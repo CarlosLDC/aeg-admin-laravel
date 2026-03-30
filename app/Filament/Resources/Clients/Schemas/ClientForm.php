@@ -16,6 +16,7 @@ class ClientForm
                 Select::make('branch_id')
                     ->label('Sucursal')
                     ->required()
+                    ->unique()
                     ->options(Branch::query()->pluck('trade_name', 'id'))
                     ->searchable(),
                 Select::make('distributor_id')

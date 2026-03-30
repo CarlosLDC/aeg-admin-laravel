@@ -16,8 +16,12 @@ class DistributorForm
                 Select::make('branch_id')
                     ->label('Sucursal')
                     ->required()
+                    ->unique()
                     ->options(Branch::query()->pluck('trade_name', 'id'))
-                    ->searchable(),
+                    ->searchable()
+                    ->validationMessages([
+                        'unique' => 'Esta sucursal ya tiene un distribuidor asignado.',
+                    ]),
             ]);
     }
 }

@@ -18,7 +18,7 @@ class DistributorFactory extends Factory
     public function definition(): array
     {
         return [
-            'branch_id' => fake()->numberBetween(1, 50),
+            'branch_id' => fake()->unique()->numberBetween(1, 50),
         ];
     }
 }
