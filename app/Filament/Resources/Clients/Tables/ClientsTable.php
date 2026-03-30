@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Clients\Tables;
 
+use Dom\Text;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -15,11 +16,21 @@ class ClientsTable
     {
         return $table
             ->columns([
-                TextColumn::make('branch_id')
-                    ->numeric()
+                TextColumn::make('branch.trade_name')
+                    ->label('Sucursal')
+                    ->searchable()
                     ->sortable(),
-                TextColumn::make('distributor_id')
-                    ->numeric()
+                TextColumn::make('branch.company.tax_id')
+                    ->label('RIF de la sucursal')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('distributor.branch.trade_name')
+                    ->label('Distribuidor')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('distributor.branch.company.tax_id')
+                    ->label('RIF del distribuidor')
+                    ->searchable()
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()

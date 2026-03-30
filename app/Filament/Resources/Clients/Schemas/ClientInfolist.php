@@ -11,10 +11,18 @@ class ClientInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('branch_id')
-                    ->numeric(),
-                TextEntry::make('distributor_id')
-                    ->numeric(),
+                // TextEntry::make('branch_id')
+                //     ->numeric(),
+                // TextEntry::make('distributor_id')
+                //     ->numeric(),
+                TextEntry::make('branch.trade_name')
+                    ->label('Sucursal'),
+                TextEntry::make('branch.company.tax_id')
+                    ->label('RIF de la sucursal'),
+                TextEntry::make('distributor.branch.trade_name')
+                    ->label('Distribuidor'),
+                TextEntry::make('distributor.branch.company.tax_id')
+                    ->label('RIF del distribuidor'),
                 TextEntry::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),

@@ -23,10 +23,6 @@ class DistributorsTable
                     ->label('RIF')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('branch_id')
-                    ->numeric()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

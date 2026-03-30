@@ -12,8 +12,9 @@ class BranchInfolist
         return $schema
             ->components([
                 TextEntry::make('trade_name')
-                    ->label('Nombre comercial')
-                    ->columnSpanFull(),
+                    ->label('Nombre comercial'),
+                TextEntry::make('company.tax_id')
+                    ->label('RIF'),
                 TextEntry::make('state')
                     ->label('Estado'),
                 TextEntry::make('city')

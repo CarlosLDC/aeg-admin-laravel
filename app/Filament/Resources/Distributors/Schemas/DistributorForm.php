@@ -20,7 +20,7 @@ class DistributorForm
                     ->options(Branch::query()->pluck('trade_name', 'id'))
                     ->searchable()
                     ->validationMessages([
-                        'unique' => 'Esta sucursal ya tiene un distribuidor asignado.',
+                        'unique' => 'Esta sucursal ya está registrada como distribuidor.',
                     ]),
             ]);
     }

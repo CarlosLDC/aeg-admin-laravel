@@ -19,6 +19,10 @@ class BranchesTable
                     ->label('Nombre comercial')
                     ->searchable()
                     ->sortable(),
+                TextColumn::make('company.tax_id')
+                    ->label('RIF')
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('state')
                     ->label('Estado')
                     ->searchable()
