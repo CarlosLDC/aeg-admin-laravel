@@ -25,13 +25,13 @@ class CompanyForm
                     ]),
                 Select::make('taxpayer_type')
                     ->label('Tipo de contribuyente')
+                    ->required()
                     ->options([
                         'ordinario' => 'Ordinario',
                         'especial' => 'Especial',
                         'formal' => 'Formal',
                     ])
                     ->default('ordinario')
-                    ->required(),
             ]);
     }
 }

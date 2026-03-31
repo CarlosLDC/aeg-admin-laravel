@@ -45,4 +45,9 @@ class Branch extends Model
     {
         return $this->hasOne(Client::class);
     }
+
+    public function serviceCenter(): HasOne
+    {
+        return $this->hasOne(ServiceCenter::class);
+    }
 }

@@ -21,7 +21,7 @@ class DistributorResource extends Resource
 {
     protected static ?string $model = Distributor::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTruck;
 
     protected static ?string $modelLabel = 'Distribuidor';
 
@@ -57,9 +57,9 @@ class DistributorResource extends Resource
     {
         return [
             'index' => ListDistributors::route('/'),
-            'create' => CreateDistributor::route('/create'),
-            'view' => ViewDistributor::route('/{record}'),
-            'edit' => EditDistributor::route('/{record}/edit'),
+            // 'create' => CreateDistributor::route('/create'),
+            // 'view' => ViewDistributor::route('/{record}'),
+            // 'edit' => EditDistributor::route('/{record}/edit'),
         ];
     }
 }

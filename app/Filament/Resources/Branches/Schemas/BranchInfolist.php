@@ -20,8 +20,7 @@ class BranchInfolist
                 TextEntry::make('city')
                     ->label('Ciudad'),
                 TextEntry::make('address')
-                    ->label('Dirección')
-                    ->columnSpanFull(),
+                    ->label('Dirección'),
                 TextEntry::make('phone')
                     ->label('Teléfono'),
                 TextEntry::make('email')

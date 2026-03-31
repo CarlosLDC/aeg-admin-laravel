@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Branch;
+use App\Models\ServiceCenter;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class BranchSeeder extends Seeder
+class ServiceCenterSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Branch::factory()->count(10)->create();
+        ServiceCenter::factory()->count(10)->create();
     }
 }

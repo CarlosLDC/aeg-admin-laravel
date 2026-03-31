@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Filament\Resources\Distributors\Schemas;
+namespace App\Filament\Resources\ServiceCenters\Schemas;
 
-use App\Models\Branch;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
-class DistributorForm
+class ServiceCenterForm
 {
     public static function configure(Schema $schema): Schema
     {
@@ -15,12 +13,12 @@ class DistributorForm
             ->components([
                 Select::make('branch_id')
                     ->label('Sucursal')
-                    ->required()
                     ->unique()
                     ->relationship('branch', 'trade_name')
                     ->searchable()
+                    ->required()
                     ->validationMessages([
-                        'unique' => 'Esta sucursal ya está registrada como distribuidor.',
+                        'unique' => 'Esta sucursal ya está registrada como centro de servicio.',
                     ]),
             ]);
     }

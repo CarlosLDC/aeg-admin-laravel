@@ -21,7 +21,7 @@ class BranchResource extends Resource
 {
     protected static ?string $model = Branch::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedMapPin;
 
     protected static ?string $recordTitleAttribute = 'trade_name';
 
@@ -59,9 +59,9 @@ class BranchResource extends Resource
     {
         return [
             'index' => ListBranches::route('/'),
-            'create' => CreateBranch::route('/create'),
-            'view' => ViewBranch::route('/{record}'),
-            'edit' => EditBranch::route('/{record}/edit'),
+            // 'create' => CreateBranch::route('/create'),
+            // 'view' => ViewBranch::route('/{record}'),
+            // 'edit' => EditBranch::route('/{record}/edit'),
         ];
     }
 }

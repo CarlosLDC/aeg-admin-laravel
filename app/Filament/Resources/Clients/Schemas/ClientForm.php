@@ -17,7 +17,7 @@ class ClientForm
                     ->label('Sucursal')
                     ->required()
                     ->unique()
-                    ->options(Branch::query()->pluck('trade_name', 'id'))
+                    ->relationship('branch', 'trade_name')
                     ->searchable()
                     ->validationMessages([
                         'unique' => 'Esta sucursal ya está registrada como cliente.',

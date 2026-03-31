@@ -15,6 +15,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class PrinterModelResource extends Resource
 {
@@ -29,6 +30,12 @@ class PrinterModelResource extends Resource
     protected static ?string $pluralModelLabel = 'Modelos de impresora';
 
     protected static bool $hasTitleCaseModelLabel = false;
+
+    protected static ?string $navigationLabel = 'Modelos';
+
+    protected static ?int $navigationSort = 1;
+
+    protected static string | UnitEnum | null $navigationGroup = 'Impresoras';
 
     public static function form(Schema $schema): Schema
     {
@@ -56,9 +63,9 @@ class PrinterModelResource extends Resource
     {
         return [
             'index' => ListPrinterModels::route('/'),
-            'create' => CreatePrinterModel::route('/create'),
-            'view' => ViewPrinterModel::route('/{record}'),
-            'edit' => EditPrinterModel::route('/{record}/edit'),
+            // 'create' => CreatePrinterModel::route('/create'),
+            // 'view' => ViewPrinterModel::route('/{record}'),
+            // 'edit' => EditPrinterModel::route('/{record}/edit'),
         ];
     }
 }

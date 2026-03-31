@@ -19,12 +19,10 @@ class PrinterModelInfolist
                     ->label('Precio')
                     ->money(),
                 TextEntry::make('administrative_act')
-                    ->label('Providencia')
-                    ->placeholder('-'),
+                    ->label('Providencia'),
                 TextEntry::make('certification_date')
-                    ->label('Fecha homologación')
-                    ->date()
-                    ->placeholder('-'),
+                    ->label('Fecha de homologación')
+                    ->date(),
                 TextEntry::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Filament\Resources\Clients\Schemas;
+namespace App\Filament\Resources\ServiceCenters\Schemas;
 
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
 
-class ClientInfolist
+class ServiceCenterInfolist
 {
     public static function configure(Schema $schema): Schema
     {
@@ -14,13 +14,7 @@ class ClientInfolist
                 TextEntry::make('branch.trade_name')
                     ->label('Sucursal'),
                 TextEntry::make('branch.company.tax_id')
-                    ->label('RIF de la sucursal'),
-                TextEntry::make('distributor.branch.trade_name')
-                    ->label('Distribuidor')
-                    ->placeholder('-'),
-                TextEntry::make('distributor.branch.company.tax_id')
-                    ->label('RIF del distribuidor')
-                    ->placeholder('-'),
+                    ->label('RIF'),
                 TextEntry::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),

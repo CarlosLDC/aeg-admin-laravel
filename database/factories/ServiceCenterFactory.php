@@ -3,13 +3,13 @@
 namespace Database\Factories;
 
 use App\Models\Branch;
-use App\Models\distributor;
+use App\Models\ServiceCenter;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<distributor>
+ * @extends Factory<ServiceCenter>
  */
-class DistributorFactory extends Factory
+class ServiceCenterFactory extends Factory
 {
     /**
      * Define the model's default state.

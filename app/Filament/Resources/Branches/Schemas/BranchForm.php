@@ -18,7 +18,7 @@ class BranchForm
                 Select::make('company_id')
                     ->label('Empresa')
                     ->required()
-                    ->options(Company::query()->pluck('legal_name', 'id'))
+                    ->relationship('company', 'legal_name')
                     ->searchable(),
                 TextInput::make('trade_name')
                     ->label('Nombre comercial')

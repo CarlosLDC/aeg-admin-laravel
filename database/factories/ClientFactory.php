@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Branch;
 use App\Models\Client;
+use App\Models\Distributor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,8 +20,8 @@ class ClientFactory extends Factory
     public function definition(): array
     {
         return [
-            'branch_id' => fake()->unique()->numberBetween(1, 50),
-            'distributor_id' => fake()->numberBetween(1, 10),
+            'branch_id' => Branch::factory(),
+            'distributor_id' => Distributor::factory(),
         ];
     }
 }

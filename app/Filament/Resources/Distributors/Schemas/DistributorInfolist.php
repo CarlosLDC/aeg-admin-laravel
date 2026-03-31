@@ -11,8 +11,6 @@ class DistributorInfolist
     {
         return $schema
             ->components([
-                // TextEntry::make('branch_id')
-                //     ->numeric(),
                 TextEntry::make('branch.trade_name')
                     ->label('Sucursal'),
                 TextEntry::make('branch.company.tax_id')

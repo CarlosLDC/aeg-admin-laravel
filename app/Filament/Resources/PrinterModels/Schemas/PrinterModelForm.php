@@ -25,14 +25,21 @@ class PrinterModelForm
                     ->required()
                     ->numeric()
                     ->prefix('$')
-                    ->gt('0'),
+                    ->gt('0')
+                    ->validationMessages([
+                        'gt' => 'El precio debe ser mayor que cero.',
+                    ]),
                 TextInput::make('administrative_act')
                     ->label('Providencia')
                     ->required()
                     ->mask('aaaa/9999/9999')
-                    ->placeholder('snat/2024/0001'),
+                    ->placeholder('snat/2024/0001')
+                    ->regex('/^[a-z]{4}\/\d{4}\/\d{4}$/')
+                    ->validationMessages([
+                        'regex' => 'La providencia debe seguir el formato abcd/1234/5678.',
+                    ]),
                 DatePicker::make('certification_date')
-                    ->label('Fecha homologación')
+                    ->label('Fecha de homologación')
                     ->required(),
             ]);
     }

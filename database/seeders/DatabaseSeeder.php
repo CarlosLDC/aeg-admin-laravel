@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             BranchSeeder::class,
             DistributorSeeder::class,
             ClientSeeder::class,
+            ServiceCenterSeeder::class,
         ]);
     }
 }

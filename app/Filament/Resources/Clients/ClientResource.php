@@ -21,7 +21,7 @@ class ClientResource extends Resource
 {
     protected static ?string $model = Client::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
 
     protected static ?string $modelLabel = 'Cliente';
 
@@ -57,9 +57,9 @@ class ClientResource extends Resource
     {
         return [
             'index' => ListClients::route('/'),
-            'create' => CreateClient::route('/create'),
-            'view' => ViewClient::route('/{record}'),
-            'edit' => EditClient::route('/{record}/edit'),
+            // 'create' => CreateClient::route('/create'),
+            // 'view' => ViewClient::route('/{record}'),
+            // 'edit' => EditClient::route('/{record}/edit'),
         ];
     }
 }
