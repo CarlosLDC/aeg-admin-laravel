@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('service_centers', function (Blueprint $table) {
+        Schema::create('software', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('branch_id')->unique()->constrained()->onDelete('restrict');
+            $table->foreignId('software_provider_id')->constrained()->onDelete('restrict');
+            $table->string('name');
+            $table->string('version');
+            $table->date('integration_date');
             $table->timestamps();
         });
     }
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('service_centers');
+        Schema::dropIfExists('software');
     }
 };

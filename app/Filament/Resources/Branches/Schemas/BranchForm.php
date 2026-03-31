@@ -43,6 +43,9 @@ class BranchForm
                     ->label('Correo electrónico')
                     ->email()
                     ->required(),
+                TextInput::make('contact_person')
+                    ->label('Persona de contacto')
+                    ->required(),
             ]);
     }
 }

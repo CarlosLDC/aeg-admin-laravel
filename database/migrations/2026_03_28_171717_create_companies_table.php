@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('legal_name'); // Razón social
             $table->string('tax_id')->unique(); // RIF
-            $table->enum('taxpayer_type', ['ordinario', 'especial', 'formal'])
-                ->default('ordinario'); // Tipo de contribuyente
+            $table->enum('taxpayer_type', ['ordinario', 'especial', 'formal'])->default('ordinario'); // Tipo de contribuyente
             $table->timestamps();
         });
     }

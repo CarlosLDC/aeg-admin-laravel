@@ -2,15 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Enums\VenezuelaState;
-use App\Models\Branch;
-use App\Models\Company;
+use App\Models\SoftwareProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Branch>
+ * @extends Factory<SoftwareProvider>
  */
-class BranchFactory extends Factory
+class SoftwareProviderFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,11 +18,8 @@ class BranchFactory extends Factory
     public function definition(): array
     {
         return [
-            'company_id' => Company::factory(),
-            'trade_name' => fake()->company(),
-            'state' => fake()->randomElement(VenezuelaState::cases()),
-            'city' => fake()->city(),
-            'address' => fake()->address(),
+            'name' => fake()->company(),
+            'tax_id' => fake()->unique()->regexify('[VEJPG][0-9]{9}'),
             'phone' => fake()->e164PhoneNumber(),
             'email' => fake()->freeEmail(),
             'contact_person' => fake()->name(),

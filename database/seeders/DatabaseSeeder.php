@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             DistributorSeeder::class,
             ClientSeeder::class,
             ServiceCenterSeeder::class,
+            SoftwareProviderSeeder::class,
+            SoftwareSeeder::class,
         ]);
     }
 }

@@ -22,6 +22,7 @@ class Branch extends Model
         'address',
         'phone',
         'email',
+        'contact_person',
     ];
 
     protected function casts(): array

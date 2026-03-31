@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('service_centers', function (Blueprint $table) {
+        Schema::create('software_providers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('branch_id')->unique()->constrained()->onDelete('restrict');
+            $table->string('name');
+            $table->string('tax_id')->unique(); // RIF
+            $table->string('phone');
+            $table->string('email');
+            $table->string('contact_person');
             $table->timestamps();
         });
     }
@@ -23,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('service_centers');
+        Schema::dropIfExists('software_providers');
     }
 };

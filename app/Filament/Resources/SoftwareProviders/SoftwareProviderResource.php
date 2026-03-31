@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Filament\Resources\SoftwareProviders;
+
+use App\Filament\Resources\SoftwareProviders\Pages\CreateSoftwareProvider;
+use App\Filament\Resources\SoftwareProviders\Pages\EditSoftwareProvider;
+use App\Filament\Resources\SoftwareProviders\Pages\ListSoftwareProviders;
+use App\Filament\Resources\SoftwareProviders\Pages\ViewSoftwareProvider;
+use App\Filament\Resources\SoftwareProviders\Schemas\SoftwareProviderForm;
+use App\Filament\Resources\SoftwareProviders\Schemas\SoftwareProviderInfolist;
+use App\Filament\Resources\SoftwareProviders\Tables\SoftwareProvidersTable;
+use App\Models\SoftwareProvider;
+use BackedEnum;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Table;
+
+class SoftwareProviderResource extends Resource
+{
+    protected static ?string $model = SoftwareProvider::class;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    protected static ?string $recordTitleAttribute = 'name';
+
+    public static function form(Schema $schema): Schema
+    {
+        return SoftwareProviderForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return SoftwareProviderInfolist::configure($schema);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return SoftwareProvidersTable::configure($table);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => ListSoftwareProviders::route('/'),
+            'create' => CreateSoftwareProvider::route('/create'),
+            'view' => ViewSoftwareProvider::route('/{record}'),
+            'edit' => EditSoftwareProvider::route('/{record}/edit'),
+        ];
+    }
+}

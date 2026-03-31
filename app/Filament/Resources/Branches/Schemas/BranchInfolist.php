@@ -25,6 +25,8 @@ class BranchInfolist
                     ->label('Teléfono'),
                 TextEntry::make('email')
                     ->label('Correo electrónico'),
+                TextEntry::make('contact_person')
+                    ->label('Persona de contacto'),
                 TextEntry::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),

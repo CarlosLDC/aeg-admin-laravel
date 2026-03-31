@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('version');
             $table->date('release_date');
-            $table->text('description')
-                ->nullable();
+            $table->text('description');
             $table->timestamps();
         });
     }

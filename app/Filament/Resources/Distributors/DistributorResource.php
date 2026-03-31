@@ -23,9 +23,9 @@ class DistributorResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTruck;
 
-    protected static ?string $modelLabel = 'Distribuidor';
+    protected static ?string $modelLabel = 'Distribuidora';
 
-    protected static ?string $pluralModelLabel = 'Distribuidores';
+    protected static ?string $pluralModelLabel = 'Distribuidoras';
 
     protected static ?int $navigationSort = 3;
 

@@ -21,11 +21,11 @@ class FirmwareResource extends Resource
 {
     protected static ?string $model = Firmware::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCpuChip;
 
     protected static ?string $recordTitleAttribute = 'version';
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 2;
 
     protected static string | UnitEnum | null $navigationGroup = 'Impresoras';
 
