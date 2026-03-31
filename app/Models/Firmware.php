@@ -12,7 +12,7 @@ class Firmware extends Model
 
     protected $fillable = [
         'version',
-        'description',
         'release_date',
+        'description',
     ];
 }

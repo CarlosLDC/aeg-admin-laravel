@@ -20,7 +20,7 @@ class FirmwareFactory extends Factory
         return [
             'version' => fake()->numerify('#.#.#'),
             'release_date' => fake()->dateTimeThisDecade()->format('Y-m-d'),
-            'release_notes' => fake()->sentence(),
+            'description' => fake()->paragraph(),
         ];
     }
 }
