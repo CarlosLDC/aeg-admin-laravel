@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             PrinterModelSeeder::class,
+            FirmwareSeeder::class,
             CompanySeeder::class,
             BranchSeeder::class,
             DistributorSeeder::class,

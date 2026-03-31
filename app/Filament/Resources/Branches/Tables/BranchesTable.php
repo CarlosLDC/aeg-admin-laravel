@@ -21,8 +21,7 @@ class BranchesTable
                     ->sortable(),
                 TextColumn::make('company.tax_id')
                     ->label('RIF')
-                    ->searchable()
-                    ->sortable(),
+                    ->searchable(),
                 TextColumn::make('state')
                     ->label('Estado')
                     ->searchable()

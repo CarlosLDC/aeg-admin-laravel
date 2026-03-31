@@ -17,11 +17,10 @@ class DistributorsTable
             ->columns([
                 TextColumn::make('branch.trade_name')
                     ->label('Sucursal')
-                    ->sortable()
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('branch.company.tax_id')
                     ->label('RIF')
-                    ->sortable()
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

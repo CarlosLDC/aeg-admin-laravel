@@ -21,8 +21,7 @@ class ServiceCentersTable
                     ->sortable(),
                 TextColumn::make('branch.company.tax_id')
                     ->label('RIF')
-                    ->searchable()
-                    ->sortable(),
+                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
