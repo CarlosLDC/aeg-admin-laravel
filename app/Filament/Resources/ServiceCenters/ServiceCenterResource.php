@@ -31,7 +31,7 @@ class ServiceCenterResource extends Resource
 
     protected static ?int $navigationSort = 4;
 
-    protected static string | UnitEnum | null $navigationGroup = 'Aliados y Clientes';
+    protected static string|UnitEnum|null $navigationGroup = 'Aliados y Clientes';
 
     public static function form(Schema $schema): Schema
     {
@@ -59,9 +59,9 @@ class ServiceCenterResource extends Resource
     {
         return [
             'index' => ListServiceCenters::route('/'),
-            'create' => CreateServiceCenter::route('/create'),
-            'view' => ViewServiceCenter::route('/{record}'),
-            'edit' => EditServiceCenter::route('/{record}/edit'),
+            // 'create' => CreateServiceCenter::route('/create'),
+            // 'view' => ViewServiceCenter::route('/{record}'),
+            // 'edit' => EditServiceCenter::route('/{record}/edit'),
         ];
     }
 }

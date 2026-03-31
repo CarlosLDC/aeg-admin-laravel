@@ -21,7 +21,8 @@ class CompaniesTable
                     ->sortable(),
                 TextColumn::make('tax_id')
                     ->label('RIF')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('taxpayer_type')
                     ->label('Tipo de contribuyente')
                     ->sortable()
