@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Enums\OperatingSystem;
+use App\Enums\ProgrammingLanguage;
+use Illuminate\Database\Eloquent\Casts\AsEnumCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -20,10 +23,18 @@ class Software extends Model
         'programming_languages',
     ];
 
-    protected $casts = [
-        'operating_systems' => 'array',
-        'programming_languages' => 'array',
-    ];
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'operating_systems' => AsEnumCollection::of(OperatingSystem::class),
+            'programming_languages' => AsEnumCollection::of(ProgrammingLanguage::class),
+        ];
+    }
 
     public function softwareProvider(): BelongsTo
     {

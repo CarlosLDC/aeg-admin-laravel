@@ -18,6 +18,11 @@ class Company extends Model
         'taxpayer_type',
     ];
 
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
     protected function casts(): array
     {
         return [

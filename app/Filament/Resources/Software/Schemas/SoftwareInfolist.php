@@ -21,6 +21,10 @@ class SoftwareInfolist
                     ->date(),
                 TextEntry::make('softwareProvider.name')
                     ->label('Proveedor de Software'),
+                TextEntry::make('operating_systems')
+                    ->label('Sist. Operativos Compatibles'),
+                TextEntry::make('programming_languages')
+                    ->label('Lenguajes de Programación'),
                 TextEntry::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),

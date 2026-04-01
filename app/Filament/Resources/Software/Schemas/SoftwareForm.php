@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\Software\Schemas;
 
+use App\Enums\OperatingSystem;
+use App\Enums\ProgrammingLanguage;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -29,6 +31,14 @@ class SoftwareForm
                 DatePicker::make('integration_date')
                     ->label('Fecha de Integración')
                     ->required(),
+                Select::make('operating_systems')
+                    ->label('Sistemas Operativos Compatibles')
+                    ->multiple()
+                    ->options(OperatingSystem::class),
+                Select::make('programming_languages')
+                    ->label('Lenguajes de Programación')
+                    ->multiple()
+                    ->options(ProgrammingLanguage::class),
             ]);
     }
 }

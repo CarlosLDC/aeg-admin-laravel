@@ -25,7 +25,7 @@ class CompaniesTable
                 TextColumn::make('taxpayer_type')
                     ->label('Tipo de contribuyente')
                     ->sortable()
-                    ->color('primary'),
+                    ->badge(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
