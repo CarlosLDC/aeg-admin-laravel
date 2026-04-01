@@ -25,7 +25,11 @@ class SoftwareResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $navigationLabel = 'Catálogo de Software';
+    protected static ?string $modelLabel = 'Software';
+
+    protected static ?string $pluralModelLabel = 'Catálogo de Software';
+
+    protected static bool $hasTitleCaseModelLabel = false;
 
     protected static ?int $navigationSort = 2;
 

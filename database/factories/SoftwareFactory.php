@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\OperatingSystem;
+use App\Enums\ProgrammingLanguage;
 use App\Models\Software;
 use App\Models\SoftwareProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -23,6 +25,8 @@ class SoftwareFactory extends Factory
             'name' => fake()->word(),
             'version' => fake()->semver(),
             'integration_date' => fake()->dateTimeThisDecade()->format('Y-m-d'),
+            'operating_systems' => fake()->randomElements(OperatingSystem::cases(), fake()->numberBetween(1, 3)),
+            'programming_languages' => fake()->randomElements(ProgrammingLanguage::cases(), fake()->numberBetween(1, 2)),
         ];
     }
 }

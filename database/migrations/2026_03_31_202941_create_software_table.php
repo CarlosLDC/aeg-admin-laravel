@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('version');
             $table->date('integration_date');
+            $table->json('operating_systems');
+            $table->json('programming_languages');
             $table->timestamps();
         });
     }
