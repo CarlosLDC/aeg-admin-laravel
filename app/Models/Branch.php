@@ -15,7 +15,6 @@ class Branch extends Model
 
     protected $fillable = [
         'company_id',
-        'distributor_id',
         'trade_name',
         'city',
         'state',
@@ -25,6 +24,11 @@ class Branch extends Model
         'contact_person',
     ];
 
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
     protected function casts(): array
     {
         return [
