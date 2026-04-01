@@ -15,14 +15,25 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class SoftwareProviderResource extends Resource
 {
     protected static ?string $model = SoftwareProvider::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBuildingOffice2;
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    protected static ?string $modelLabel = 'Proveedor de Software';
+
+    protected static ?string $pluralModelLabel = 'Proveedores de Software';
+
+    protected static bool $hasTitleCaseModelLabel = false;
+
+    protected static ?int $navigationSort = 1;
+
+    protected static string | UnitEnum | null $navigationGroup = 'Software';
 
     public static function form(Schema $schema): Schema
     {

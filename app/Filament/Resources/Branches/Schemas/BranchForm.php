@@ -19,7 +19,8 @@ class BranchForm
                     ->label('Empresa')
                     ->required()
                     ->relationship('company', 'legal_name')
-                    ->searchable(),
+                    ->searchable(['legal_name', 'tax_id'])
+                    ->searchPrompt('Buscar por Razón Social o RIF...'),
                 TextInput::make('trade_name')
                     ->label('Nombre comercial')
                     ->required(),

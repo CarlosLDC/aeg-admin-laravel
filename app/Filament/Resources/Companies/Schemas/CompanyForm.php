@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Companies\Schemas;
 
+use App\Enums\TaxpayerType;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
@@ -26,11 +27,7 @@ class CompanyForm
                 Select::make('taxpayer_type')
                     ->label('Tipo de contribuyente')
                     ->required()
-                    ->options([
-                        'ordinario' => 'Ordinario',
-                        'especial' => 'Especial',
-                        'formal' => 'Formal',
-                    ])
+                    ->options(TaxpayerType::cases())
                     ->default('ordinario')
             ]);
     }

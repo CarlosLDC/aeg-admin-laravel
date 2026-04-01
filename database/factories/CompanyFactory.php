@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\TaxpayerType;
 use App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,7 +21,7 @@ class CompanyFactory extends Factory
         return [
             'legal_name' => fake()->company(),
             'tax_id' => fake()->unique()->regexify('[VEJPG][0-9]{9}'),
-            'taxpayer_type' => fake()->randomElement(['ordinario', 'especial', 'formal']),
+            'taxpayer_type' => fake()->randomElement(TaxpayerType::cases()),
         ];
     }
 }
