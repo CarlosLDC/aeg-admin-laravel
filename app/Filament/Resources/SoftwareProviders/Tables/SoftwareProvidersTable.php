@@ -16,15 +16,20 @@ class SoftwareProvidersTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label('Nombre')
                     ->searchable(),
                 TextColumn::make('tax_id')
+                    ->label('RIF')
                     ->searchable(),
                 TextColumn::make('phone')
+                    ->label('Teléfono')
                     ->searchable(),
                 TextColumn::make('email')
+                    ->label('Correo Electrónico')
                     ->label('Email address')
                     ->searchable(),
                 TextColumn::make('contact_person')
+                    ->label('Persona de Contacto')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

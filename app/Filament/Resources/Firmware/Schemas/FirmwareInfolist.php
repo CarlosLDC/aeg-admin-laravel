@@ -14,7 +14,7 @@ class FirmwareInfolist
                 TextEntry::make('version')
                     ->label('Versión'),
                 TextEntry::make('release_date')
-                    ->label('Fecha de lanzamiento')
+                    ->label('Fecha de Lanzamiento')
                     ->date(),
                 TextEntry::make('description')
                     ->label('Descripción')

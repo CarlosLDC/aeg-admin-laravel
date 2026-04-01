@@ -12,11 +12,11 @@ class CompanyInfolist
         return $schema
             ->components([
                 TextEntry::make('legal_name')
-                    ->label('Razón social'),
+                    ->label('Razón Social'),
                 TextEntry::make('tax_id')
                     ->label('RIF'),
                 TextEntry::make('taxpayer_type')
-                    ->label('Tipo de contribuyente')
+                    ->label('Tipo de Contribuyente')
                     ->columnSpanFull(),
                 TextEntry::make('created_at')
                     ->dateTime()

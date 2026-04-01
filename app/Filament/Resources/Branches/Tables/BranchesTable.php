@@ -17,9 +17,8 @@ class BranchesTable
         return $table
             ->columns([
                 TextColumn::make('trade_name')
-                    ->label('Nombre comercial')
-                    ->searchable()
-                    ->sortable(),
+                    ->label('Nombre Comercial')
+                    ->searchable(),
                 TextColumn::make('company.tax_id')
                     ->label('RIF')
                     ->searchable(),

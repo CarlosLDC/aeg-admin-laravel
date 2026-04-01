@@ -16,15 +16,14 @@ class CompaniesTable
         return $table
             ->columns([
                 TextColumn::make('legal_name')
-                    ->label('Razón social')
-                    ->searchable()
-                    ->sortable(),
+                    ->label('Razón Social')
+                    ->searchable(),
                 TextColumn::make('tax_id')
                     ->label('RIF')
                     ->searchable(),
                 TextColumn::make('taxpayer_type')
-                    ->label('Tipo de contribuyente')
-                    ->sortable()
+                    ->label('Tipo de Contribuyente')
+                    ->searchable()
                     ->badge(),
                 TextColumn::make('created_at')
                     ->dateTime()

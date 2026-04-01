@@ -17,17 +17,15 @@ class ClientsTable
             ->columns([
                 TextColumn::make('branch.trade_name')
                     ->label('Sucursal')
-                    ->searchable()
-                    ->sortable(),
+                    ->searchable(),
                 TextColumn::make('branch.company.tax_id')
-                    ->label('RIF de la sucursal')
+                    ->label('RIF de la Sucursal')
                     ->searchable(),
                 TextColumn::make('distributor.branch.trade_name')
                     ->label('Distribuidor')
-                    ->searchable()
-                    ->sortable(),
+                    ->searchable(),
                 TextColumn::make('distributor.branch.company.tax_id')
-                    ->label('RIF del distribuidor')
+                    ->label('RIF del Distribuidor')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

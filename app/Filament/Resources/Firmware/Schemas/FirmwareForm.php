@@ -23,7 +23,7 @@ class FirmwareForm
                         'regex' => 'La versión debe seguir el formato x.y.z, donde x, y, y z son dígitos.',
                     ]),
                 DatePicker::make('release_date')
-                    ->label('Fecha de lanzamiento')
+                    ->label('Fecha de Lanzamiento')
                     ->required(),
                 Textarea::make('description')
                     ->label('Descripción')

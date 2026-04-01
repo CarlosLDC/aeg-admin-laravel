@@ -39,7 +39,7 @@ class PrinterModelForm
                         'regex' => 'La providencia debe seguir el formato abcd/1234/5678.',
                     ]),
                 DatePicker::make('certification_date')
-                    ->label('Fecha de homologación')
+                    ->label('Fecha de Homologación')
                     ->required(),
             ]);
     }

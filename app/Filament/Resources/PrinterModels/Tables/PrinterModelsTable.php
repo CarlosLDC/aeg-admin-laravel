@@ -29,7 +29,7 @@ class PrinterModelsTable
                     ->label('Providencia')
                     ->searchable(),
                 TextColumn::make('certification_date')
-                    ->label('Fecha homologación')
+                    ->label('Fecha de Homologación')
                     ->date()
                     ->sortable(),
                 TextColumn::make('created_at')

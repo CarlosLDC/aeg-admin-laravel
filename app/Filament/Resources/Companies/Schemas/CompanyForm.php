@@ -14,7 +14,7 @@ class CompanyForm
         return $schema
             ->components([
                 TextInput::make('legal_name')
-                    ->label('Razón social')
+                    ->label('Razón Social')
                     ->required(),
                 TextInput::make('tax_id')
                     ->label('RIF')
@@ -25,7 +25,7 @@ class CompanyForm
                         'regex' => 'El RIF debe comenzar con V, E, J, P o G (en mayúsculas) seguido de 9 dígitos. No separe los dígitos. Si tiene menos de 9 dígitos, complete con ceros a la izquierda (ejemplo: J012345678).',
                     ]),
                 Select::make('taxpayer_type')
-                    ->label('Tipo de contribuyente')
+                    ->label('Tipo de Contribuyente')
                     ->required()
                     ->options(TaxpayerType::class)
                     ->default('ordinario')

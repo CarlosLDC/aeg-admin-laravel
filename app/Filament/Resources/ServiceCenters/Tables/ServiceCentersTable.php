@@ -17,8 +17,7 @@ class ServiceCentersTable
             ->columns([
                 TextColumn::make('branch.trade_name')
                     ->label('Sucursal')
-                    ->searchable()
-                    ->sortable(),
+                    ->searchable(),
                 TextColumn::make('branch.company.tax_id')
                     ->label('RIF')
                     ->searchable(),

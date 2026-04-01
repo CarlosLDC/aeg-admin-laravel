@@ -12,7 +12,7 @@ class BranchInfolist
         return $schema
             ->components([
                 TextEntry::make('trade_name')
-                    ->label('Nombre comercial'),
+                    ->label('Nombre Comercial'),
                 TextEntry::make('company.tax_id')
                     ->label('RIF'),
                 TextEntry::make('state')
@@ -24,9 +24,9 @@ class BranchInfolist
                 TextEntry::make('phone')
                     ->label('Teléfono'),
                 TextEntry::make('email')
-                    ->label('Correo electrónico'),
+                    ->label('Correo Electrónico'),
                 TextEntry::make('contact_person')
-                    ->label('Persona de contacto'),
+                    ->label('Persona de Contacto'),
                 TextEntry::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),

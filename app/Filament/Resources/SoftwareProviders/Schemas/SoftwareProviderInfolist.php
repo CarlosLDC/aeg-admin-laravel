@@ -11,12 +11,17 @@ class SoftwareProviderInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('name'),
-                TextEntry::make('tax_id'),
-                TextEntry::make('phone'),
+                TextEntry::make('name')
+                    ->label('Nombre'),
+                TextEntry::make('tax_id')
+                    ->label('RIF'),
+                TextEntry::make('phone')
+                    ->label('Teléfono'),
                 TextEntry::make('email')
+                    ->label('Correo Electrónico')
                     ->label('Email address'),
-                TextEntry::make('contact_person'),
+                TextEntry::make('contact_person')
+                    ->label('Persona de Contacto'),
                 TextEntry::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),

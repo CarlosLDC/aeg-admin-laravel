@@ -19,7 +19,7 @@ class FirmwareTable
                     ->label('Versión')
                     ->searchable(),
                 TextColumn::make('release_date')
-                    ->label('Fecha de lanzamiento')
+                    ->label('Fecha de Lanzamiento')
                     ->date()
                     ->sortable(),
                 TextColumn::make('created_at')

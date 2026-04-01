@@ -21,7 +21,7 @@ class PrinterModelInfolist
                 TextEntry::make('administrative_act')
                     ->label('Providencia'),
                 TextEntry::make('certification_date')
-                    ->label('Fecha de homologación')
+                    ->label('Fecha de Homologación')
                     ->date(),
                 TextEntry::make('created_at')
                     ->dateTime()

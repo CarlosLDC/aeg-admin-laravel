@@ -22,7 +22,7 @@ class BranchForm
                     ->searchable(['legal_name', 'tax_id'])
                     ->searchPrompt('Buscar por Razón Social o RIF...'),
                 TextInput::make('trade_name')
-                    ->label('Nombre comercial')
+                    ->label('Nombre Comercial')
                     ->required(),
                 Select::make('state')
                     ->label('Estado')
@@ -41,11 +41,11 @@ class BranchForm
                     ->tel()
                     ->required(),
                 TextInput::make('email')
-                    ->label('Correo electrónico')
+                    ->label('Correo Electrónico')
                     ->email()
                     ->required(),
                 TextInput::make('contact_person')
-                    ->label('Persona de contacto')
+                    ->label('Persona de Contacto')
                     ->required(),
             ]);
     }
