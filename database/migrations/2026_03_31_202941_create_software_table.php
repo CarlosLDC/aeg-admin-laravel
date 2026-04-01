@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('software', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('software_provider_id')->constrained()->onDelete('restrict');
+            $table->foreignId('software_provider_id')->constrained()->restrictOnDelete();
             $table->string('name');
             $table->string('version');
             $table->date('integration_date');

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('service_centers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('branch_id')->unique()->constrained()->onDelete('restrict');
+            $table->foreignId('branch_id')->unique()->constrained()->restrictOnDelete();
             $table->timestamps();
         });
     }
