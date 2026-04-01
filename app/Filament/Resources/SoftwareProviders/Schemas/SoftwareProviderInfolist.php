@@ -18,8 +18,7 @@ class SoftwareProviderInfolist
                 TextEntry::make('phone')
                     ->label('Teléfono'),
                 TextEntry::make('email')
-                    ->label('Correo Electrónico')
-                    ->label('Email address'),
+                    ->label('Correo Electrónico'),
                 TextEntry::make('contact_person')
                     ->label('Persona de Contacto'),
                 TextEntry::make('created_at')

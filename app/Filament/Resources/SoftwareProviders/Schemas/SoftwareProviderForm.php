@@ -28,7 +28,6 @@ class SoftwareProviderForm
                     ->required(),
                 TextInput::make('email')
                     ->label('Correo Electrónico')
-                    ->label('Email address')
                     ->email()
                     ->required(),
                 TextInput::make('contact_person')

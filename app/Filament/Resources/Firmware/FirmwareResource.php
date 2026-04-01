@@ -25,6 +25,8 @@ class FirmwareResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'version';
 
+    protected static ?string $modelLabel = 'Firmware';
+
     protected static ?int $navigationSort = 2;
 
     protected static string | UnitEnum | null $navigationGroup = 'Impresoras';

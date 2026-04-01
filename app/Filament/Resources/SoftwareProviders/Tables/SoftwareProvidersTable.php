@@ -26,7 +26,6 @@ class SoftwareProvidersTable
                     ->searchable(),
                 TextColumn::make('email')
                     ->label('Correo Electrónico')
-                    ->label('Email address')
                     ->searchable(),
                 TextColumn::make('contact_person')
                     ->label('Persona de Contacto')

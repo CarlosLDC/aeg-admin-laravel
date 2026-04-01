@@ -17,7 +17,10 @@ class SoftwareTable
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->label('Nombre del Software')
+                    ->label('Nombre')
+                    ->searchable(),
+                TextColumn::make('softwareProvider.name')
+                    ->label('Proveedor')
                     ->searchable(),
                 TextColumn::make('version')
                     ->label('Versión')
@@ -26,9 +29,6 @@ class SoftwareTable
                     ->label('Fecha de Integración')
                     ->date()
                     ->sortable(),
-                TextColumn::make('softwareProvider.name')
-                    ->label('Proveedor de Software')
-                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

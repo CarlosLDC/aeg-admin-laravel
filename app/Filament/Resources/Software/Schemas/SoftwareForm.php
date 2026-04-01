@@ -16,14 +16,14 @@ class SoftwareForm
         return $schema
             ->components([
                 Select::make('software_provider_id')
-                    ->label('Proveedor de Software')
+                    ->label('Proveedor')
                     ->required()
                     ->relationship('softwareProvider', 'name')
                     ->searchable(['name', 'tax_id'])
                     ->preload()
                     ->searchPrompt('Buscar Proveedor de Software por nombre o RIF...'),
                 TextInput::make('name')
-                    ->label('Nombre del Software')
+                    ->label('Nombre')
                     ->required(),
                 TextInput::make('version')
                     ->label('Versión')

@@ -13,16 +13,16 @@ class SoftwareInfolist
         return $schema
             ->components([
                 TextEntry::make('name')
-                    ->label('Nombre del Software'),
+                    ->label('Nombre'),
+                TextEntry::make('softwareProvider.name')
+                    ->label('Proveedor'),
                 TextEntry::make('version')
                     ->label('Versión'),
                 TextEntry::make('integration_date')
                     ->label('Fecha de Integración')
                     ->date(),
-                TextEntry::make('softwareProvider.name')
-                    ->label('Proveedor de Software'),
                 TextEntry::make('operating_systems')
-                    ->label('Sist. Operativos Compatibles'),
+                    ->label('Sistemas Operativos Compatibles'),
                 TextEntry::make('programming_languages')
                     ->label('Lenguajes de Programación'),
                 TextEntry::make('created_at')

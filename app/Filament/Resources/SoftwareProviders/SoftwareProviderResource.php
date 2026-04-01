@@ -6,6 +6,7 @@ use App\Filament\Resources\SoftwareProviders\Pages\CreateSoftwareProvider;
 use App\Filament\Resources\SoftwareProviders\Pages\EditSoftwareProvider;
 use App\Filament\Resources\SoftwareProviders\Pages\ListSoftwareProviders;
 use App\Filament\Resources\SoftwareProviders\Pages\ViewSoftwareProvider;
+use App\Filament\Resources\SoftwareProviders\RelationManagers\SoftwareRelationManager;
 use App\Filament\Resources\SoftwareProviders\Schemas\SoftwareProviderForm;
 use App\Filament\Resources\SoftwareProviders\Schemas\SoftwareProviderInfolist;
 use App\Filament\Resources\SoftwareProviders\Tables\SoftwareProvidersTable;
@@ -53,7 +54,7 @@ class SoftwareProviderResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            SoftwareRelationManager::class,
         ];
     }
 
