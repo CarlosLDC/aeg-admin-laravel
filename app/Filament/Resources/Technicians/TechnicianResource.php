@@ -59,9 +59,9 @@ class TechnicianResource extends Resource
     {
         return [
             'index' => ListTechnicians::route('/'),
-            'create' => CreateTechnician::route('/create'),
-            'view' => ViewTechnician::route('/{record}'),
-            'edit' => EditTechnician::route('/{record}/edit'),
+            // 'create' => CreateTechnician::route('/create'),
+            // 'view' => ViewTechnician::route('/{record}'),
+            // 'edit' => EditTechnician::route('/{record}/edit'),
         ];
     }
 }

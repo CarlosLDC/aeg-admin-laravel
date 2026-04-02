@@ -15,16 +15,20 @@ class TechniciansTable
     {
         return $table
             ->columns([
-                TextColumn::make('serviceCenter.id')
-                    ->searchable(),
                 TextColumn::make('name')
+                    ->label('Nombre')
                     ->searchable(),
                 TextColumn::make('national_id')
+                    ->label('Cédula')
+                    ->searchable(),
+                TextColumn::make('serviceCenter.branch.trade_name')
+                    ->label('Centro de Servicio')
                     ->searchable(),
                 TextColumn::make('phone')
+                    ->label('Teléfono')
                     ->searchable(),
                 TextColumn::make('email')
-                    ->label('Email address')
+                    ->label('Correo Electrónico')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

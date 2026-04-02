@@ -11,13 +11,16 @@ class TechnicianInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('serviceCenter.id')
-                    ->label('Service center'),
-                TextEntry::make('name'),
-                TextEntry::make('national_id'),
-                TextEntry::make('phone'),
+                TextEntry::make('name')
+                    ->label('Nombre'),
+                TextEntry::make('national_id')
+                    ->label('Cédula'),
+                TextEntry::make('serviceCenter.branch.trade_name')
+                    ->label('Centro de Servicio'),
+                TextEntry::make('phone')
+                    ->label('Teléfono'),
                 TextEntry::make('email')
-                    ->label('Email address'),
+                    ->label('Correo Electrónico'),
                 TextEntry::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),
