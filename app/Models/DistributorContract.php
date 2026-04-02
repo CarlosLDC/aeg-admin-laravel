@@ -13,7 +13,7 @@ class DistributorContract extends Model
 
     protected $fillable = [
         'distributor_id',
-        'contract_photo_path',
+        'photo_path',
         'start_date',
         'end_date',
     ];

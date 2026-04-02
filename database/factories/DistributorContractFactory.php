@@ -22,7 +22,7 @@ class DistributorContractFactory extends Factory
 
         return [
             'distributor_id' => Distributor::factory(),
-            'contract_photo_path' => fake()->imageUrl(),
+            'photo_path' => fake()->imageUrl(),
             'start_date' => $fakeDate->format('Y-m-d'),
             'end_date' => $fakeDate->modify('+2 years')->format('Y-m-d'),
         ];

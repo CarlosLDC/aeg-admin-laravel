@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('distributor_contracts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('distributor_id')->constrained()->cascadeOnDelete();
-            $table->string('contract_photo_path');
             $table->date('start_date');
             $table->date('end_date');
+            $table->text('photo_path');
             $table->timestamps();
         });
     }

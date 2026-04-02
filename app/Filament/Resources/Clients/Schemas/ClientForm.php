@@ -43,6 +43,7 @@ class ClientForm
                         ->selectRaw("branches.trade_name || ' (' || companies.tax_id || ')' as label")
                         ->where('distributors.id', $value)
                         ->value('label'))
+                    ->searchPrompt('Buscar por Nombre Comercial, Razón Social o RIF...')
                     ->rules([
                         fn (Get $get): Closure => function (string $attribute, $value, Closure $fail) use ($get): void {
                             if (blank($value) || blank($get('branch_id'))) {

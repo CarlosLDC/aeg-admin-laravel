@@ -21,7 +21,7 @@ class SoftwareResource extends Resource
 {
     protected static ?string $model = Software::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedComputerDesktop;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCodeBracketSquare;
 
     protected static ?string $recordTitleAttribute = 'name';
 

@@ -31,8 +31,6 @@ class PrinterModelResource extends Resource
 
     protected static bool $hasTitleCaseModelLabel = false;
 
-    protected static ?string $navigationLabel = 'Modelos';
-
     protected static ?int $navigationSort = 1;
 
     protected static string | UnitEnum | null $navigationGroup = 'Impresoras';
