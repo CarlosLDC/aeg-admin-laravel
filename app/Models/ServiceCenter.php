@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class ServiceCenter extends Model
 {
@@ -25,5 +26,10 @@ class ServiceCenter extends Model
     public function technicians(): HasMany
     {
         return $this->hasMany(Technician::class);
+    }
+
+    public function contracts(): MorphMany
+    {
+        return $this->morphMany(Contract::class, 'contractable');
     }
 }

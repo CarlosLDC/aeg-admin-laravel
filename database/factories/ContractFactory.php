@@ -2,14 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Distributor;
-use App\Models\DistributorContract;
+use App\Models\Contract;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<DistributorContract>
+ * @extends Factory<Contract>
  */
-class DistributorContractFactory extends Factory
+class ContractFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -21,10 +20,9 @@ class DistributorContractFactory extends Factory
         $fakeDate = fake()->dateTimeThisDecade();
 
         return [
-            'distributor_id' => Distributor::factory(),
-            'contract_photo_path' => fake()->imageUrl(),
+            'photo_path' => fake()->imageUrl(),
             'start_date' => $fakeDate->format('Y-m-d'),
-            'end_date' => $fakeDate->modify('+2 years')->format('Y-m-d'),
+            'end_date' => $fakeDate->modify('+2 year')->format('Y-m-d'),
         ];
     }
 }

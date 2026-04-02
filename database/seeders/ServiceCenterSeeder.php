@@ -13,6 +13,6 @@ class ServiceCenterSeeder extends Seeder
      */
     public function run(): void
     {
-        ServiceCenter::factory()->count(10)->create();
+        ServiceCenter::factory()->count(10)->hasContracts(5)->create();
     }
 }
