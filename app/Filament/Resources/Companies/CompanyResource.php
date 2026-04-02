@@ -32,7 +32,7 @@ class CompanyResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
-    protected static string | UnitEnum | null $navigationGroup = 'Aliados y Clientes';
+    protected static string|UnitEnum|null $navigationGroup = 'Aliados y Clientes';
 
     public static function form(Schema $schema): Schema
     {
@@ -60,7 +60,7 @@ class CompanyResource extends Resource
     {
         return [
             'index' => ListCompanies::route('/'),
-            // 'create' => CreateCompany::route('/create'),
+            'create' => CreateCompany::route('/create'),
             'view' => ViewCompany::route('/{record}'),
             'edit' => EditCompany::route('/{record}/edit'),
         ];

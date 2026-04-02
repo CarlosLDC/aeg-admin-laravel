@@ -2,9 +2,8 @@
 
 namespace App\Filament\Resources\Distributors\Schemas;
 
-use App\Models\Branch;
+use App\Filament\Support\BranchSelect;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
 class DistributorForm
@@ -17,8 +16,10 @@ class DistributorForm
                     ->label('Sucursal')
                     ->required()
                     ->unique()
-                    ->relationship('branch', 'trade_name')
                     ->searchable()
+                    ->getSearchResultsUsing(BranchSelect::searchResults(...))
+                    ->getOptionLabelUsing(BranchSelect::optionLabel(...))
+                    ->searchPrompt('Buscar por Nombre Comercial, Razón Social o RIF...')
                     ->validationMessages([
                         'unique' => 'Esta sucursal ya está registrada como distribuidor.',
                     ]),

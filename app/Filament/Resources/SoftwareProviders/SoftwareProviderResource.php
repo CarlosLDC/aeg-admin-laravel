@@ -34,7 +34,7 @@ class SoftwareProviderResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
-    protected static string | UnitEnum | null $navigationGroup = 'Software';
+    protected static string|UnitEnum|null $navigationGroup = 'Software';
 
     public static function form(Schema $schema): Schema
     {
@@ -62,7 +62,7 @@ class SoftwareProviderResource extends Resource
     {
         return [
             'index' => ListSoftwareProviders::route('/'),
-            // 'create' => CreateSoftwareProvider::route('/create'),
+            'create' => CreateSoftwareProvider::route('/create'),
             'view' => ViewSoftwareProvider::route('/{record}'),
             'edit' => EditSoftwareProvider::route('/{record}/edit'),
         ];

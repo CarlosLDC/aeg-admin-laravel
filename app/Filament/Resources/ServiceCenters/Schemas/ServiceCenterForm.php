@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ServiceCenters\Schemas;
 
+use App\Filament\Support\BranchSelect;
 use Filament\Forms\Components\Select;
 use Filament\Schemas\Schema;
 
@@ -13,10 +14,12 @@ class ServiceCenterForm
             ->components([
                 Select::make('branch_id')
                     ->label('Sucursal')
-                    ->unique()
-                    ->relationship('branch', 'trade_name')
-                    ->searchable()
                     ->required()
+                    ->unique()
+                    ->searchable()
+                    ->getSearchResultsUsing(BranchSelect::searchResults(...))
+                    ->getOptionLabelUsing(BranchSelect::optionLabel(...))
+                    ->searchPrompt('Buscar por Nombre Comercial, Razón Social o RIF...')
                     ->validationMessages([
                         'unique' => 'Esta sucursal ya está registrada como centro de servicio.',
                     ]),

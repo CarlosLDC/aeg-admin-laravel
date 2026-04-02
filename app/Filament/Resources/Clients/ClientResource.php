@@ -27,9 +27,9 @@ class ClientResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Clientes';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 5;
 
-    protected static string | UnitEnum | null $navigationGroup = 'Aliados y Clientes';
+    protected static string|UnitEnum|null $navigationGroup = 'Aliados y Clientes';
 
     public static function form(Schema $schema): Schema
     {

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Clients\Schemas;
 
+use App\Filament\Support\BranchSelect;
 use App\Models\Distributor;
 use Closure;
 use Filament\Forms\Components\Select;
@@ -18,26 +19,32 @@ class ClientForm
                     ->label('Sucursal')
                     ->required()
                     ->unique()
-                    ->relationship('branch', 'trade_name')
                     ->searchable()
+                    ->getSearchResultsUsing(BranchSelect::searchResults(...))
+                    ->getOptionLabelUsing(BranchSelect::optionLabel(...))
+                    ->searchPrompt('Buscar por Nombre Comercial, Razón Social o RIF...')
                     ->validationMessages([
                         'unique' => 'Esta sucursal ya está registrada como cliente.',
                     ]),
                 Select::make('distributor_id')
                     ->label('Distribuidor')
                     ->searchable()
-                    ->getSearchResultsUsing(fn(string $search): array => Distributor::query()
+                    ->getSearchResultsUsing(fn (string $search): array => Distributor::query()
                         ->join('branches', 'distributors.branch_id', '=', 'branches.id')
-                        ->where('branches.trade_name', 'like', "%{$search}%")
+                        ->join('companies', 'branches.company_id', '=', 'companies.id')
+                        ->selectRaw("distributors.id, branches.trade_name || ' (' || companies.tax_id || ')' as label")
+                        ->whereAny(['companies.legal_name', 'companies.tax_id', 'branches.trade_name'], 'like', "%{$search}%")
                         ->limit(50)
-                        ->pluck('branches.trade_name', 'distributors.id')
+                        ->pluck('label', 'id')
                         ->all())
-                    ->getOptionLabelUsing(fn(string $value): ?string => Distributor::query()
+                    ->getOptionLabelUsing(fn (string $value): ?string => Distributor::query()
                         ->join('branches', 'distributors.branch_id', '=', 'branches.id')
+                        ->join('companies', 'branches.company_id', '=', 'companies.id')
+                        ->selectRaw("branches.trade_name || ' (' || companies.tax_id || ')' as label")
                         ->where('distributors.id', $value)
-                        ->value('branches.trade_name'))
+                        ->value('label'))
                     ->rules([
-                        fn(Get $get): Closure => function (string $attribute, $value, Closure $fail) use ($get): void {
+                        fn (Get $get): Closure => function (string $attribute, $value, Closure $fail) use ($get): void {
                             if (blank($value) || blank($get('branch_id'))) {
                                 return;
                             }
@@ -50,7 +57,7 @@ class ClientForm
                                 $fail('Un cliente no puede ser su propio distribuidor.');
                             }
                         },
-                    ])
+                    ]),
             ]);
     }
 }

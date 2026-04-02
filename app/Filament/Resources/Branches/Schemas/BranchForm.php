@@ -18,7 +18,8 @@ class BranchForm
                 Select::make('company_id')
                     ->label('Empresa')
                     ->required()
-                    ->relationship('company', 'legal_name')
+                    ->relationship(name: 'company', titleAttribute: 'legal_name')
+                    ->getOptionLabelFromRecordUsing(fn (Company $company) => "{$company->legal_name} ({$company->tax_id})")
                     ->searchable(['legal_name', 'tax_id'])
                     ->searchPrompt('Buscar por Razón Social o RIF...'),
                 TextInput::make('trade_name')

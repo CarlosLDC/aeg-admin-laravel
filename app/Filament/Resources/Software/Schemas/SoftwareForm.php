@@ -33,10 +33,12 @@ class SoftwareForm
                     ->required(),
                 Select::make('operating_systems')
                     ->label('Sistemas Operativos Compatibles')
+                    ->required()
                     ->multiple()
                     ->options(OperatingSystem::class),
                 Select::make('programming_languages')
                     ->label('Lenguajes de Programación')
+                    ->required()
                     ->multiple()
                     ->options(ProgrammingLanguage::class),
             ]);

@@ -27,9 +27,9 @@ class DistributorResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Distribuidoras';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 4;
 
-    protected static string | UnitEnum | null $navigationGroup = 'Aliados y Clientes';
+    protected static string|UnitEnum|null $navigationGroup = 'Aliados y Clientes';
 
     public static function form(Schema $schema): Schema
     {
@@ -57,9 +57,9 @@ class DistributorResource extends Resource
     {
         return [
             'index' => ListDistributors::route('/'),
-            // 'create' => CreateDistributor::route('/create'),
-            // 'view' => ViewDistributor::route('/{record}'),
-            // 'edit' => EditDistributor::route('/{record}/edit'),
+            'create' => CreateDistributor::route('/create'),
+            'view' => ViewDistributor::route('/{record}'),
+            'edit' => EditDistributor::route('/{record}/edit'),
         ];
     }
 }

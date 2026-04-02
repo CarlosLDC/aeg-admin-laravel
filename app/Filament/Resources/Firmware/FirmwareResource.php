@@ -25,11 +25,15 @@ class FirmwareResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'version';
 
-    protected static ?string $modelLabel = 'Firmware';
+    protected static ?string $modelLabel = 'Versión de Firmware';
+
+    protected static ?string $pluralModelLabel = 'Versiones de Firmware';
+
+    protected static bool $hasTitleCaseModelLabel = false;
 
     protected static ?int $navigationSort = 2;
 
-    protected static string | UnitEnum | null $navigationGroup = 'Impresoras';
+    protected static string|UnitEnum|null $navigationGroup = 'Impresoras';
 
     public static function form(Schema $schema): Schema
     {

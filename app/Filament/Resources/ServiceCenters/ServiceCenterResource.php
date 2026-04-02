@@ -6,6 +6,7 @@ use App\Filament\Resources\ServiceCenters\Pages\CreateServiceCenter;
 use App\Filament\Resources\ServiceCenters\Pages\EditServiceCenter;
 use App\Filament\Resources\ServiceCenters\Pages\ListServiceCenters;
 use App\Filament\Resources\ServiceCenters\Pages\ViewServiceCenter;
+use App\Filament\Resources\ServiceCenters\RelationManagers\TechniciansRelationManager;
 use App\Filament\Resources\ServiceCenters\Schemas\ServiceCenterForm;
 use App\Filament\Resources\ServiceCenters\Schemas\ServiceCenterInfolist;
 use App\Filament\Resources\ServiceCenters\Tables\ServiceCentersTable;
@@ -51,7 +52,7 @@ class ServiceCenterResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            TechniciansRelationManager::class,
         ];
     }
 
@@ -59,9 +60,9 @@ class ServiceCenterResource extends Resource
     {
         return [
             'index' => ListServiceCenters::route('/'),
-            // 'create' => CreateServiceCenter::route('/create'),
-            // 'view' => ViewServiceCenter::route('/{record}'),
-            // 'edit' => EditServiceCenter::route('/{record}/edit'),
+            'create' => CreateServiceCenter::route('/create'),
+            'view' => ViewServiceCenter::route('/{record}'),
+            'edit' => EditServiceCenter::route('/{record}/edit'),
         ];
     }
 }
