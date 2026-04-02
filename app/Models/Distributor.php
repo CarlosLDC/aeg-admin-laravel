@@ -25,4 +25,9 @@ class Distributor extends Model
     {
         return $this->hasMany(Client::class);
     }
+
+    public function representatives(): HasMany
+    {
+        return $this->hasMany(Representative::class);
+    }
 }

@@ -2,14 +2,14 @@
 
 namespace Database\Factories;
 
-use App\Models\ServiceCenter;
-use App\Models\Technician;
+use App\Models\Distributor;
+use App\Models\Representative;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Technician>
+ * @extends Factory<Representative>
  */
-class TechnicianFactory extends Factory
+class RepresentativeFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,7 +19,7 @@ class TechnicianFactory extends Factory
     public function definition(): array
     {
         return [
-            'service_center_id' => ServiceCenter::factory(),
+            'distributor_id' => Distributor::factory(),
             'name' => fake()->name(),
             'national_id' => fake()->unique()->regexify('[VE][0-9]{7,8}'),
             'phone' => fake()->e164PhoneNumber(),
