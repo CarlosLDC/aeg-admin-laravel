@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ServiceCenter;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -27,6 +28,7 @@ class DatabaseSeeder extends Seeder
             TechnicianSeeder::class,
             RepresentativeSeeder::class,
             DistributorContractSeeder::class,
+            ServiceCenterContractSeeder::class,
         ]);
     }
 }

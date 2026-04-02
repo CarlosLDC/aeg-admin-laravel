@@ -24,12 +24,22 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+            ->navigationGroups([
+                'Aliados y Clientes',
+                'Agentes',
+                'Impresoras',
+                'Software',
+                'Finanzas y Compras',
+                'Libro Fiscal',
+                'Contratos',
+                'Administración',
+            ])
             ->default()
             ->id('admin')
             ->path('')
             ->login()
             ->brandLogo(asset('images/logo.png'))
-            ->darkModeBrandLogo(fn () => view('filament.brand-logo-dark'))
+            ->darkModeBrandLogo(fn() => view('filament.brand-logo-dark'))
             ->brandLogoHeight('2.5rem')
             ->favicon(asset('images/favicon.png'))
             ->colors([

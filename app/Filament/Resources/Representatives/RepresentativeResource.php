@@ -21,7 +21,7 @@ class RepresentativeResource extends Resource
 {
     protected static ?string $model = Representative::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBriefcase;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTruck;
 
     protected static ?string $recordTitleAttribute = 'name';
 

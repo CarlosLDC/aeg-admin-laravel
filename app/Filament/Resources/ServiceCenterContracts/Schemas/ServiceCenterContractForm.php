@@ -1,36 +1,36 @@
 <?php
 
-namespace App\Filament\Resources\DistributorContracts\Schemas;
+namespace App\Filament\Resources\ServiceCenterContracts\Schemas;
 
-use App\Models\Distributor;
+use App\Models\ServiceCenter;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
-class DistributorContractForm
+class ServiceCenterContractForm
 {
     public static function configure(Schema $schema): Schema
     {
         return $schema
             ->components([
-                Select::make('distributor_id')
-                    ->label('Distribuidor')
+                Select::make('service_center_id')
+                    ->label('Centro de Servicio')
                     ->required()
                     ->searchable()
-                    ->getSearchResultsUsing(fn(string $search): array => Distributor::query()
-                        ->join('branches', 'distributors.branch_id', '=', 'branches.id')
+                    ->getSearchResultsUsing(fn(string $search): array => ServiceCenter::query()
+                        ->join('branches', 'service_centers.branch_id', '=', 'branches.id')
                         ->join('companies', 'branches.company_id', '=', 'companies.id')
-                        ->selectRaw("distributors.id, branches.trade_name || ' (' || companies.tax_id || ')' as label")
+                        ->selectRaw("service_centers.id, branches.trade_name || ' (' || companies.tax_id || ')' as label")
                         ->whereAny(['companies.legal_name', 'companies.tax_id', 'branches.trade_name'], 'like', "%{$search}%")
                         ->limit(50)
                         ->pluck('label', 'id')
                         ->all())
-                    ->getOptionLabelUsing(fn(string $value): ?string => Distributor::query()
-                        ->join('branches', 'distributors.branch_id', '=', 'branches.id')
+                    ->getOptionLabelUsing(fn(string $value): ?string => ServiceCenter::query()
+                        ->join('branches', 'service_centers.branch_id', '=', 'branches.id')
                         ->join('companies', 'branches.company_id', '=', 'companies.id')
-                        ->selectRaw("branches.trade_name || ' (' || companies.tax_id || ')' as label")
-                        ->where('distributors.id', $value)
+                        ->selectRaw("service_centers.id, branches.trade_name || ' (' || companies.tax_id || ')' as label")
+                        ->where('service_centers.id', $value)
                         ->value('label'))
                     ->searchPrompt('Buscar por Nombre Comercial, Razón Social o RIF...'),
                 TextInput::make('photo_path')

@@ -6,6 +6,7 @@ use App\Filament\Resources\ServiceCenters\Pages\CreateServiceCenter;
 use App\Filament\Resources\ServiceCenters\Pages\EditServiceCenter;
 use App\Filament\Resources\ServiceCenters\Pages\ListServiceCenters;
 use App\Filament\Resources\ServiceCenters\Pages\ViewServiceCenter;
+use App\Filament\Resources\ServiceCenters\RelationManagers\ServiceCenterContractsRelationManager;
 use App\Filament\Resources\ServiceCenters\RelationManagers\TechniciansRelationManager;
 use App\Filament\Resources\ServiceCenters\Schemas\ServiceCenterForm;
 use App\Filament\Resources\ServiceCenters\Schemas\ServiceCenterInfolist;
@@ -53,6 +54,7 @@ class ServiceCenterResource extends Resource
     {
         return [
             TechniciansRelationManager::class,
+            ServiceCenterContractsRelationManager::class,
         ];
     }
 

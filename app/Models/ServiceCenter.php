@@ -26,4 +26,9 @@ class ServiceCenter extends Model
     {
         return $this->hasMany(Technician::class);
     }
+
+    public function serviceCenterContracts(): HasMany
+    {
+        return $this->hasMany(ServiceCenterContract::class);
+    }
 }
