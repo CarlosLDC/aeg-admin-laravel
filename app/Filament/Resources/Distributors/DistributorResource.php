@@ -11,6 +11,7 @@ use App\Filament\Resources\Distributors\Schemas\DistributorForm;
 use App\Filament\Resources\Distributors\Schemas\DistributorInfolist;
 use App\Filament\Resources\Distributors\Tables\DistributorsTable;
 use App\Models\Distributor;
+use App\Models\Representative;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;

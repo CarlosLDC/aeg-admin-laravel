@@ -13,6 +13,6 @@ class DistributorSeeder extends Seeder
      */
     public function run(): void
     {
-        Distributor::factory()->count(10)->hasContracts(5)->create();
+        Distributor::factory()->count(10)->create();
     }
 }
