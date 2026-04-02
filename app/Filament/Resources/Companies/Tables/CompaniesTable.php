@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Companies\Tables;
 
+use App\Enums\TaxpayerType;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -24,7 +25,12 @@ class CompaniesTable
                 TextColumn::make('taxpayer_type')
                     ->label('Tipo de Contribuyente')
                     ->searchable()
-                    ->badge(),
+                    ->badge()
+                    ->color(fn(TaxpayerType $state): string => match ($state) {
+                        TaxpayerType::Ordinary => 'primary',
+                        TaxpayerType::Special => 'success',
+                        TaxpayerType::Formal => 'gray',
+                    }),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -38,7 +44,7 @@ class CompaniesTable
                 //
             ])
             ->recordActions([
-                ViewAction::make(),
+                // ViewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([

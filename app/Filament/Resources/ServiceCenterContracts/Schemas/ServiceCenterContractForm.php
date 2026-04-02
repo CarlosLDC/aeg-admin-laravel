@@ -35,8 +35,14 @@ class ServiceCenterContractForm
                     ->searchPrompt('Buscar por Nombre Comercial, Razón Social o RIF...'),
                 TextInput::make('photo_path')
                     ->label('Ruta de la foto del contrato')
+                    ->required()
+                    ->url()
                     ->placeholder('http://example.com/contrato.jpg')
-                    ->required(),
+                    ->columnSpanFull()
+                    ->copyable()
+                    ->validationMessages([
+                        'url' => 'Ingrese una URL válida.',
+                    ]),
                 DatePicker::make('start_date')
                     ->label('Fecha de inicio')
                     ->required(),
