@@ -6,10 +6,12 @@ use App\Filament\Resources\Distributors\Pages\CreateDistributor;
 use App\Filament\Resources\Distributors\Pages\EditDistributor;
 use App\Filament\Resources\Distributors\Pages\ListDistributors;
 use App\Filament\Resources\Distributors\Pages\ViewDistributor;
+use App\Filament\Resources\Distributors\RelationManagers\RepresentativesRelationManager;
 use App\Filament\Resources\Distributors\Schemas\DistributorForm;
 use App\Filament\Resources\Distributors\Schemas\DistributorInfolist;
 use App\Filament\Resources\Distributors\Tables\DistributorsTable;
 use App\Models\Distributor;
+use App\Models\Representative;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -49,7 +51,7 @@ class DistributorResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RepresentativesRelationManager::class,
         ];
     }
 

@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             SoftwareSeeder::class,
             TechnicianSeeder::class,
             RepresentativeSeeder::class,
+            DistributorContractSeeder::class,
         ]);
     }
 }
