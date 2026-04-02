@@ -27,7 +27,7 @@ class ClientForm
                         'unique' => 'Esta sucursal ya está registrada como cliente.',
                     ]),
                 Select::make('distributor_id')
-                    ->label('Distribuidor')
+                    ->label('Distribuidora')
                     ->searchable()
                     ->getSearchResultsUsing(fn (string $search): array => Distributor::query()
                         ->join('branches', 'distributors.branch_id', '=', 'branches.id')
@@ -55,7 +55,7 @@ class ClientForm
                                 ->value('branch_id');
 
                             if ((string) $distributorBranchId === (string) $get('branch_id')) {
-                                $fail('Un cliente no puede ser su propio distribuidor.');
+                                $fail('Un cliente no puede ser su propia distribuidora.');
                             }
                         },
                     ]),

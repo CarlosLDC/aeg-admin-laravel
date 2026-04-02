@@ -16,10 +16,10 @@ class ClientInfolist
                 TextEntry::make('branch.company.tax_id')
                     ->label('RIF de la Sucursal'),
                 TextEntry::make('distributor.branch.trade_name')
-                    ->label('Distribuidor')
+                    ->label('Distribuidora')
                     ->placeholder('-'),
                 TextEntry::make('distributor.branch.company.tax_id')
-                    ->label('RIF del Distribuidor')
+                    ->label('RIF de la Distribuidora')
                     ->placeholder('-'),
                 TextEntry::make('created_at')
                     ->dateTime()

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('brand');
             $table->string('model');
-            $table->decimal('price', total: 8, places: 2);
+            $table->decimal('price', total: 10, places: 2);
             $table->string('administrative_act'); // Providencia
             $table->date('certification_date'); // Fecha de homologación
             $table->timestamps();

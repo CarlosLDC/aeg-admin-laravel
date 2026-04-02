@@ -22,10 +22,10 @@ class ClientsTable
                     ->label('RIF de la Sucursal')
                     ->searchable(),
                 TextColumn::make('distributor.branch.trade_name')
-                    ->label('Distribuidor')
+                    ->label('Distribuidora')
                     ->searchable(),
                 TextColumn::make('distributor.branch.company.tax_id')
-                    ->label('RIF del Distribuidor')
+                    ->label('RIF de la Distribuidora')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

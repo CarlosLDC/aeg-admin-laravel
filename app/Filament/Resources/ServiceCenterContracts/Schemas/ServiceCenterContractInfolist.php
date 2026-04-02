@@ -4,7 +4,6 @@ namespace App\Filament\Resources\ServiceCenterContracts\Schemas;
 
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
-use Filament\Support\Enums\IconPosition;
 
 class ServiceCenterContractInfolist
 {
@@ -24,8 +23,6 @@ class ServiceCenterContractInfolist
                     ->date(),
                 TextEntry::make('photo_path')
                     ->label('Ruta de la foto del contrato')
-                    ->icon('heroicon-m-clipboard-document-check')
-                    ->iconPosition(IconPosition::After)
                     ->columnSpanFull()
                     ->copyable(),
                 TextEntry::make('created_at')

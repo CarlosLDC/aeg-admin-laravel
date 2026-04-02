@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             RepresentativeSeeder::class,
             DistributorContractSeeder::class,
             ServiceCenterContractSeeder::class,
+            PurchaseSeeder::class,
         ]);
     }
 }

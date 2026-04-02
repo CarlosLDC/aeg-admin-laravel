@@ -35,4 +35,9 @@ class Distributor extends Model
     {
         return $this->hasMany(DistributorContract::class);
     }
+
+    public function purchases(): HasMany
+    {
+        return $this->hasMany(Purchase::class);
+    }
 }
