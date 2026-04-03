@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Clients\Schemas;
 
 use App\Filament\Support\BranchSelect;
+use App\Filament\Support\DistributorSelect;
 use App\Models\Distributor;
 use Closure;
 use Filament\Forms\Components\Select;
@@ -29,20 +30,8 @@ class ClientForm
                 Select::make('distributor_id')
                     ->label('Distribuidora')
                     ->searchable()
-                    ->getSearchResultsUsing(fn (string $search): array => Distributor::query()
-                        ->join('branches', 'distributors.branch_id', '=', 'branches.id')
-                        ->join('companies', 'branches.company_id', '=', 'companies.id')
-                        ->selectRaw("distributors.id, branches.trade_name || ' (' || companies.tax_id || ')' as label")
-                        ->whereAny(['companies.legal_name', 'companies.tax_id', 'branches.trade_name'], 'like', "%{$search}%")
-                        ->limit(50)
-                        ->pluck('label', 'id')
-                        ->all())
-                    ->getOptionLabelUsing(fn (string $value): ?string => Distributor::query()
-                        ->join('branches', 'distributors.branch_id', '=', 'branches.id')
-                        ->join('companies', 'branches.company_id', '=', 'companies.id')
-                        ->selectRaw("branches.trade_name || ' (' || companies.tax_id || ')' as label")
-                        ->where('distributors.id', $value)
-                        ->value('label'))
+                    ->getSearchResultsUsing(DistributorSelect::searchResults(...))
+                    ->getOptionLabelUsing(DistributorSelect::optionLabel(...))
                     ->searchPrompt('Buscar por Nombre Comercial, Razón Social o RIF...')
                     ->rules([
                         fn (Get $get): Closure => function (string $attribute, $value, Closure $fail) use ($get): void {

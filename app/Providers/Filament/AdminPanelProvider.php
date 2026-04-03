@@ -29,7 +29,7 @@ class AdminPanelProvider extends PanelProvider
                 'Agentes',
                 'Impresoras',
                 'Software',
-                'Finanzas y Compras',
+                'Gestión de Compras',
                 'Libro Fiscal',
                 'Contratos',
                 'Administración',

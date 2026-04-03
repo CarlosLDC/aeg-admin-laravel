@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Filament\Resources\Software\Schemas;
+namespace App\Filament\Resources\Distributors\Resources\Representatives\Schemas;
 
-use Dom\Text;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
 
-class SoftwareInfolist
+class RepresentativeInfolist
 {
     public static function configure(Schema $schema): Schema
     {
@@ -14,15 +13,12 @@ class SoftwareInfolist
             ->components([
                 TextEntry::make('name')
                     ->label('Nombre'),
-                TextEntry::make('version')
-                    ->label('Versión'),
-                TextEntry::make('integration_date')
-                    ->label('Fecha de Integración')
-                    ->date(),
-                TextEntry::make('operating_systems')
-                    ->label('Sistemas Operativos Compatibles'),
-                TextEntry::make('programming_languages')
-                    ->label('Lenguajes de Programación'),
+                TextEntry::make('national_id')
+                    ->label('Cédula'),
+                TextEntry::make('phone')
+                    ->label('Teléfono'),
+                TextEntry::make('email')
+                    ->label('Correo Electrónico'),
                 TextEntry::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),

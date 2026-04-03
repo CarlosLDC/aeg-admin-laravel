@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Filament\Resources\Software\Tables;
+namespace App\Filament\Resources\Purchases\Tables;
 
-use Dom\Text;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -10,20 +9,36 @@ use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class SoftwareTable
+class PurchasesTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('name')
-                    ->label('Nombre')
+                TextColumn::make('distributor.id')
                     ->searchable(),
-                TextColumn::make('version')
-                    ->label('Versión')
+                TextColumn::make('purchase_date')
+                    ->date()
+                    ->sortable(),
+                TextColumn::make('subtotal')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('discount')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('tax')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('total')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('payment_term')
+                    ->badge()
                     ->searchable(),
-                TextColumn::make('integration_date')
-                    ->label('Fecha de Integración')
+                TextColumn::make('payment_status')
+                    ->badge()
+                    ->searchable(),
+                TextColumn::make('due_date')
                     ->date()
                     ->sortable(),
                 TextColumn::make('created_at')
@@ -39,7 +54,7 @@ class SoftwareTable
                 //
             ])
             ->recordActions([
-                // ViewAction::make(),
+                ViewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([

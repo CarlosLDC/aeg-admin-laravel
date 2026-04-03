@@ -20,15 +20,23 @@ class PurchaseFactory extends Factory
      */
     public function definition(): array
     {
+        $fakePurchaseDate = fake()->dateTimeThisDecade();
+
+        $fakePaymentTerm = fake()->randomElement(PaymentTerm::cases());
+
+        $fakeDueDate = $fakePaymentTerm === PaymentTerm::Credit
+            ? fake()->dateTimeBetween($fakePurchaseDate, '+1 year')
+            : null;
+
         return [
             'distributor_id' => Distributor::factory(),
-            'purchase_date' => fake()->date(),
+            'purchase_date' => $fakePurchaseDate->format('Y-m-d'),
             'subtotal' => fake()->randomFloat(2, min: 100, max: 1000),
             'discount' => fake()->randomFloat(2, min: 0, max: 100),
             'tax' => fake()->randomFloat(2, min: 10, max: 100),
-            'payment_term' => fake()->randomElement(PaymentTerm::cases()),
+            'payment_term' => $fakePaymentTerm,
+            'due_date' => $fakeDueDate?->format('Y-m-d'),
             'payment_status' => fake()->randomElement(PaymentStatus::cases()),
-            'due_date' => fake()->optional()->dateTimeThisDecade()?->format('Y-m-d'),
         ];
     }
 }

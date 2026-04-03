@@ -20,8 +20,8 @@ class Purchase extends Model
         'discount',
         'tax',
         'payment_term',
-        'payment_status',
         'due_date',
+        'payment_status',
     ];
 
     protected function casts(): array

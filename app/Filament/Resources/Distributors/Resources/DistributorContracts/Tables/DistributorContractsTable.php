@@ -1,29 +1,27 @@
 <?php
 
-namespace App\Filament\Resources\Software\Tables;
+namespace App\Filament\Resources\Distributors\Resources\DistributorContracts\Tables;
 
-use Dom\Text;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class SoftwareTable
+class DistributorContractsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('name')
-                    ->label('Nombre')
-                    ->searchable(),
-                TextColumn::make('version')
-                    ->label('Versión')
-                    ->searchable(),
-                TextColumn::make('integration_date')
-                    ->label('Fecha de Integración')
+                TextColumn::make('start_date')
+                    ->label('Fecha de Inicio')
+                    ->date()
+                    ->sortable(),
+                TextColumn::make('end_date')
+                    ->label('Fecha de Finalización')
                     ->date()
                     ->sortable(),
                 TextColumn::make('created_at')

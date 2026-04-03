@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Filament\Resources\Software\Tables;
+namespace App\Filament\Resources\Distributors\Resources\Representatives\Tables;
 
-use Dom\Text;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -10,7 +9,7 @@ use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class SoftwareTable
+class RepresentativesTable
 {
     public static function configure(Table $table): Table
     {
@@ -19,13 +18,15 @@ class SoftwareTable
                 TextColumn::make('name')
                     ->label('Nombre')
                     ->searchable(),
-                TextColumn::make('version')
-                    ->label('Versión')
+                TextColumn::make('national_id')
+                    ->label('Cédula')
                     ->searchable(),
-                TextColumn::make('integration_date')
-                    ->label('Fecha de Integración')
-                    ->date()
-                    ->sortable(),
+                TextColumn::make('phone')
+                    ->label('Teléfono')
+                    ->searchable(),
+                TextColumn::make('email')
+                    ->label('Correo Electrónico')
+                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

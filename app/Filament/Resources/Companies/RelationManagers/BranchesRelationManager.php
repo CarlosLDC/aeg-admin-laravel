@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Companies\RelationManagers;
 
-use App\Filament\Resources\Branches\BranchResource;
+use App\Filament\Resources\Companies\Resources\Branches\BranchResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Table;

@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Distributors;
 
-use App\Filament\Resources\DistributorContracts\DistributorContractResource;
 use App\Filament\Resources\Distributors\Pages\CreateDistributor;
 use App\Filament\Resources\Distributors\Pages\EditDistributor;
 use App\Filament\Resources\Distributors\Pages\ListDistributors;
@@ -62,7 +61,7 @@ class DistributorResource extends Resource
         return [
             'index' => ListDistributors::route('/'),
             'create' => CreateDistributor::route('/create'),
-            'view' => ViewDistributor::route('/{record}'),
+            // 'view' => ViewDistributor::route('/{record}'),
             'edit' => EditDistributor::route('/{record}/edit'),
         ];
     }

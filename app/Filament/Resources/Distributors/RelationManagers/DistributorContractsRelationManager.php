@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Distributors\RelationManagers;
 
-use App\Filament\Resources\DistributorContracts\DistributorContractResource;
+use App\Filament\Resources\Distributors\Resources\DistributorContracts\DistributorContractResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Table;

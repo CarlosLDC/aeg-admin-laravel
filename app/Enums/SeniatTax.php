@@ -15,7 +15,7 @@ enum SeniatTax: string implements HasLabel
     {
         return match ($this) {
             self::General => 'General (16%)',
-            self::Reduced => 'Reducida (8%)',
+            self::Reduced => 'Reducido (8%)',
             self::Additional => 'Lujo (31%)',
             self::Exempt => 'Exento (0%)',
         };

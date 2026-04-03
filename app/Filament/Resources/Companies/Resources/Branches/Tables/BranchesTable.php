@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Filament\Resources\Software\Tables;
+namespace App\Filament\Resources\Companies\Resources\Branches\Tables;
 
-use Dom\Text;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -10,22 +9,30 @@ use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class SoftwareTable
+class BranchesTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('name')
-                    ->label('Nombre')
+                TextColumn::make('trade_name')
+                    ->label('Nombre Comercial')
                     ->searchable(),
-                TextColumn::make('version')
-                    ->label('Versión')
+                TextColumn::make('state')
+                    ->label('Estado')
                     ->searchable(),
-                TextColumn::make('integration_date')
-                    ->label('Fecha de Integración')
-                    ->date()
-                    ->sortable(),
+                TextColumn::make('city')
+                    ->label('Ciudad')
+                    ->searchable(),
+                TextColumn::make('phone')
+                    ->label('Número de Teléfono')
+                    ->searchable(),
+                TextColumn::make('email')
+                    ->label('Correo Electrónico')
+                    ->searchable(),
+                TextColumn::make('contact_person')
+                    ->label('Persona de Contacto')
+                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
