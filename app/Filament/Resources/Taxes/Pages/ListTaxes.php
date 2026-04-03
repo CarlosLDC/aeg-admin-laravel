@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\Purchases\Pages;
+namespace App\Filament\Resources\Taxes\Pages;
 
-use App\Filament\Resources\Purchases\PurchaseResource;
+use App\Filament\Resources\Taxes\TaxResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
-class ListPurchases extends ListRecords
+class ListTaxes extends ListRecords
 {
-    protected static string $resource = PurchaseResource::class;
+    protected static string $resource = TaxResource::class;
 
     protected function getHeaderActions(): array
     {

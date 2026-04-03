@@ -1,46 +1,31 @@
 <?php
 
-namespace App\Filament\Resources\Purchases\Tables;
+namespace App\Filament\Resources\Taxes\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class PurchasesTable
+class TaxesTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('distributor.id')
+                TextColumn::make('name')
+                    ->label('Nombre')
                     ->searchable(),
-                TextColumn::make('purchase_date')
-                    ->date()
-                    ->sortable(),
-                TextColumn::make('subtotal')
+                TextColumn::make('rate')
+                    ->label('Tasa')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('discount')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('tax')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('total')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('payment_term')
-                    ->badge()
-                    ->searchable(),
-                TextColumn::make('payment_status')
-                    ->badge()
-                    ->searchable(),
-                TextColumn::make('due_date')
-                    ->date()
-                    ->sortable(),
+                IconColumn::make('is_active')
+                    ->label('Activa')
+                    ->boolean(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -54,7 +39,7 @@ class PurchasesTable
                 //
             ])
             ->recordActions([
-                ViewAction::make(),
+                // ViewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([

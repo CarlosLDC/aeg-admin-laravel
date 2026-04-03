@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\Purchases\Pages;
+namespace App\Filament\Resources\Taxes\Pages;
 
-use App\Filament\Resources\Purchases\PurchaseResource;
+use App\Filament\Resources\Taxes\TaxResource;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 
-class ViewPurchase extends ViewRecord
+class ViewTax extends ViewRecord
 {
-    protected static string $resource = PurchaseResource::class;
+    protected static string $resource = TaxResource::class;
 
     protected function getHeaderActions(): array
     {
