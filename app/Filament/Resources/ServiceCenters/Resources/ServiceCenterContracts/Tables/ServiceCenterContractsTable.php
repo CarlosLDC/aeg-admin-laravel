@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\ServiceCenterContracts\Tables;
+namespace App\Filament\Resources\ServiceCenters\Resources\ServiceCenterContracts\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -15,18 +15,12 @@ class ServiceCenterContractsTable
     {
         return $table
             ->columns([
-                TextColumn::make('serviceCenter.branch.trade_name')
-                    ->label('Centro de Servicio')
-                    ->searchable(),
-                TextColumn::make('serviceCenter.branch.company.tax_id')
-                    ->label('RIF del Centro de Servicio')
-                    ->searchable(),
                 TextColumn::make('start_date')
-                    ->label('Fecha de inicio')
+                    ->label('Fecha de Inicio')
                     ->date()
                     ->sortable(),
                 TextColumn::make('end_date')
-                    ->label('Fecha de finalización')
+                    ->label('Fecha de Finalización')
                     ->date()
                     ->sortable(),
                 TextColumn::make('created_at')

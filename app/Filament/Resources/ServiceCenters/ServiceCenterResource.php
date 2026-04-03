@@ -63,7 +63,7 @@ class ServiceCenterResource extends Resource
         return [
             'index' => ListServiceCenters::route('/'),
             'create' => CreateServiceCenter::route('/create'),
-            'view' => ViewServiceCenter::route('/{record}'),
+            // 'view' => ViewServiceCenter::route('/{record}'),
             'edit' => EditServiceCenter::route('/{record}/edit'),
         ];
     }

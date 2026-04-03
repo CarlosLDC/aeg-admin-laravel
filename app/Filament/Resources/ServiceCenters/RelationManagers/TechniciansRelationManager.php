@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\ServiceCenters\RelationManagers;
 
-use App\Filament\Resources\Technicians\TechnicianResource;
+use App\Filament\Resources\ServiceCenters\Resources\Technicians\TechnicianResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Table;

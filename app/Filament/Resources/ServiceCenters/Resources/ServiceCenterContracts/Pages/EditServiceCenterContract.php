@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\ServiceCenterContracts\Pages;
+namespace App\Filament\Resources\ServiceCenters\Resources\ServiceCenterContracts\Pages;
 
-use App\Filament\Resources\ServiceCenterContracts\ServiceCenterContractResource;
+use App\Filament\Resources\ServiceCenters\Resources\ServiceCenterContracts\ServiceCenterContractResource;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;

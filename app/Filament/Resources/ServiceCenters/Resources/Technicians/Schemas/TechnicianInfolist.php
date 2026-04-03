@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Technicians\Schemas;
+namespace App\Filament\Resources\ServiceCenters\Resources\Technicians\Schemas;
 
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
@@ -15,8 +15,6 @@ class TechnicianInfolist
                     ->label('Nombre'),
                 TextEntry::make('national_id')
                     ->label('Cédula'),
-                TextEntry::make('serviceCenter.branch.trade_name')
-                    ->label('Centro de Servicio'),
                 TextEntry::make('phone')
                     ->label('Teléfono'),
                 TextEntry::make('email')

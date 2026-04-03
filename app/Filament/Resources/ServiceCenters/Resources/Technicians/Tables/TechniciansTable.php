@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Technicians\Tables;
+namespace App\Filament\Resources\ServiceCenters\Resources\Technicians\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -20,9 +20,6 @@ class TechniciansTable
                     ->searchable(),
                 TextColumn::make('national_id')
                     ->label('Cédula')
-                    ->searchable(),
-                TextColumn::make('serviceCenter.branch.trade_name')
-                    ->label('Centro de Servicio')
                     ->searchable(),
                 TextColumn::make('phone')
                     ->label('Teléfono')

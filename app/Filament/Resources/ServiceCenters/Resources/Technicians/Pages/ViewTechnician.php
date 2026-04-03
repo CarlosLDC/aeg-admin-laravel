@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\Technicians\Pages;
+namespace App\Filament\Resources\ServiceCenters\Resources\Technicians\Pages;
 
-use App\Filament\Resources\Technicians\TechnicianResource;
+use App\Filament\Resources\ServiceCenters\Resources\Technicians\TechnicianResource;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 

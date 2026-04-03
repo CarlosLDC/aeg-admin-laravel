@@ -21,6 +21,23 @@ class DistributorsTable
                 TextColumn::make('branch.company.tax_id')
                     ->label('RIF')
                     ->searchable(),
+                TextColumn::make('branch.state')
+                    ->label('Estado')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('branch.city')
+                    ->label('Ciudad')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('branch.phone')
+                    ->label('Teléfono')
+                    ->searchable(),
+                TextColumn::make('branch.email')
+                    ->label('Correo Electrónico')
+                    ->searchable(),
+                TextColumn::make('branch.contact_person')
+                    ->label('Persona de Contacto')
+                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

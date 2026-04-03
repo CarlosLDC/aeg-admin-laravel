@@ -26,12 +26,10 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->navigationGroups([
                 'Aliados y Clientes',
-                'Agentes',
                 'Impresoras',
                 'Software',
                 'Gestión de Compras',
                 'Libro Fiscal',
-                'Contratos',
                 'Administración',
             ])
             ->default()
