@@ -25,9 +25,9 @@ class PrinterModelResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'model';
 
-    protected static ?string $modelLabel = 'Modelo de impresora';
+    protected static ?string $modelLabel = 'Modelo de Impresora';
 
-    protected static ?string $pluralModelLabel = 'Modelos de impresora';
+    protected static ?string $pluralModelLabel = 'Modelos de Impresora';
 
     protected static bool $hasTitleCaseModelLabel = false;
 

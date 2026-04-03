@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             DistributorContractSeeder::class,
             ServiceCenterContractSeeder::class,
             PurchaseSeeder::class,
+            TaxSeeder::class,
         ]);
     }
 }

@@ -14,7 +14,17 @@ class ClientInfolist
                 TextEntry::make('branch.trade_name')
                     ->label('Sucursal'),
                 TextEntry::make('branch.company.tax_id')
-                    ->label('RIF de la Sucursal'),
+                    ->label('RIF'),
+                TextEntry::make('branch.state')
+                    ->label('Estado'),
+                TextEntry::make('branch.city')
+                    ->label('Ciudad'),
+                TextEntry::make('branch.phone')
+                    ->label('Teléfono'),
+                TextEntry::make('branch.email')
+                    ->label('Correo Electrónico'),
+                TextEntry::make('branch.contact_person')
+                    ->label('Persona de Contacto'),
                 TextEntry::make('distributor.branch.trade_name')
                     ->label('Distribuidora')
                     ->placeholder('-'),

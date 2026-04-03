@@ -17,7 +17,8 @@ class PrinterModelInfolist
                     ->label('Modelo'),
                 TextEntry::make('price')
                     ->label('Precio')
-                    ->money(),
+                    ->money()
+                    ->columnSpanFull(),
                 TextEntry::make('administrative_act')
                     ->label('Providencia'),
                 TextEntry::make('certification_date')
