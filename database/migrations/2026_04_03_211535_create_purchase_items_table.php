@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('purchase_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('purchase_id')->constrained()->restrictOnDelete();
+            $table->foreignId('purchase_id')->constrained()->cascadeOnDelete();
             $table->foreignId('printer_model_id')->constrained()->restrictOnDelete();
             $table->integer('quantity');
             $table->decimal('unit_price', total: 8, places: 2);
             $table->decimal('discount', total: 8, places: 2)->default(0);
-            $table->foreignId('tax_id')->constrained();
-            $table->decimal('tax_amount', total: 8, places: 2);
-            $table->decimal('line_total', total: 8, places: 2)->storedAs('(quantity * unit_price) - discount + tax_amount');
+            $table->decimal('line_total', total: 8, places: 2)->storedAs('(quantity * unit_price) - discount');
+            $table->foreignId('tax_id')->constrained()->restrictOnDelete();
+            $table->decimal('applied_tax_rate', total: 5, places: 4);
+            $table->decimal('tax_amount', total: 8, places: 2)->storedAs('((quantity * unit_price) - discount) * applied_tax_rate');
             $table->timestamps();
         });
     }

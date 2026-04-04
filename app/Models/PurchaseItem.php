@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Observers\PurchaseItemObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+#[ObservedBy(PurchaseItemObserver::class)]
 class PurchaseItem extends Model
 {
     /** @use HasFactory<\Database\Factories\PurchaseItemFactory> */
@@ -19,6 +22,7 @@ class PurchaseItem extends Model
         'discount',
         'tax_id',
         'tax_amount',
+        'applied_tax_rate',
     ];
 
     public function purchase(): BelongsTo

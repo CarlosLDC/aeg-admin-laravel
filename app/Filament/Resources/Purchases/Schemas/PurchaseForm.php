@@ -6,7 +6,9 @@ use App\Filament\Support\DistributorSelect;
 use App\Models\Distributor;
 use App\Models\PrinterModel;
 use App\Models\Tax;
+use Filament\Actions\Action;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -20,15 +22,6 @@ class PurchaseForm
 {
     public static function configure(Schema $schema): Schema
     {
-        $calcularTotalLinea = function (Get $get) 
-        {
-            $cantidad = floatval($get('quantity') ?: 0);
-            $precio = floatval($get('unit_price') ?: 0);
-            $descuento = floatval($get('discount') ?: 0);
-
-            return max(0, ($cantidad * $precio) - $descuento);
-        };
-
         return $schema
             ->components([
                 Select::make('distributor_id')
@@ -52,7 +45,6 @@ class PurchaseForm
                     ->label('Descuento Global')
                     ->required()
                     ->numeric()
-                    ->step(5)
                     ->prefix('$')
                     ->default(0)
                     ->gte(0)
@@ -74,33 +66,24 @@ class PurchaseForm
                                     ->searchable(['brand', 'model'])
                                     ->preload()
                                     ->live()
-                                    ->afterStateUpdated(function (Set $set, $state) {
-                                        if (blank($state)) {
-                                            $set('unit_price', null);
-                                            return;
-                                        }
-
-                                        $printer = PrinterModel::find($state);
-
-                                        if ($printer) {
-                                            $set('unit_price', $printer->price);
-                                        }
-                                    }),
+                                    ->afterStateUpdated(fn(Set $set, ?string $state) => $set('unit_price', PrinterModel::find($state)->price)),
                                 TextInput::make('quantity')
                                     ->label('Cantidad')
                                     ->required()
                                     ->numeric()
-                                    ->gte(1)
+                                    ->minValue(1)
                                     ->validationMessages([
-                                        'gte' => 'Debe ingresar al menos una unidad.',
+                                        'minValue' => 'Debe ingresar al menos una unidad.',
                                     ]),
                                 TextInput::make('unit_price')
                                     ->label('Precio Unitario')
                                     ->required()
                                     ->numeric()
-                                    ->step(5)
                                     ->prefix('$')
-                                    ->default(fn(callable $get) => $get('printer_model_id') ? PrinterModel::find($get('printer_model_id'))->price : 0)
+                                    ->default(fn(callable $get) =>
+                                    $get('printer_model_id')
+                                        ? PrinterModel::find($get('printer_model_id'))->price
+                                        : 0)
                                     ->gt(0)
                                     ->validationMessages([
                                         'gt' => 'El precio unitario debe ser mayor que cero.',
@@ -109,7 +92,6 @@ class PurchaseForm
                                     ->label('Descuento')
                                     ->required()
                                     ->numeric()
-                                    ->step(5)
                                     ->prefix('$')
                                     ->default(0)
                                     ->gte(0)
@@ -119,15 +101,21 @@ class PurchaseForm
                                 Select::make('tax_id')
                                     ->label('Impuesto')
                                     ->required()
-                                    ->relationship(name: 'tax', modifyQueryUsing: fn(Builder $query) => $query->where('is_active', true))
+                                    ->relationship(
+                                        name: 'tax', 
+                                        modifyQueryUsing: fn(Builder $query) => $query->where('is_active', true))
                                     ->getOptionLabelFromRecordUsing(fn(Tax $record) => $record->name . ' (' . ($record->rate * 100) . '%)')
                                     ->searchable('name')
-                                    ->preload(),
-
+                                    ->preload()
+                                    ->live()
+                                    ->afterStateUpdated(fn(Set $set, ?string $state) => $set('applied_tax_rate', Tax::find($state)->rate)),
+                                Hidden::make('applied_tax_rate')
+                                    ->required(),
                             ])
-                            ->columns(2)
+                            ->columns(3)
                             ->defaultItems(1)
-                            ->addActionLabel('Añadir otro producto'),
+                            ->addActionLabel('Añadir otro producto')
+                            ->deleteAction(fn(Action $action) => $action->requiresConfirmation()),
                     ])
                     ->columnSpan('full'),
             ]);

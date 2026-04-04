@@ -16,7 +16,9 @@ class Purchase extends Model
         'distributor_id',
         'invoice_number',
         'purchase_date',
+        'subtotal',
         'global_discount',
+        'total_tax',
     ];
 
     public function distributor(): BelongsTo

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->decimal('subtotal', total: 8, places: 2)->default(0);
             $table->decimal('global_discount', total: 8, places: 2)->default(0);
             $table->decimal('total_tax', total: 8, places: 2)->default(0);
-            $table->decimal('total', total: 8, places: 2)->default(0);
+            $table->decimal('total', total: 8, places: 2)->storedAs('subtotal - global_discount + total_tax');
             $table->timestamps();
         });
     }
