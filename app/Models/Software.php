@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\OperatingSystem;
 use App\Enums\ProgrammingLanguage;
+use Database\Factories\SoftwareFactory;
 use Illuminate\Database\Eloquent\Casts\AsEnumCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Software extends Model
 {
-    /** @use HasFactory<\Database\Factories\SoftwareFactory> */
+    /** @use HasFactory<SoftwareFactory> */
     use HasFactory;
 
     protected $fillable = [

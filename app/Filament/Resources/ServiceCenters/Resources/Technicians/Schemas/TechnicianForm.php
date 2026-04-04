@@ -20,25 +20,15 @@ class TechnicianForm
                     ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Debe comenzar con V o E (en mayúsculas) seguido de 7 u 8 dígitos, sin espacios ni separadores. Ejemplo: V12345678.')
                     ->required()
                     ->unique()
-                    ->regex('/^[VE][0-9]{7,8}$/')
-                    ->validationMessages([
-                        'unique' => 'Esta cédula ya está registrada para otro empleado.',
-                        'regex' => 'Formato de cédula inválido.',
-                    ]),
+                    ->regex('/^[VE][0-9]{7,8}$/'),
                 TextInput::make('phone')
                     ->label('Teléfono')
                     ->tel()
-                    ->required()
-                    ->validationMessages([
-                        'tel' => 'Ingrese un número de teléfono válido.',
-                    ]),
+                    ->required(),
                 TextInput::make('email')
                     ->label('Correo Electrónico')
                     ->email()
-                    ->required()
-                    ->validationMessages([
-                        'email' => 'Ingrese una dirección de correo electrónico válida.',
-                    ]),
+                    ->required(),
             ]);
     }
 }

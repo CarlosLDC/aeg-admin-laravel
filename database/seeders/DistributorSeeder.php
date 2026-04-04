@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Distributor;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DistributorSeeder extends Seeder

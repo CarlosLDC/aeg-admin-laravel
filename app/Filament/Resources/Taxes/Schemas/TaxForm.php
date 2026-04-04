@@ -21,11 +21,7 @@ class TaxForm
                     ->required()
                     ->numeric()
                     ->gte(0)
-                    ->lte(1)
-                    ->validationMessages([
-                        'gte' => 'La tasa debe ser mayor o igual a 0.',
-                        'lte' => 'La tasa debe ser menor o igual a 1.',
-                    ]),
+                    ->lte(1),
                 Toggle::make('is_active')
                     ->label('Activa')
                     ->required()

@@ -23,10 +23,7 @@ class ClientForm
                     ->searchable()
                     ->getSearchResultsUsing(BranchSelect::searchResults(...))
                     ->getOptionLabelUsing(BranchSelect::optionLabel(...))
-                    ->searchPrompt('Buscar por Nombre Comercial, Razón Social o RIF...')
-                    ->validationMessages([
-                        'unique' => 'Esta sucursal ya está registrada como cliente.',
-                    ]),
+                    ->searchPrompt('Buscar por Nombre Comercial, Razón Social o RIF...'),
                 Select::make('distributor_id')
                     ->label('Distribuidora')
                     ->required()

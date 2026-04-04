@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Database\Factories\SoftwareProviderFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class SoftwareProvider extends Model
 {
-    /** @use HasFactory<\Database\Factories\SoftwareProviderFactory> */
+    /** @use HasFactory<SoftwareProviderFactory> */
     use HasFactory;
 
     protected $fillable = [

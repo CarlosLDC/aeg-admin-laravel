@@ -33,7 +33,7 @@ class SoftwareResource extends Resource
 
     protected static ?int $navigationSort = 2;
 
-    protected static string | UnitEnum | null $navigationGroup = 'Software';
+    protected static string|UnitEnum|null $navigationGroup = 'Software';
 
     public static function form(Schema $schema): Schema
     {

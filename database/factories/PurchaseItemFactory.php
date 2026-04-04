@@ -23,9 +23,11 @@ class PurchaseItemFactory extends Factory
         return [
             'purchase_id' => Purchase::factory(),
             'printer_model_id' => PrinterModel::factory(),
-            'quantity' => fake()->numberBetween(1, 10),
-            'discount' => fake()->randomFloat(2, min: 0, max: 50),
             'tax_id' => Tax::factory(),
+            'quantity' => $this->faker->numberBetween(1, 10),
+            'unit_price' => $this->faker->randomFloat(2, 10, 100),
+            'discount' => $this->faker->randomFloat(2, 0, 20),
+            'applied_tax_rate' => $this->faker->randomFloat(4, 0, 0.25),
         ];
     }
 }

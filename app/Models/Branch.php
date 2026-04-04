@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\VenezuelaState;
+use Database\Factories\BranchFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Branch extends Model
 {
-    /** @use HasFactory<\Database\Factories\BranchFactory> */
+    /** @use HasFactory<BranchFactory> */
     use HasFactory;
 
     protected $fillable = [

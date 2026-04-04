@@ -18,10 +18,7 @@ class ServiceCenterContractForm
                 DatePicker::make('end_date')
                     ->label('Fecha de Finalización')
                     ->required()
-                    ->after('start_date')
-                    ->validationMessages([
-                        'after' => 'La fecha de finalización debe ser posterior a la fecha de inicio.',
-                    ]),
+                    ->after('start_date'),
                 TextInput::make('photo_path')
                     ->label('Ruta de la Foto del Contrato')
                     ->required()
@@ -29,11 +26,7 @@ class ServiceCenterContractForm
                     ->url()
                     ->placeholder('http://example.com/contrato.jpg')
                     ->columnSpanFull()
-                    ->copyable()
-                    ->validationMessages([
-                        'unique' => 'Este contrato ya tiene una foto asociada. Por favor, ingrese una ruta de foto diferente.',
-                        'url' => 'Por favor, ingrese una URL válida.',
-                    ])
+                    ->copyable(),
             ]);
     }
 }

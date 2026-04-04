@@ -3,20 +3,10 @@
 namespace App\Filament\Resources\Purchases\Schemas;
 
 use App\Filament\Support\DistributorSelect;
-use App\Models\Distributor;
-use App\Models\PrinterModel;
-use App\Models\Tax;
-use Filament\Actions\Action;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Hidden;
-use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Utilities\Get;
-use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
-use Illuminate\Database\Eloquent\Builder;
 
 class PurchaseForm
 {
@@ -34,90 +24,18 @@ class PurchaseForm
                 TextInput::make('invoice_number')
                     ->label('Número de Factura')
                     ->unique()
-                    ->required()
-                    ->validationMessages([
-                        'unique' => 'El número de factura ya existe. Por favor, ingrese un número de factura único.',
-                    ]),
+                    ->required(),
                 DatePicker::make('purchase_date')
                     ->label('Fecha de Compra')
                     ->required(),
                 TextInput::make('global_discount')
                     ->label('Descuento Global')
+                    ->prefix('$')
                     ->required()
                     ->numeric()
-                    ->prefix('$')
-                    ->default(0)
                     ->gte(0)
-                    ->validationMessages([
-                        'gte' => 'El descuento global debe ser mayor o igual que cero.',
-                    ]),
-                Section::make('Detalles de la Compra')
-                    ->description('Agregue los productos adquiridos en esta factura.')
-                    ->schema([
-                        Repeater::make('purchaseItems')
-                            ->hiddenLabel()
-                            ->relationship()
-                            ->schema([
-                                Select::make('printer_model_id')
-                                    ->label('Modelo de Impresora')
-                                    ->required()
-                                    ->relationship('printerModel')
-                                    ->getOptionLabelFromRecordUsing(fn(PrinterModel $record) => "{$record->brand}-{$record->model}")
-                                    ->searchable(['brand', 'model'])
-                                    ->preload()
-                                    ->live()
-                                    ->afterStateUpdated(fn(Set $set, ?string $state) => $set('unit_price', PrinterModel::find($state)->price)),
-                                TextInput::make('quantity')
-                                    ->label('Cantidad')
-                                    ->required()
-                                    ->numeric()
-                                    ->minValue(1)
-                                    ->validationMessages([
-                                        'minValue' => 'Debe ingresar al menos una unidad.',
-                                    ]),
-                                TextInput::make('unit_price')
-                                    ->label('Precio Unitario')
-                                    ->required()
-                                    ->numeric()
-                                    ->prefix('$')
-                                    ->default(fn(callable $get) =>
-                                    $get('printer_model_id')
-                                        ? PrinterModel::find($get('printer_model_id'))->price
-                                        : 0)
-                                    ->gt(0)
-                                    ->validationMessages([
-                                        'gt' => 'El precio unitario debe ser mayor que cero.',
-                                    ]),
-                                TextInput::make('discount')
-                                    ->label('Descuento')
-                                    ->required()
-                                    ->numeric()
-                                    ->prefix('$')
-                                    ->default(0)
-                                    ->gte(0)
-                                    ->validationMessages([
-                                        'gte' => 'El descuento debe ser mayor o igual que cero.',
-                                    ]),
-                                Select::make('tax_id')
-                                    ->label('Impuesto')
-                                    ->required()
-                                    ->relationship(
-                                        name: 'tax', 
-                                        modifyQueryUsing: fn(Builder $query) => $query->where('is_active', true))
-                                    ->getOptionLabelFromRecordUsing(fn(Tax $record) => $record->name . ' (' . ($record->rate * 100) . '%)')
-                                    ->searchable('name')
-                                    ->preload()
-                                    ->live()
-                                    ->afterStateUpdated(fn(Set $set, ?string $state) => $set('applied_tax_rate', Tax::find($state)->rate)),
-                                Hidden::make('applied_tax_rate')
-                                    ->required(),
-                            ])
-                            ->columns(3)
-                            ->defaultItems(1)
-                            ->addActionLabel('Añadir otro producto')
-                            ->deleteAction(fn(Action $action) => $action->requiresConfirmation()),
-                    ])
-                    ->columnSpan('full'),
+                    ->minValue(0)
+                    ->default(0),
             ]);
     }
 }

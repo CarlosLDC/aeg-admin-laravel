@@ -19,10 +19,7 @@ class ServiceCenterForm
                     ->searchable()
                     ->getSearchResultsUsing(BranchSelect::searchResults(...))
                     ->getOptionLabelUsing(BranchSelect::optionLabel(...))
-                    ->searchPrompt('Buscar por Nombre Comercial, Razón Social o RIF...')
-                    ->validationMessages([
-                        'unique' => 'Esta sucursal ya está registrada como centro de servicio.',
-                    ]),
+                    ->searchPrompt('Buscar por Nombre Comercial, Razón Social o RIF...'),
             ]);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Software\Schemas;
 
-use Dom\Text;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
 

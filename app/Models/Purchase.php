@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\PurchaseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Purchase extends Model
 {
-    /** @use HasFactory<\Database\Factories\PurchaseFactory> */
+    /** @use HasFactory<PurchaseFactory> */
     use HasFactory;
 
     protected $fillable = [
@@ -29,5 +30,5 @@ class Purchase extends Model
     public function purchaseItems(): HasMany
     {
         return $this->hasMany(PurchaseItem::class);
-    }   
+    }
 }

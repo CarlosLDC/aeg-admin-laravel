@@ -19,10 +19,7 @@ class SoftwareProviderForm
                     ->placeholder('J123456789')
                     ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'El RIF debe comenzar con V, E, J, P o G (en mayúsculas) seguido de 9 dígitos, sin separadores ni espacios. Si tiene menos de 9 dígitos, complete con ceros a la izquierda. Ejemplo: J012345678.')
                     ->required()
-                    ->regex('/^[VEJPG][0-9]{9}$/')
-                    ->validationMessages([
-                        'regex' => 'Formato de RIF inválido.',
-                    ]),
+                    ->regex('/^[VEJPG][0-9]{9}$/'),
                 TextInput::make('phone')
                     ->label('Teléfono')
                     ->tel()

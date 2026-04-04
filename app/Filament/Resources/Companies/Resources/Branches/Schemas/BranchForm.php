@@ -4,8 +4,8 @@ namespace App\Filament\Resources\Companies\Resources\Branches\Schemas;
 
 use App\Enums\VenezuelaState;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Schema;
 
@@ -36,17 +36,11 @@ class BranchForm
                 TextInput::make('phone')
                     ->label('Número de Teléfono')
                     ->tel()
-                    ->required()
-                    ->validationMessages([
-                        'tel' => 'Ingrese un número de teléfono válido.',
-                    ]),
+                    ->required(),
                 TextInput::make('email')
                     ->label('Correo Electrónico')
                     ->email()
-                    ->required()
-                    ->validationMessages([
-                        'email' => 'Ingrese una dirección de correo electrónico válida.',
-                    ]),
+                    ->required(),
                 TextInput::make('contact_person')
                     ->label('Persona de Contacto')
                     ->required(),

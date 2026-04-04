@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\ServiceCenterContract;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ServiceCenterContractSeeder extends Seeder

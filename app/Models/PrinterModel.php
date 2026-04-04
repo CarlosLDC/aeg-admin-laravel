@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Database\Factories\PrinterModelFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PrinterModel extends Model
 {
-    /** @use HasFactory<\Database\Factories\PrinterModelFactory> */
+    /** @use HasFactory<PrinterModelFactory> */
     use HasFactory;
 
     protected $fillable = [

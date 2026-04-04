@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Database\Factories\ServiceCenterContractFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ServiceCenterContract extends Model
 {
-    /** @use HasFactory<\Database\Factories\ServiceCenterContractFactory> */
+    /** @use HasFactory<ServiceCenterContractFactory> */
     use HasFactory;
 
     protected $fillable = [

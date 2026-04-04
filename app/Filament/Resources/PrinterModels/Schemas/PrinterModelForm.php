@@ -4,7 +4,6 @@ namespace App\Filament\Resources\PrinterModels\Schemas;
 
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TextInput;
-use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Schema;
 
 class PrinterModelForm
@@ -26,25 +25,16 @@ class PrinterModelForm
                     ->required()
                     ->numeric()
                     ->prefix('$')
-                    ->gt('0')
-                    ->validationMessages([
-                        'gt' => 'El precio debe ser mayor que cero.',
-                    ]),
-                Grid::make()
-                    ->schema([
-                        TextInput::make('administrative_act')
-                            ->label('Providencia')
-                            ->required()
-                            ->mask('aaaa/9999/9999')
-                            ->placeholder('snat/2024/0001')
-                            ->regex('/^[a-z]{4}\/\d{4}\/\d{4}$/')
-                            ->validationMessages([
-                                'regex' => 'La providencia debe seguir el formato abcd/1234/5678.',
-                            ]),
-                        DatePicker::make('certification_date')
-                            ->label('Fecha de Homologación')
-                            ->required(),
-                    ])->columnSpanFull(),
+                    ->gt('0'),
+                TextInput::make('administrative_act')
+                    ->label('Providencia')
+                    ->required()
+                    ->mask('aaaa/9999/9999')
+                    ->placeholder('snat/2024/0001')
+                    ->regex('/^[a-z]{4}\/\d{4}\/\d{4}$/'),
+                DatePicker::make('certification_date')
+                    ->label('Fecha de Homologación')
+                    ->required(),
             ]);
     }
 }

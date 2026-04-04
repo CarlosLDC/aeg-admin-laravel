@@ -23,7 +23,7 @@ class PrinterModelResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'model';
+    protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?string $modelLabel = 'Modelo de Impresora';
 
@@ -33,7 +33,7 @@ class PrinterModelResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
-    protected static string | UnitEnum | null $navigationGroup = 'Impresoras';
+    protected static string|UnitEnum|null $navigationGroup = 'Impresoras';
 
     public static function form(Schema $schema): Schema
     {

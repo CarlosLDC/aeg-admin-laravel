@@ -19,10 +19,7 @@ class DistributorForm
                     ->searchable()
                     ->getSearchResultsUsing(BranchSelect::searchResults(...))
                     ->getOptionLabelUsing(BranchSelect::optionLabel(...))
-                    ->searchPrompt('Buscar por Nombre Comercial, Razón Social o RIF...')
-                    ->validationMessages([
-                        'unique' => 'Esta sucursal ya está registrada como distribuidor.',
-                    ]),
+                    ->searchPrompt('Buscar por Nombre Comercial, Razón Social o RIF...'),
             ]);
     }
 }
