@@ -32,6 +32,7 @@ class AdminPanelProvider extends PanelProvider
                 'Libro Fiscal',
                 'Administración',
             ])
+            ->unsavedChangesAlerts()
             ->default()
             ->id('admin')
             ->path('')

@@ -16,11 +16,12 @@ class SoftwareProviderForm
                     ->required(),
                 TextInput::make('tax_id')
                     ->label('RIF')
-                    ->required()
                     ->placeholder('J123456789')
+                    ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'El RIF debe comenzar con V, E, J, P o G (en mayúsculas) seguido de 9 dígitos, sin separadores ni espacios. Si tiene menos de 9 dígitos, complete con ceros a la izquierda. Ejemplo: J012345678.')
+                    ->required()
                     ->regex('/^[VEJPG][0-9]{9}$/')
                     ->validationMessages([
-                        'regex' => 'El RIF debe comenzar con V, E, J, P o G (en mayúsculas) seguido de 9 dígitos. No separe los dígitos. Si tiene menos de 9 dígitos, complete con ceros a la izquierda (ejemplo: J012345678).',
+                        'regex' => 'Formato de RIF inválido.',
                     ]),
                 TextInput::make('phone')
                     ->label('Teléfono')

@@ -17,8 +17,15 @@ class TaxForm
                     ->required(),
                 TextInput::make('rate')
                     ->label('Tasa')
+                    ->helperText('Escriba en formato decimal. Ejemplo: 0.16 para el 16%.')
                     ->required()
-                    ->numeric(),
+                    ->numeric()
+                    ->gte(0)
+                    ->lte(1)
+                    ->validationMessages([
+                        'gte' => 'La tasa debe ser mayor o igual a 0.',
+                        'lte' => 'La tasa debe ser menor o igual a 1.',
+                    ]),
                 Toggle::make('is_active')
                     ->label('Activa')
                     ->required()

@@ -2,11 +2,10 @@
 
 namespace App\Models;
 
-use App\Enums\PaymentStatus;
-use App\Enums\PaymentTerm;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Purchase extends Model
 {
@@ -15,25 +14,18 @@ class Purchase extends Model
 
     protected $fillable = [
         'distributor_id',
+        'invoice_number',
         'purchase_date',
-        'subtotal',
-        'discount',
-        'tax',
-        'payment_term',
-        'due_date',
-        'payment_status',
+        'global_discount',
     ];
-
-    protected function casts(): array
-    {
-        return [
-            'payment_term' => PaymentTerm::class,
-            'payment_status' => PaymentStatus::class,
-        ];
-    }
 
     public function distributor(): BelongsTo
     {
         return $this->belongsTo(Distributor::class);
     }
+
+    public function purchaseItems(): HasMany
+    {
+        return $this->hasMany(PurchaseItem::class);
+    }   
 }

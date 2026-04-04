@@ -16,12 +16,14 @@ class TechnicianForm
                     ->required(),
                 TextInput::make('national_id')
                     ->label('Cédula')
+                    ->placeholder('V12345678')
+                    ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Debe comenzar con V o E (en mayúsculas) seguido de 7 u 8 dígitos, sin espacios ni separadores. Ejemplo: V12345678.')
                     ->required()
                     ->unique()
                     ->regex('/^[VE][0-9]{7,8}$/')
                     ->validationMessages([
                         'unique' => 'Esta cédula ya está registrada para otro empleado.',
-                        'regex' => 'La cédula debe comenzar con V o E (en mayúsculas) seguido de 7 u 8 dígitos, sin espacios ni separadores (ejemplo: V12345678).',
+                        'regex' => 'Formato de cédula inválido.',
                     ]),
                 TextInput::make('phone')
                     ->label('Teléfono')
