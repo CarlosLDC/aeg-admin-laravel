@@ -84,9 +84,6 @@ class ImpresoraForm
                             ->minValue(0)
                             ->prefix('$')
                             ->nullable(),
-                        Toggle::make('se_pago')
-                            ->label('Se Pagó')
-                            ->default(false),
                         DateTimePicker::make('fecha_instalacion')
                             ->label('Fecha de Instalación')
                             ->seconds(false)
@@ -102,6 +99,10 @@ class ImpresoraForm
                             ->placeholder('AA:BB:CC:DD:EE:FF')
                             ->regex('/^([0-9A-F]{2}:){5}[0-9A-F]{2}$/i')
                             ->nullable(),
+                        Toggle::make('se_pago')
+                            ->label('Se Pagó')
+                            ->default(false)
+                            ->columnSpanFull(),
                     ])
                     ->columns(2)
                     ->columnSpanFull(),
