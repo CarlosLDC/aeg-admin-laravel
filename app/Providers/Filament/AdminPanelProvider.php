@@ -36,6 +36,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('')
             ->authGuard('web')
+            ->resourceCreatePageRedirect('edit')
             ->login()
             ->brandName('AEG Admin')
             ->brandLogo(asset('images/logo.png'))
