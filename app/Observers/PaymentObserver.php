@@ -30,13 +30,16 @@ class PaymentObserver
 
     private function updatePurchaseTotals(Payment $payment): void
     {
-        $purchase = $payment->purchase;
+        $purchase = Purchase::query()->find($payment->purchase_id);
 
         if (! $purchase) {
             return;
         }
 
         $purchase->recalculateTotals()->save();
+        Purchase::query()->whereKey($purchase->getKey())->update([
+            'updated_at' => now(),
+        ]);
     }
 
     private function updatePreviousPurchaseTotals(Payment $payment): void
@@ -54,5 +57,8 @@ class PaymentObserver
         }
 
         $oldPurchase->recalculateTotals()->save();
+        Purchase::query()->whereKey($oldPurchase->getKey())->update([
+            'updated_at' => now(),
+        ]);
     }
 }

@@ -29,6 +29,8 @@ class DatabaseSeeder extends Seeder
             DistributorContractSeeder::class,
             ServiceCenterContractSeeder::class,
             PurchaseSeeder::class,
+            ImpresoraSeeder::class,
+            PrecintoSeeder::class,
             PaymentSeeder::class,
             TaxSeeder::class,
         ]);
