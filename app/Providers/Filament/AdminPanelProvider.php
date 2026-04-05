@@ -37,6 +37,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('')
             ->authGuard('web')
             ->login()
+            ->brandName('AEG Admin')
             ->brandLogo(asset('images/logo.png'))
             ->darkModeBrandLogo(fn () => view('filament.brand-logo-dark'))
             ->brandLogoHeight('2.5rem')
