@@ -35,6 +35,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('')
+            ->authGuard('web')
             ->login()
             ->brandLogo(asset('images/logo.png'))
             ->darkModeBrandLogo(fn () => view('filament.brand-logo-dark'))
