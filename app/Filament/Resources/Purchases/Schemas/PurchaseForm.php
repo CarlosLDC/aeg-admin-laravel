@@ -58,7 +58,8 @@ class PurchaseForm
                             ->readOnly(),
                     ])
                     ->columns(3)
-                    ->columnSpanFull(),
+                    ->columnSpanFull()
+                    ->hiddenOn('create'),
             ]);
     }
 }
