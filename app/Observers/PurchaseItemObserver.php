@@ -25,11 +25,6 @@ class PurchaseItemObserver
 
     public function updatePurchaseTotals(PurchaseItem $purchaseItem): void
     {
-        $purchase = $purchaseItem->purchase;
-
-        $purchase->update([
-            'total_tax' => $purchase->purchaseItems()->sum('tax_amount'),
-            'subtotal' => $purchase->purchaseItems()->sum('line_total'),
-        ]);
+        $purchaseItem->purchase->recalculateTotals()->save();
     }
 }

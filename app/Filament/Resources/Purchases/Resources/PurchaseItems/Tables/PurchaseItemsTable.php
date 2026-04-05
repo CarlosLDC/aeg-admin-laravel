@@ -15,27 +15,39 @@ class PurchaseItemsTable
     {
         return $table
             ->columns([
-                TextColumn::make('printerModel.id')
+                TextColumn::make('printerModel.name')
+                    ->label('Impresora')
                     ->searchable(),
                 TextColumn::make('quantity')
+                    ->label('Cantidad')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('unit_price')
+                    ->label('Precio Unitario')
                     ->money()
                     ->sortable(),
                 TextColumn::make('discount')
-                    ->numeric()
+                    ->label('Descuento')
+                    ->money()
                     ->sortable(),
                 TextColumn::make('tax.name')
+                    ->label('Alícuota')
                     ->searchable(),
                 TextColumn::make('applied_tax_rate')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('tax_amount')
+                    ->label('Alícuota Aplicada')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('line_total')
-                    ->numeric()
+                    ->label('Subtotal')
+                    ->money()
+                    ->sortable(),
+                TextColumn::make('tax_amount')
+                    ->label('Importe del Impuesto')
+                    ->money()
+                    ->sortable(),
+                TextColumn::make('grand_total')
+                    ->label('Total')
+                    ->money()
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
@@ -50,12 +62,14 @@ class PurchaseItemsTable
                 //
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
+                // ViewAction::make(),
+                EditAction::make()
+                    ->successRedirectUrl(fn (): string => url()->previous()),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                        ->successRedirectUrl(fn (): string => url()->previous()),
                 ]),
             ]);
     }

@@ -35,12 +35,12 @@ class PurchaseItem extends Model
     public function recalculateTotals(): self
     {
         $lineTotal = ($this->quantity * $this->unit_price) - $this->discount;
-        $this->line_total = round($lineTotal, 2);
-
         $taxAmount = $lineTotal * $this->applied_tax_rate;
-        $this->tax_amount = round($taxAmount, 2);
+        $total = $lineTotal + $taxAmount;
 
-        $this->grand_total = $this->line_total + $this->tax_amount;
+        $this->line_total = round($lineTotal, 2);
+        $this->tax_amount = round($taxAmount, 2);
+        $this->grand_total = round($total, 2);
 
         return $this;
     }

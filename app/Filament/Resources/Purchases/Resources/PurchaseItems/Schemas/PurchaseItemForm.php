@@ -7,6 +7,7 @@ use App\Models\PurchaseItem;
 use App\Models\Tax;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
@@ -16,34 +17,11 @@ class PurchaseItemForm
     public static function configure(Schema $schema): Schema
     {
         $recalculateTotals = function (Get $get, Set $set) {
-            $inputs = collect([
-                'quantity' => $get('quantity'),
-                'unit_price' => $get('unit_price'),
-                'discount' => $get('discount'),
-                'applied_tax_rate' => $get('applied_tax_rate'),
-            ]);
-
-            $inputsContainsNull = $inputs->contains(fn($value) => is_null($value));
-            $inputsContainsNegative = $inputs->contains(fn($value) => is_numeric($value) && $value < 0);
-
-            if ($inputsContainsNull || $inputsContainsNegative) {
-                $set('line_total', null);
-                $set('tax_amount', null);
-                $set('grand_total', null);
-
-                return;
-            }
-
-                $quantity = $inputs->get('quantity');
-                $unitPrice = $inputs->get('unit_price');
-                $discount = $inputs->get('discount');
-                $appliedTaxRate = $inputs->get('applied_tax_rate');
-
             $item = new PurchaseItem([
-                'quantity' => (int) $quantity,
-                'unit_price' => (float) $unitPrice,
-                'discount' => (float) $discount,
-                'applied_tax_rate' => (float) $appliedTaxRate,
+                'quantity' => (int) max(1, ($get('quantity') ?? 0)),
+                'unit_price' => (float) max(0, ($get('unit_price') ?? 0)),
+                'discount' => (float) max(0, ($get('discount') ?? 0)),
+                'applied_tax_rate' => (float) max(0, ($get('applied_tax_rate') ?? 0)),
             ])->recalculateTotals();
 
             $set('line_total', round($item->line_total, 2));
@@ -83,7 +61,6 @@ class PurchaseItemForm
                     ->minValue(0)
                     ->live(debounce: 500)
                     ->afterStateUpdated($recalculateTotals)
-                    ->extraInputAttributes(['step' => '10'])
                     ->disabled(fn(Get $get) => ! $get('printer_model_id')),
                 TextInput::make('quantity')
                     ->label('Cantidad')
@@ -100,12 +77,12 @@ class PurchaseItemForm
                     ->required()
                     ->numeric()
                     ->minValue(0)
+                    ->lte('unit_price')
                     ->default(0)
                     ->live(debounce: 500)
-                    ->afterStateUpdated($recalculateTotals)
-                    ->extraInputAttributes(['step' => '10']),
+                    ->afterStateUpdated($recalculateTotals),
                 Select::make('tax_id')
-                    ->label('Impuesto')
+                    ->label('Alícuota')
                     ->relationship('tax', 'name')
                     ->searchable()
                     ->preload()
@@ -127,28 +104,33 @@ class PurchaseItemForm
                         }
                     }),
                 TextInput::make('applied_tax_rate')
-                    ->label('Tasa de Impuesto Aplicada')
+                    ->label('Alícuota Aplicada')
                     ->required()
                     ->readOnly()
                     ->disabled(fn(Get $get) => ! $get('tax_id')),
-                TextInput::make('line_total')
-                    ->label('Subtotal')
-                    ->prefix('$')
-                    ->default(0)
-                    ->readOnly()
-                    ->dehydrated(false),
-                TextInput::make('tax_amount')
-                    ->label('Impuestos')
-                    ->prefix('$')
-                    ->default(0)
-                    ->readOnly()
-                    ->dehydrated(false),
-                TextInput::make('grand_total')
-                    ->label('Total')
-                    ->prefix('$')
-                    ->default(0)
-                    ->readOnly()
-                    ->dehydrated(false),
+                Fieldset::make('Totales')
+                    ->schema([
+                        TextInput::make('line_total')
+                            ->label('Subtotal')
+                            ->prefix('$')
+                            ->default(0)
+                            ->readOnly()
+                            ->dehydrated(false),
+                        TextInput::make('tax_amount')
+                            ->label('Importe del Impuesto')
+                            ->prefix('$')
+                            ->default(0)
+                            ->readOnly()
+                            ->dehydrated(false),
+                        TextInput::make('grand_total')
+                            ->label('Total')
+                            ->prefix('$')
+                            ->default(0)
+                            ->readOnly()
+                            ->dehydrated(false),
+                    ])
+                    ->columns(3)
+                    ->columnSpanFull(),
             ]);
     }
 }

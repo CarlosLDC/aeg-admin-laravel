@@ -53,9 +53,9 @@ class PurchaseItemResource extends Resource
     public static function getPages(): array
     {
         return [
-            'create' => CreatePurchaseItem::route('/create'),
-            'view' => ViewPurchaseItem::route('/{record}'),
-            'edit' => EditPurchaseItem::route('/{record}/edit'),
+            // 'create' => CreatePurchaseItem::route('/create'),
+            // 'view' => ViewPurchaseItem::route('/{record}'),
+            // 'edit' => EditPurchaseItem::route('/{record}/edit'),
         ];
     }
 }

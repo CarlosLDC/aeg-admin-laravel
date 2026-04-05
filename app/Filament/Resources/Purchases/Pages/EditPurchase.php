@@ -11,6 +11,16 @@ class EditPurchase extends EditRecord
 {
     protected static string $resource = PurchaseResource::class;
 
+    protected function afterSave(): void
+    {
+        $this->record->recalculateTotals()->save();
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('edit', ['record' => $this->getRecord()]);
+    }
+
     protected function getHeaderActions(): array
     {
         return [

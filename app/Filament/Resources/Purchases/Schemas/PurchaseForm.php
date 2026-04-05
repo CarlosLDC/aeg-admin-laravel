@@ -6,6 +6,7 @@ use App\Filament\Support\DistributorSelect;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Schema;
 
 class PurchaseForm
@@ -33,9 +34,31 @@ class PurchaseForm
                     ->prefix('$')
                     ->required()
                     ->numeric()
-                    ->gte(0)
                     ->minValue(0)
                     ->default(0),
+                Fieldset::make('Totales')
+                    ->schema([
+                        TextInput::make('subtotal')
+                            ->label('Subtotal')
+                            ->prefix('$')
+                            ->default(0)
+                            ->live()
+                            ->readOnly(),
+                        TextInput::make('total_tax')
+                            ->label('Total de Impuestos')
+                            ->prefix('$')
+                            ->default(0)
+                            ->live()
+                            ->readOnly(),
+                        TextInput::make('total')
+                            ->label('Total')
+                            ->prefix('$')
+                            ->default(0)
+                            ->live()
+                            ->readOnly(),
+                    ])
+                    ->columns(3)
+                    ->columnSpanFull(),
             ]);
     }
 }

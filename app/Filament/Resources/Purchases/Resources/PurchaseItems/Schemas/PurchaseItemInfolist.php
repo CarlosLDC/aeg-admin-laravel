@@ -11,23 +11,33 @@ class PurchaseItemInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('printerModel.id')
-                    ->label('Printer model'),
-                TextEntry::make('quantity')
-                    ->numeric(),
+                TextEntry::make('printerModel.name')
+                    ->label('Impresora'),
                 TextEntry::make('unit_price')
+                    ->label('Precio Unitario')
                     ->money(),
+                TextEntry::make('quantity')
+                    ->label('Cantidad')
+                    ->numeric(),
                 TextEntry::make('discount')
-                    ->numeric(),
+                    ->label('Descuento')
+                    ->money(),
                 TextEntry::make('tax.name')
-                    ->label('Tax'),
+                    ->label('Alícuota'),
                 TextEntry::make('applied_tax_rate')
+                    ->label('Alícuota Aplicada')
                     ->numeric(),
-                TextEntry::make('tax_amount')
-                    ->numeric()
-                    ->placeholder('-'),
                 TextEntry::make('line_total')
-                    ->numeric()
+                    ->label('Subtotal')
+                    ->money()
+                    ->placeholder('-'),
+                TextEntry::make('tax_amount')
+                    ->label('Importe del Impuesto')
+                    ->money()
+                    ->placeholder('-'),
+                TextEntry::make('grand_total')
+                    ->label('Total')
+                    ->money()
                     ->placeholder('-'),
                 TextEntry::make('created_at')
                     ->dateTime()

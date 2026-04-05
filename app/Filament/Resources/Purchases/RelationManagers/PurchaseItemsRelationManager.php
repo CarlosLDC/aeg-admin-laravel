@@ -17,7 +17,8 @@ class PurchaseItemsRelationManager extends RelationManager
     {
         return $table
             ->headerActions([
-                CreateAction::make(),
+                CreateAction::make()
+                    ->successRedirectUrl(fn (): string => url()->previous()),
             ]);
     }
 }

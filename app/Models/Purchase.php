@@ -17,10 +17,21 @@ class Purchase extends Model
         'distributor_id',
         'invoice_number',
         'purchase_date',
-        'subtotal',
         'global_discount',
-        'total_tax',
     ];
+
+    public function recalculateTotals(): self
+    {
+        $subtotal = $this->purchaseItems->sum('line_total');
+        $totalTax = $this->purchaseItems->sum('tax_amount');
+        $total = $subtotal + $totalTax - $this->global_discount;
+
+        $this->subtotal = round($subtotal, 2);
+        $this->total_tax = round($totalTax, 2);
+        $this->total = round($total, 2);
+
+        return $this;
+    }
 
     public function distributor(): BelongsTo
     {

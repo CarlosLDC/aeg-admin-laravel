@@ -16,10 +16,10 @@ return new class extends Migration
             $table->foreignId('distributor_id')->constrained()->restrictOnDelete();
             $table->string('invoice_number')->unique(); // Número de factura
             $table->date('purchase_date');
+            $table->decimal('global_discount', total: 8, places: 2);
             $table->decimal('subtotal', total: 8, places: 2)->default(0);
-            $table->decimal('global_discount', total: 8, places: 2)->default(0);
             $table->decimal('total_tax', total: 8, places: 2)->default(0);
-            $table->decimal('total', total: 8, places: 2)->storedAs('subtotal - global_discount + total_tax');
+            $table->decimal('total', total: 8, places: 2)->default(0);
             $table->timestamps();
         });
     }
