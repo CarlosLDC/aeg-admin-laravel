@@ -6,6 +6,7 @@ use App\Filament\Resources\Purchases\Pages\CreatePurchase;
 use App\Filament\Resources\Purchases\Pages\EditPurchase;
 use App\Filament\Resources\Purchases\Pages\ListPurchases;
 use App\Filament\Resources\Purchases\Pages\ViewPurchase;
+use App\Filament\Resources\Purchases\RelationManagers\PaymentsRelationManager;
 use App\Filament\Resources\Purchases\RelationManagers\PurchaseItemsRelationManager;
 use App\Filament\Resources\Purchases\Schemas\PurchaseForm;
 use App\Filament\Resources\Purchases\Schemas\PurchaseInfolist;
@@ -53,6 +54,7 @@ class PurchaseResource extends Resource
     {
         return [
             PurchaseItemsRelationManager::class,
+            PaymentsRelationManager::class,
         ];
     }
 
