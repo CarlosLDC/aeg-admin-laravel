@@ -30,8 +30,8 @@ class BranchForm
                                 ->schema([
                                     Select::make('state')
                                         ->label('Estado')
-                                        ->options(VenezuelaState::class)
                                         ->required()
+                                        ->options(VenezuelaState::class)
                                         ->searchable(),
                                     TextInput::make('city')
                                         ->label('Ciudad')
@@ -46,12 +46,12 @@ class BranchForm
                         ->schema([
                             TextInput::make('phone')
                                 ->label('Número de Teléfono')
-                                ->tel()
-                                ->required(),
+                                ->required()
+                                ->tel(),
                             TextInput::make('email')
                                 ->label('Correo Electrónico')
-                                ->email()
-                                ->required(),
+                                ->required()
+                                ->email(),
                             TextInput::make('contact_person')
                                 ->label('Persona de Contacto')
                                 ->required(),
