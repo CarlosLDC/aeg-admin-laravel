@@ -20,8 +20,8 @@ class TaxForm
                     ->helperText('Escriba en formato decimal. Ejemplo: 0.16 para el 16%.')
                     ->required()
                     ->numeric()
-                    ->gte(0)
-                    ->lte(1),
+                    ->minValue(0)
+                    ->maxValue(1),
                 Toggle::make('is_active')
                     ->label('Activa')
                     ->required()
