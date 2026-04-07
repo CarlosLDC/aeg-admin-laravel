@@ -7,6 +7,8 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Wizard;
+use Filament\Schemas\Components\Wizard\Step;
 use Filament\Schemas\Schema;
 
 class BranchForm
@@ -15,35 +17,48 @@ class BranchForm
     {
         return $schema
             ->components([
-                TextInput::make('trade_name')
-                    ->label('Nombre Comercial')
-                    ->required(),
-                Grid::make()
-                    ->schema([
-                        Select::make('state')
-                            ->label('Estado')
-                            ->options(VenezuelaState::class)
-                            ->required()
-                            ->searchable(),
-                        TextInput::make('city')
-                            ->label('Ciudad')
-                            ->required(),
-                    ])->columnSpanFull(),
-                Textarea::make('address')
-                    ->label('Dirección')
-                    ->required()
-                    ->columnSpanFull(),
-                TextInput::make('phone')
-                    ->label('Número de Teléfono')
-                    ->tel()
-                    ->required(),
-                TextInput::make('email')
-                    ->label('Correo Electrónico')
-                    ->email()
-                    ->required(),
-                TextInput::make('contact_person')
-                    ->label('Persona de Contacto')
-                    ->required(),
+                Wizard::make([
+                    Step::make('Información General')
+                        ->schema([
+                            TextInput::make('trade_name')
+                                ->label('Nombre Comercial')
+                                ->required(),
+                        ]),
+                    Step::make('Ubicación')
+                        ->schema([
+                            Grid::make()
+                                ->schema([
+                                    Select::make('state')
+                                        ->label('Estado')
+                                        ->options(VenezuelaState::class)
+                                        ->required()
+                                        ->searchable(),
+                                    TextInput::make('city')
+                                        ->label('Ciudad')
+                                        ->required(),
+                                ])->columnSpanFull(),
+                            Textarea::make('address')
+                                ->label('Dirección')
+                                ->required()
+                                ->columnSpanFull(),
+                        ]),
+                    Step::make('Contacto')
+                        ->schema([
+                            TextInput::make('phone')
+                                ->label('Número de Teléfono')
+                                ->tel()
+                                ->required(),
+                            TextInput::make('email')
+                                ->label('Correo Electrónico')
+                                ->email()
+                                ->required(),
+                            TextInput::make('contact_person')
+                                ->label('Persona de Contacto')
+                                ->required(),
+                        ]),
+                ])
+                ->columnSpanFull()
+                ->skippable(),
             ]);
     }
 }
