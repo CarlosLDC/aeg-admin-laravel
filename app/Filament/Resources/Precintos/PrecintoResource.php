@@ -62,7 +62,7 @@ class PrecintoResource extends Resource
         return [
             'index' => ListPrecintos::route('/'),
             'create' => CreatePrecinto::route('/create'),
-            'view' => ViewPrecinto::route('/{record}'),
+            // 'view' => ViewPrecinto::route('/{record}'),
             'edit' => EditPrecinto::route('/{record}/edit'),
         ];
     }

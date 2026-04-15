@@ -14,7 +14,7 @@ class EditTax extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            ViewAction::make(),
+            // ViewAction::make(),
             DeleteAction::make(),
         ];
     }

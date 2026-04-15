@@ -1,7 +1,7 @@
 <?php
 
 use App\Enums\DeviceType;
-use App\Enums\ImpresoraStatus;
+use App\Enums\PrinterStatus;
 use App\Filament\Resources\Impresoras\Pages\CreateImpresora;
 use App\Filament\Resources\Impresoras\Pages\EditImpresora;
 use App\Filament\Resources\Impresoras\Pages\ListImpresoras;
@@ -57,14 +57,13 @@ it('can create an impresora', function () {
             'id_sucursal' => $branch->id,
             'serial_fiscal' => 'ABC1234567',
             'precio_venta_final' => 1500,
-            'estatus' => ImpresoraStatus::Instalada->value,
+            'estatus' => PrinterStatus::Installed->value,
             'id_firmware' => $firmware->id,
             'id_distribuidora' => $distributor->id,
             'se_pago' => true,
             'fecha_instalacion' => now()->toDateTimeString(),
-            'version_firmware' => '1.0.0',
             'direccion_mac' => 'AA:BB:CC:DD:EE:FF',
-            'tipo_dispositivo' => DeviceType::Externo->value,
+            'tipo_dispositivo' => DeviceType::External->value,
         ])
         ->call('create')
         ->assertNotified()
@@ -73,8 +72,8 @@ it('can create an impresora', function () {
     assertDatabaseHas(Impresora::class, [
         'serial_fiscal' => 'ABC1234567',
         'id_modelo_impresora' => $printerModel->id,
-        'estatus' => ImpresoraStatus::Instalada->value,
-        'tipo_dispositivo' => DeviceType::Externo->value,
+        'estatus' => PrinterStatus::Installed->value,
+        'tipo_dispositivo' => DeviceType::External->value,
     ]);
 });
 

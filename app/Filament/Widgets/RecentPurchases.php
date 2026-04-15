@@ -53,6 +53,6 @@ class RecentPurchases extends TableWidget
             ->recordActions([
                 //
             ])
-            ->recordUrl(fn (Purchase $record): string => PurchaseResource::getUrl('view', ['record' => $record]));
+            ->recordUrl(fn (Purchase $record): string => PurchaseResource::getUrl('edit', ['record' => $record]));
     }
 }

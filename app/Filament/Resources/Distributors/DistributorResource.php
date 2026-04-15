@@ -6,8 +6,8 @@ use App\Filament\Resources\Distributors\Pages\CreateDistributor;
 use App\Filament\Resources\Distributors\Pages\EditDistributor;
 use App\Filament\Resources\Distributors\Pages\ListDistributors;
 use App\Filament\Resources\Distributors\Pages\ViewDistributor;
+use App\Filament\Resources\Distributors\RelationManagers\DistributorContactsRelationManager;
 use App\Filament\Resources\Distributors\RelationManagers\DistributorContractsRelationManager;
-use App\Filament\Resources\Distributors\RelationManagers\RepresentativesRelationManager;
 use App\Filament\Resources\Distributors\Schemas\DistributorForm;
 use App\Filament\Resources\Distributors\Schemas\DistributorInfolist;
 use App\Filament\Resources\Distributors\Tables\DistributorsTable;
@@ -51,7 +51,7 @@ class DistributorResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RepresentativesRelationManager::class,
+            DistributorContactsRelationManager::class,
             DistributorContractsRelationManager::class,
         ];
     }

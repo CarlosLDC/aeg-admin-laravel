@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\ServiceCenter;
+use App\Models\ServiceCenterContact;
+use App\Models\ServiceCenterContract;
 use Illuminate\Database\Seeder;
 
 class ServiceCenterSeeder extends Seeder
@@ -12,6 +14,10 @@ class ServiceCenterSeeder extends Seeder
      */
     public function run(): void
     {
-        ServiceCenter::factory()->count(10)->create();
+        ServiceCenter::factory()
+            ->count(5)
+            ->has(ServiceCenterContact::factory())
+            ->has(ServiceCenterContract::factory())
+            ->create();
     }
 }

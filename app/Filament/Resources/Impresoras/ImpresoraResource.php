@@ -62,7 +62,7 @@ class ImpresoraResource extends Resource
         return [
             'index' => ListImpresoras::route('/'),
             'create' => CreateImpresora::route('/create'),
-            'view' => ViewImpresora::route('/{record}'),
+            // 'view' => ViewImpresora::route('/{record}'),
             'edit' => EditImpresora::route('/{record}/edit'),
         ];
     }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Software;
 use App\Models\SoftwareProvider;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,9 @@ class SoftwareProviderSeeder extends Seeder
      */
     public function run(): void
     {
-        SoftwareProvider::factory()->count(10)->create();
+        SoftwareProvider::factory()
+            ->count(5)
+            ->has(Software::factory())
+            ->create();
     }
 }

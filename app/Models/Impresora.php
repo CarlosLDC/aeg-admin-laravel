@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Enums\DeviceType;
-use App\Enums\ImpresoraStatus;
+use App\Enums\PrinterStatus;
 use Database\Factories\ImpresoraFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -28,7 +28,6 @@ class Impresora extends Model
         'id_distribuidora',
         'se_pago',
         'fecha_instalacion',
-        'version_firmware',
         'direccion_mac',
         'tipo_dispositivo',
         'created_at',
@@ -38,7 +37,7 @@ class Impresora extends Model
     {
         return [
             'precio_venta_final' => 'decimal:2',
-            'estatus' => ImpresoraStatus::class,
+            'estatus' => PrinterStatus::class,
             'se_pago' => 'boolean',
             'fecha_instalacion' => 'datetime',
             'tipo_dispositivo' => DeviceType::class,

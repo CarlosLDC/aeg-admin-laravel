@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Enums\DeviceType;
-use App\Enums\ImpresoraStatus;
+use App\Enums\PrinterStatus;
 use App\Models\Branch;
 use App\Models\Distributor;
 use App\Models\Firmware;
@@ -27,9 +27,9 @@ class ImpresoraFactory extends Factory
     {
         $relatedId = static fn (string $modelClass, Factory $factory): int|Factory => $modelClass::query()->inRandomOrder()->value('id') ?? $factory;
 
-        $status = fake()->randomElement(ImpresoraStatus::cases());
+        $status = fake()->randomElement(PrinterStatus::cases());
         $deviceType = fake()->randomElement(DeviceType::cases());
-        $hasInstallationDate = in_array($status, [ImpresoraStatus::Instalada, ImpresoraStatus::Mantenimiento], true);
+        $hasInstallationDate = in_array($status, [PrinterStatus::Installed, PrinterStatus::Maintenance], true);
 
         return [
             'id_modelo_impresora' => $relatedId(PrinterModel::class, PrinterModel::factory()),
@@ -43,7 +43,6 @@ class ImpresoraFactory extends Factory
             'id_distribuidora' => fake()->boolean(60) ? $relatedId(Distributor::class, Distributor::factory()) : null,
             'se_pago' => fake()->boolean(80),
             'fecha_instalacion' => $hasInstallationDate ? fake()->dateTimeBetween('-1 year', 'now') : null,
-            'version_firmware' => fake()->optional()->numerify('#.#.#'),
             'direccion_mac' => strtoupper(fake()->macAddress()),
             'tipo_dispositivo' => $deviceType,
             'created_at' => fake()->dateTimeBetween('-1 year', 'now'),

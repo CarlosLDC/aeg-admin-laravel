@@ -27,9 +27,9 @@ class Distributor extends Model
         return $this->hasMany(Client::class);
     }
 
-    public function representatives(): HasMany
+    public function DistributorContacts(): HasMany
     {
-        return $this->hasMany(Representative::class);
+        return $this->hasMany(DistributorContact::class);
     }
 
     public function distributorContracts(): HasMany

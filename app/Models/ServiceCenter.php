@@ -22,9 +22,9 @@ class ServiceCenter extends Model
         return $this->belongsTo(Branch::class);
     }
 
-    public function technicians(): HasMany
+    public function ServiceCenterContacts(): HasMany
     {
-        return $this->hasMany(Technician::class);
+        return $this->hasMany(ServiceCenterContact::class);
     }
 
     public function serviceCenterContracts(): HasMany

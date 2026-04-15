@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Client;
+use App\Models\Distributor;
 use Illuminate\Database\Seeder;
 
 class ClientSeeder extends Seeder
@@ -12,6 +13,12 @@ class ClientSeeder extends Seeder
      */
     public function run(): void
     {
-        Client::factory()->count(10)->create();
+        Distributor::all()
+            ->each(function ($distributor) {
+                Client::factory()
+                    ->count(fake()->numberBetween(1, 5))
+                    ->for($distributor)
+                    ->create();
+            });
     }
 }

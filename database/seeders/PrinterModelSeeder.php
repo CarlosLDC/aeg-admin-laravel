@@ -12,6 +12,8 @@ class PrinterModelSeeder extends Seeder
      */
     public function run(): void
     {
-        PrinterModel::factory()->count(10)->create();
+        PrinterModel::factory()
+            ->count(5)
+            ->create();
     }
 }

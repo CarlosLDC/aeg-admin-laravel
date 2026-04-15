@@ -15,22 +15,19 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            // Aliados y Clientes
+            DistributorSeeder::class,
+            ServiceCenterSeeder::class,
+            ClientSeeder::class,
+            // Software
+            SoftwareProviderSeeder::class,
+            // Impresoras
             PrinterModelSeeder::class,
             FirmwareSeeder::class,
-            CompanySeeder::class,
-            BranchSeeder::class,
-            DistributorSeeder::class,
-            ClientSeeder::class,
-            ServiceCenterSeeder::class,
-            SoftwareProviderSeeder::class,
-            SoftwareSeeder::class,
-            TechnicianSeeder::class,
-            RepresentativeSeeder::class,
-            DistributorContractSeeder::class,
-            ServiceCenterContractSeeder::class,
-            PurchaseSeeder::class,
             ImpresoraSeeder::class,
             PrecintoSeeder::class,
+            // Gestión de Compras
+            PurchaseSeeder::class,
             PaymentSeeder::class,
             TaxSeeder::class,
         ]);

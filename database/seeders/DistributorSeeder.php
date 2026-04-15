@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Distributor;
+use App\Models\DistributorContact;
+use App\Models\DistributorContract;
 use Illuminate\Database\Seeder;
 
 class DistributorSeeder extends Seeder
@@ -12,6 +14,10 @@ class DistributorSeeder extends Seeder
      */
     public function run(): void
     {
-        Distributor::factory()->count(10)->create();
+        Distributor::factory()
+            ->count(10)
+            ->has(DistributorContact::factory())
+            ->has(DistributorContract::factory())
+            ->create();
     }
 }

@@ -6,14 +6,14 @@ use Filament\Support\Contracts\HasLabel;
 
 enum DeviceType: string implements HasLabel
 {
-    case Interno = 'interno';
-    case Externo = 'externo';
+    case Internal = 'interno';
+    case External = 'externo';
 
     public function getLabel(): ?string
     {
         return match ($this) {
-            self::Interno => 'Interno',
-            self::Externo => 'Externo',
+            self::Internal => 'Interno',
+            self::External => 'Externo',
         };
     }
 }

@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Branch;
 use App\Models\Client;
-use App\Models\Distributor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,7 +20,6 @@ class ClientFactory extends Factory
     {
         return [
             'branch_id' => Branch::factory(),
-            'distributor_id' => Distributor::factory(),
         ];
     }
 }

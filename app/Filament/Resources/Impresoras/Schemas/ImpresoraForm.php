@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\Impresoras\Schemas;
 
 use App\Enums\DeviceType;
-use App\Enums\ImpresoraStatus;
+use App\Enums\PrinterStatus;
 use App\Filament\Support\DistributorSelect;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
@@ -40,13 +40,13 @@ class ImpresoraForm
                                     Select::make('estatus')
                                         ->label('Estatus')
                                         ->required()
-                                        ->options(ImpresoraStatus::class)
-                                        ->default(ImpresoraStatus::Laboratorio->value),
+                                        ->options(PrinterStatus::class)
+                                        ->default(PrinterStatus::Testing->value),
                                     Select::make('tipo_dispositivo')
                                         ->label('Tipo de Dispositivo')
                                         ->required()
                                         ->options(DeviceType::class)
-                                        ->default(DeviceType::Interno->value),
+                                        ->default(DeviceType::Internal->value),
                                 ])
                                 ->columns(2)
                                 ->columnSpanFull(),
@@ -71,7 +71,7 @@ class ImpresoraForm
                                         ->searchable()
                                         ->preload(),
                                     Select::make('id_firmware')
-                                        ->label('Firmware')
+                                        ->label('Versión de Firmware')
                                         ->relationship('firmware', 'version')
                                         ->searchable()
                                         ->preload(),
@@ -99,11 +99,6 @@ class ImpresoraForm
                                         ->label('Fecha de Instalación')
                                         ->seconds(false)
                                         ->native(false)
-                                        ->nullable(),
-                                    TextInput::make('version_firmware')
-                                        ->label('Versión de Firmware')
-                                        ->placeholder('1.0.0')
-                                        ->regex('/^\d+\.\d+\.\d+$/')
                                         ->nullable(),
                                     TextInput::make('direccion_mac')
                                         ->label('Dirección MAC')

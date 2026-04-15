@@ -10,16 +10,11 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class DashboardOverview extends StatsOverviewWidget
 {
-    protected int|string|array $columnSpan = [
-        'md' => 1,
-        'lg' => 12,
-        '2xl' => 8,
-    ];
+    protected int|string|array $columnSpan = 'full';
 
     protected int|array|null $columns = [
-        'md' => 2,
-        'xl' => 2,
-        '2xl' => 2,
+        'sm' => 1,
+        'md' => 3,
     ];
 
     protected function getStats(): array
@@ -28,6 +23,10 @@ class DashboardOverview extends StatsOverviewWidget
         $monthEnd = CarbonImmutable::now()->endOfMonth();
 
         $purchasesTotal = (float) Purchase::query()->sum('total');
+
+        $purchasesThisMonth = (float) Purchase::query()
+            ->whereBetween('purchase_date', [$monthStart, $monthEnd])
+            ->sum('total');
 
         $paymentsThisMonth = (float) Payment::query()
             ->whereBetween('paid_at', [$monthStart, $monthEnd])
@@ -43,6 +42,11 @@ class DashboardOverview extends StatsOverviewWidget
                 ->description('Mes actual')
                 ->descriptionIcon('heroicon-m-banknotes')
                 ->color('success'),
+
+            Stat::make('Compras del mes', '$'.number_format($purchasesThisMonth, 2, ',', '.'))
+                ->description('Mes actual')
+                ->descriptionIcon('heroicon-m-shopping-cart')
+                ->color('warning'),
         ];
     }
 }

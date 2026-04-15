@@ -63,7 +63,7 @@ class SoftwareProviderResource extends Resource
         return [
             'index' => ListSoftwareProviders::route('/'),
             'create' => CreateSoftwareProvider::route('/create'),
-            'view' => ViewSoftwareProvider::route('/{record}'),
+            // 'view' => ViewSoftwareProvider::route('/{record}'),
             'edit' => EditSoftwareProvider::route('/{record}/edit'),
         ];
     }

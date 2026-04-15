@@ -26,18 +26,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Field::configureUsing(function (Field $field): void {
-            $field->translateLabel();
-        });
-
-        Column::configureUsing(function (Column $column): void {
-            $column->translateLabel();
-        });
-
-        Entry::configureUsing(function (Entry $entry): void {
-            $entry->translateLabel();
-        });
-
         DeleteAction::configureUsing(function (DeleteAction $action): void {
             $action->failureNotificationTitle('No se puede eliminar este registro porque tiene información relacionada.');
 
@@ -52,6 +40,18 @@ class AppServiceProvider extends ServiceProvider
 
         DeleteBulkAction::configureUsing(function (DeleteBulkAction $action): void {
             $action->failureNotificationTitle('No se pudieron eliminar uno o más registros porque tienen información relacionada.');
+        });
+
+        Field::configureUsing(function (Field $field): void {
+            $field->translateLabel();
+        });
+
+        Column::configureUsing(function (Column $column): void {
+            $column->translateLabel();
+        });
+
+        Entry::configureUsing(function (Entry $entry): void {
+            $entry->translateLabel();
         });
     }
 }

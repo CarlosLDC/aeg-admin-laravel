@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\Impresoras\Tables;
 
 use App\Enums\DeviceType;
-use App\Enums\ImpresoraStatus;
+use App\Enums\PrinterStatus;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -26,19 +26,19 @@ class ImpresorasTable
                 TextColumn::make('estatus')
                     ->label('Estatus')
                     ->badge()
-                    ->color(fn (ImpresoraStatus|string|null $state): string => match ($state instanceof ImpresoraStatus ? $state : ImpresoraStatus::tryFrom((string) $state)) {
-                        ImpresoraStatus::Laboratorio => 'gray',
-                        ImpresoraStatus::Instalada => 'success',
-                        ImpresoraStatus::Mantenimiento => 'warning',
-                        ImpresoraStatus::Retirada => 'danger',
+                    ->color(fn (PrinterStatus|string|null $state): string => match ($state instanceof PrinterStatus ? $state : PrinterStatus::tryFrom((string) $state)) {
+                        PrinterStatus::Testing => 'gray',
+                        PrinterStatus::Installed => 'success',
+                        PrinterStatus::Maintenance => 'warning',
+                        PrinterStatus::Retired => 'danger',
                         default => 'gray',
                     }),
                 TextColumn::make('tipo_dispositivo')
                     ->label('Tipo de Dispositivo')
                     ->badge()
                     ->color(fn (DeviceType|string|null $state): string => match ($state instanceof DeviceType ? $state : DeviceType::tryFrom((string) $state)) {
-                        DeviceType::Interno => 'gray',
-                        DeviceType::Externo => 'primary',
+                        DeviceType::Internal => 'gray',
+                        DeviceType::External => 'primary',
                         default => 'gray',
                     }),
                 TextColumn::make('precio_venta_final')
@@ -52,7 +52,7 @@ class ImpresorasTable
                     ->label('Distribuidora')
                     ->searchable(),
                 TextColumn::make('firmware.version')
-                    ->label('Firmware')
+                    ->label('Versión de Firmware')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

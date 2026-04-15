@@ -29,20 +29,17 @@ class ImpresoraInfolist
                 TextEntry::make('branch.trade_name')
                     ->label('Sucursal'),
                 TextEntry::make('firmware.version')
-                    ->label('Firmware'),
+                    ->label('Versión de Firmware'),
                 TextEntry::make('distributor.branch.trade_name')
                     ->label('Distribuidora'),
-                    TextEntry::make('se_pago')
-                        ->label('Se Pagó')
-                        ->badge()
-                        ->formatStateUsing(fn (bool $state): string => $state ? 'Sí' : 'No')
-                        ->color(fn (string $state): string => $state === 'Sí' ? 'success' : 'gray'),
+                TextEntry::make('se_pago')
+                    ->label('Se Pagó')
+                    ->badge()
+                    ->formatStateUsing(fn (bool $state): string => $state ? 'Sí' : 'No')
+                    ->color(fn (string $state): string => $state === 'Sí' ? 'success' : 'gray'),
                 TextEntry::make('fecha_instalacion')
                     ->label('Fecha de Instalación')
                     ->dateTime()
-                    ->placeholder('-'),
-                TextEntry::make('version_firmware')
-                    ->label('Versión de Firmware')
                     ->placeholder('-'),
                 TextEntry::make('direccion_mac')
                     ->label('Dirección MAC')

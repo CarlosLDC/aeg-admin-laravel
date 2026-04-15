@@ -12,6 +12,8 @@ class FirmwareSeeder extends Seeder
      */
     public function run(): void
     {
-        Firmware::factory()->count(10)->create();
+        Firmware::factory()
+            ->count(5)
+            ->create();
     }
 }

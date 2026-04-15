@@ -3,7 +3,6 @@
 namespace App\Filament\Pages;
 
 use App\Filament\Widgets\DashboardOverview;
-use App\Filament\Widgets\QuickActions;
 use App\Filament\Widgets\RecentPurchases;
 use Filament\Pages\Dashboard as BaseDashboard;
 
@@ -16,7 +15,6 @@ class Dashboard extends BaseDashboard
     public function getWidgets(): array
     {
         return [
-            QuickActions::class,
             DashboardOverview::class,
             RecentPurchases::class,
         ];

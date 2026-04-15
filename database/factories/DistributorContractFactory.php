@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Distributor;
 use App\Models\DistributorContract;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,7 +20,6 @@ class DistributorContractFactory extends Factory
         $fakeDate = fake()->dateTimeThisDecade();
 
         return [
-            'distributor_id' => Distributor::factory(),
             'photo_path' => fake()->imageUrl(),
             'start_date' => $fakeDate->format('Y-m-d'),
             'end_date' => $fakeDate->modify('+2 years')->format('Y-m-d'),

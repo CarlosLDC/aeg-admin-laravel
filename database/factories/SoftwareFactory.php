@@ -5,7 +5,6 @@ namespace Database\Factories;
 use App\Enums\OperatingSystem;
 use App\Enums\ProgrammingLanguage;
 use App\Models\Software;
-use App\Models\SoftwareProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -24,7 +23,6 @@ class SoftwareFactory extends Factory
         $programmingLanguages = ProgrammingLanguage::cases();
 
         return [
-            'software_provider_id' => SoftwareProvider::factory(),
             'name' => fake()->word(),
             'version' => fake()->semver(),
             'integration_date' => fake()->dateTimeThisDecade()->format('Y-m-d'),

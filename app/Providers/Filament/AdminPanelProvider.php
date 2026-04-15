@@ -23,6 +23,7 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+            // Navegacion principal
             ->navigationGroups([
                 'Aliados y Clientes',
                 'Impresoras',
@@ -32,12 +33,16 @@ class AdminPanelProvider extends PanelProvider
                 'Administración',
             ])
             ->unsavedChangesAlerts()
+
+            // Configuracion base del panel
             ->default()
             ->id('admin')
             ->path('')
             ->authGuard('web')
-            ->resourceCreatePageRedirect('edit')
+            // ->resourceCreatePageRedirect('edit')
             ->login()
+
+            // Identidad visual
             ->brandName('AEG Admin')
             ->brandLogo(asset('images/logo.png'))
             ->darkModeBrandLogo(fn () => view('filament.brand-logo-dark'))
@@ -46,6 +51,8 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Blue,
             ])
+
+            // Descubrimiento y registro de recursos
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
@@ -56,6 +63,8 @@ class AdminPanelProvider extends PanelProvider
                 AccountWidget::class,
                 // FilamentInfoWidget::class,
             ])
+
+            // Middleware del panel
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -67,6 +76,8 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
+
+            // Middleware de autenticacion
             ->authMiddleware([
                 Authenticate::class,
             ]);
