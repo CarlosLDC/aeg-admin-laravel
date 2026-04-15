@@ -3,7 +3,11 @@
 use Illuminate\Support\Str;
 use Pdo\Mysql;
 
-$databaseUrl = env('DATABASE_URL', env('DB_URL'));
+$databaseUrl = env('DB_URL', env('DATABASE_URL'));
+
+if (is_string($databaseUrl) && str_starts_with($databaseUrl, '${')) {
+    $databaseUrl = null;
+}
 
 return [
 
