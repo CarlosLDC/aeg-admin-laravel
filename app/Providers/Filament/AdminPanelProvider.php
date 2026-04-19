@@ -26,7 +26,7 @@ class AdminPanelProvider extends PanelProvider
             // Navegacion principal
             ->navigationGroups([
                 'Aliados y Clientes',
-                'Gestión de Equipos',
+                'Gestión de Impresoras',
                 'Gestión de Ventas',
                 'Gestión de Usuarios',
             ])

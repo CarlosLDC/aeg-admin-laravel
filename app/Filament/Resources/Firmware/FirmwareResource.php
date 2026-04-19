@@ -33,7 +33,7 @@ class FirmwareResource extends Resource
 
     protected static ?int $navigationSort = 3;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Gestión de Equipos';
+    protected static string|UnitEnum|null $navigationGroup = 'Gestión de Impresoras';
 
     public static function form(Schema $schema): Schema
     {

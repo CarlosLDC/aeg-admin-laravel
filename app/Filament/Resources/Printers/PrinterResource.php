@@ -33,7 +33,7 @@ class PrinterResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Gestión de Equipos';
+    protected static string|UnitEnum|null $navigationGroup = 'Gestión de Impresoras';
 
     public static function form(Schema $schema): Schema
     {
