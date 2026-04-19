@@ -36,29 +36,34 @@ class BranchForm
                                     TextInput::make('city')
                                         ->label('Ciudad')
                                         ->required(),
-                                ])->columnSpanFull(),
+                                ]),
                             Textarea::make('address')
                                 ->label('Dirección')
-                                ->required()
-                                ->columnSpanFull(),
+                                ->required(),
                         ]),
                     Step::make('Contacto')
                         ->schema([
-                            TextInput::make('phone')
-                                ->label('Número de Teléfono')
-                                ->required()
-                                ->tel(),
-                            TextInput::make('email')
-                                ->label('Correo Electrónico')
-                                ->required()
-                                ->email(),
-                            TextInput::make('contact_person')
-                                ->label('Persona de Contacto')
-                                ->required(),
+                            Grid::make()
+                                ->schema([
+                                    TextInput::make('phone_primary')
+                                        ->label('Teléfono Principal')
+                                        ->required()
+                                        ->tel(),
+                                    TextInput::make('phone_secondary')
+                                        ->label('Teléfono Secundario')
+                                        ->tel(),
+                                    TextInput::make('email')
+                                        ->label('Correo Electrónico')
+                                        ->required()
+                                        ->email(),
+                                    TextInput::make('contact_person')
+                                        ->label('Persona de Contacto')
+                                        ->required(),
+                                ]),
                         ]),
                 ])
-                ->columnSpanFull()
-                ->skippable(),
+                    ->columnSpanFull()
+                    ->skippable(),
             ]);
     }
 }

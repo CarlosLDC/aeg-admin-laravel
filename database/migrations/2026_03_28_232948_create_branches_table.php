@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('state');
             $table->string('city');
             $table->text('address');
-            $table->string('phone');
+            $table->string('phone_primary');
+            $table->string('phone_secondary')->nullable();
             $table->string('email');
             $table->string('contact_person');
             $table->timestamps();

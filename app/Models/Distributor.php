@@ -22,11 +22,6 @@ class Distributor extends Model
         return $this->belongsTo(Branch::class);
     }
 
-    public function clients(): HasMany
-    {
-        return $this->hasMany(Client::class);
-    }
-
     public function DistributorContacts(): HasMany
     {
         return $this->hasMany(DistributorContact::class);
@@ -37,8 +32,18 @@ class Distributor extends Model
         return $this->hasMany(DistributorContract::class);
     }
 
-    public function purchases(): HasMany
+    public function clients(): HasMany
     {
-        return $this->hasMany(Purchase::class);
+        return $this->hasMany(Client::class);
+    }
+
+    public function printers(): HasMany
+    {
+        return $this->hasMany(Printer::class, 'id_distribuidora');
+    }
+
+    public function sales(): HasMany
+    {
+        return $this->hasMany(Sale::class);
     }
 }

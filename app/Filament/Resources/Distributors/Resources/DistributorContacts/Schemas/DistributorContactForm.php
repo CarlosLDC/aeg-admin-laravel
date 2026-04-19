@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Distributors\Resources\DistributorContacts\Schemas;
 
+use App\Filament\Support\HintIconText;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
@@ -17,7 +18,7 @@ class DistributorContactForm
                 TextInput::make('national_id')
                     ->label('Cédula')
                     ->placeholder('V12345678')
-                    ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Debe comenzar con V o E (en mayúsculas) seguido de 7 u 8 dígitos, sin espacios ni separadores. Ejemplo: V12345678.')
+                    ->hintIcon('heroicon-m-question-mark-circle', tooltip: HintIconText::nationalId())
                     ->required()
                     ->unique()
                     ->regex('/^[VE][0-9]{7,8}$/'),

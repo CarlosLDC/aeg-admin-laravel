@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Payment;
-use App\Models\Purchase;
+use App\Models\Sale;
 use Illuminate\Database\Seeder;
 
 class PaymentSeeder extends Seeder
@@ -13,16 +13,16 @@ class PaymentSeeder extends Seeder
      */
     public function run(): void
     {
-        $purchases = Purchase::query()->get();
+        $sales = Sale::query()->get();
 
-        if ($purchases->isEmpty()) {
-            $purchases = Purchase::factory()->count(10)->create();
+        if ($sales->isEmpty()) {
+            $sales = Sale::factory()->count(10)->create();
         }
 
-        $purchases->each(function (Purchase $purchase): void {
+        $sales->each(function (Sale $sale): void {
             Payment::factory()
                 ->count(fake()->numberBetween(1, 3))
-                ->for($purchase)
+                ->for($sale)
                 ->create();
         });
     }

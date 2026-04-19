@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\SoftwareProviders\Tables;
 
+use App\Filament\Schemas\BranchSpecializationSchemas;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -15,21 +16,7 @@ class SoftwareProvidersTable
     {
         return $table
             ->columns([
-                TextColumn::make('name')
-                    ->label('Nombre')
-                    ->searchable(),
-                TextColumn::make('tax_id')
-                    ->label('RIF')
-                    ->searchable(),
-                TextColumn::make('phone')
-                    ->label('Teléfono')
-                    ->searchable(),
-                TextColumn::make('email')
-                    ->label('Correo Electrónico')
-                    ->searchable(),
-                TextColumn::make('contact_person')
-                    ->label('Persona de Contacto')
-                    ->searchable(),
+                ...BranchSpecializationSchemas::table(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

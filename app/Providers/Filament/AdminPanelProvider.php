@@ -26,11 +26,9 @@ class AdminPanelProvider extends PanelProvider
             // Navegacion principal
             ->navigationGroups([
                 'Aliados y Clientes',
-                'Impresoras',
-                'Software',
-                'Gestión de Compras',
-                'Libro Fiscal',
-                'Administración',
+                'Gestión de Equipos',
+                'Gestión de Ventas',
+                'Gestión de Usuarios',
             ])
             ->unsavedChangesAlerts()
 

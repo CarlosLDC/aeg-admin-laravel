@@ -19,8 +19,8 @@ class CompanyFactory extends Factory
     public function definition(): array
     {
         return [
-            'legal_name' => fake()->company(),
             'tax_id' => fake()->unique()->regexify('[VEJPG][0-9]{9}'),
+            'legal_name' => fake()->company(),
             'taxpayer_type' => fake()->randomElement(TaxpayerType::cases()),
         ];
     }

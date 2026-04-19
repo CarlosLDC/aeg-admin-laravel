@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->string('legal_name'); // Razón social
             $table->string('tax_id')->unique(); // RIF
-            $table->string('taxpayer_type'); // Tipo de contribuyente
+            $table->string('legal_name'); // Razón Social
+            $table->string('taxpayer_type'); // Tipo de Contribuyente
             $table->timestamps();
         });
     }

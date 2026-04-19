@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ServiceCenters\Schemas;
 
+use App\Filament\Schemas\BranchSpecializationSchemas;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
 
@@ -11,20 +12,7 @@ class ServiceCenterInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('branch.trade_name')
-                    ->label('Sucursal'),
-                TextEntry::make('branch.company.tax_id')
-                    ->label('RIF'),
-                TextEntry::make('branch.state')
-                    ->label('Estado'),
-                TextEntry::make('branch.city')
-                    ->label('Ciudad'),
-                TextEntry::make('branch.phone')
-                    ->label('Teléfono'),
-                TextEntry::make('branch.email')
-                    ->label('Correo Electrónico'),
-                TextEntry::make('branch.contact_person')
-                    ->label('Persona de Contacto'),
+                ...BranchSpecializationSchemas::infolist(),
                 TextEntry::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),

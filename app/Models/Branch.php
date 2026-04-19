@@ -20,7 +20,8 @@ class Branch extends Model
         'city',
         'state',
         'address',
-        'phone',
+        'phone_primary',
+        'phone_secondary',
         'email',
         'contact_person',
     ];
@@ -47,13 +48,18 @@ class Branch extends Model
         return $this->hasOne(Distributor::class);
     }
 
-    public function client(): HasOne
-    {
-        return $this->hasOne(Client::class);
-    }
-
     public function serviceCenter(): HasOne
     {
         return $this->hasOne(ServiceCenter::class);
+    }
+
+    public function softwareProvider(): HasOne
+    {
+        return $this->hasOne(SoftwareProvider::class);
+    }
+
+    public function client(): HasOne
+    {
+        return $this->hasOne(Client::class);
     }
 }

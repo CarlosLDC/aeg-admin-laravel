@@ -14,8 +14,8 @@ class Company extends Model
     use HasFactory;
 
     protected $fillable = [
-        'legal_name',
         'tax_id',
+        'legal_name',
         'taxpayer_type',
     ];
 

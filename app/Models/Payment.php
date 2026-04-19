@@ -17,7 +17,7 @@ class Payment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'purchase_id',
+        'sale_id',
         'amount',
         'currency',
         'exchange_rate',
@@ -50,9 +50,9 @@ class Payment extends Model
         });
     }
 
-    public function purchase(): BelongsTo
+    public function sale(): BelongsTo
     {
-        return $this->belongsTo(Purchase::class);
+        return $this->belongsTo(Sale::class);
     }
 
     public function usesForeignCurrency(): bool

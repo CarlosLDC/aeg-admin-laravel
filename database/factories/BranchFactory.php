@@ -25,7 +25,8 @@ class BranchFactory extends Factory
             'state' => fake()->randomElement(VenezuelaState::cases()),
             'city' => fake()->city(),
             'address' => fake()->address(),
-            'phone' => fake()->e164PhoneNumber(),
+            'phone_primary' => fake()->e164PhoneNumber(),
+            'phone_secondary' => fake()->optional()->e164PhoneNumber(),
             'email' => fake()->freeEmail(),
             'contact_person' => fake()->name(),
         ];

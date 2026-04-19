@@ -24,8 +24,11 @@ class BranchesTable
                 TextColumn::make('city')
                     ->label('Ciudad')
                     ->searchable(),
-                TextColumn::make('phone')
-                    ->label('Número de Teléfono')
+                TextColumn::make('phone_primary')
+                    ->label('Teléfono Principal')
+                    ->searchable(),
+                TextColumn::make('phone_secondary')
+                    ->label('Teléfono Secundario')
                     ->searchable(),
                 TextColumn::make('email')
                     ->label('Correo Electrónico')

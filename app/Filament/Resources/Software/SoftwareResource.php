@@ -31,9 +31,9 @@ class SoftwareResource extends Resource
 
     protected static bool $hasTitleCaseModelLabel = false;
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 4;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Software';
+    protected static string|UnitEnum|null $navigationGroup = 'Gestión de Equipos';
 
     public static function form(Schema $schema): Schema
     {

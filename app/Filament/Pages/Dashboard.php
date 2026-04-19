@@ -3,7 +3,7 @@
 namespace App\Filament\Pages;
 
 use App\Filament\Widgets\DashboardOverview;
-use App\Filament\Widgets\RecentPurchases;
+use App\Filament\Widgets\RecentSales;
 use Filament\Pages\Dashboard as BaseDashboard;
 
 class Dashboard extends BaseDashboard
@@ -16,7 +16,7 @@ class Dashboard extends BaseDashboard
     {
         return [
             DashboardOverview::class,
-            RecentPurchases::class,
+            RecentSales::class,
         ];
     }
 

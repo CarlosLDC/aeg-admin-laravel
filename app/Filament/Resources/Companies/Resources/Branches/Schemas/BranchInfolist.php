@@ -21,8 +21,11 @@ class BranchInfolist
                 TextEntry::make('address')
                     ->label('Dirección')
                     ->columnSpanFull(),
-                TextEntry::make('phone')
-                    ->label('Número de Teléfono'),
+                TextEntry::make('phone_primary')
+                    ->label('Teléfono Principal'),
+                TextEntry::make('phone_secondary')
+                    ->label('Teléfono Secundario')
+                    ->placeholder('-'),
                 TextEntry::make('email')
                     ->label('Correo Electrónico'),
                 TextEntry::make('contact_person')

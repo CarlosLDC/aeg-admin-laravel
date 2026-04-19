@@ -21,13 +21,13 @@ class QuickActions extends StatsOverviewWidget
     {
         return array_values(array_filter([
             $this->makeActionStat(
-                label: 'Nueva compra',
+                label: 'Nueva venta',
                 description: 'Registrar factura',
                 icon: 'heroicon-m-document-plus',
                 color: 'primary',
                 url: $this->safeNamedRoute(
-                    preferredRouteName: 'filament.admin.resources.purchases.create',
-                    fallbackRouteName: 'filament.admin.resources.purchases.index',
+                    preferredRouteName: 'filament.admin.resources.sales.create',
+                    fallbackRouteName: 'filament.admin.resources.sales.index',
                 ),
             ),
             $this->makeActionStat(
@@ -36,8 +36,8 @@ class QuickActions extends StatsOverviewWidget
                 icon: 'heroicon-m-printer',
                 color: 'success',
                 url: $this->safeNamedRoute(
-                    preferredRouteName: 'filament.admin.resources.impresoras.create',
-                    fallbackRouteName: 'filament.admin.resources.impresoras.index',
+                    preferredRouteName: 'filament.admin.resources.printers.create',
+                    fallbackRouteName: 'filament.admin.resources.printers.index',
                 ),
             ),
             $this->makeActionStat(

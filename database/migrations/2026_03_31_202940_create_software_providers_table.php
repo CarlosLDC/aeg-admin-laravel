@@ -13,11 +13,7 @@ return new class extends Migration
     {
         Schema::create('software_providers', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('tax_id')->unique(); // RIF
-            $table->string('phone');
-            $table->string('email');
-            $table->string('contact_person');
+            $table->foreignId('branch_id')->unique()->constrained()->restrictOnDelete();
             $table->timestamps();
         });
     }

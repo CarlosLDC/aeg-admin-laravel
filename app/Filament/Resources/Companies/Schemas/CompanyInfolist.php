@@ -11,10 +11,10 @@ class CompanyInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('legal_name')
-                    ->label('Razón Social'),
                 TextEntry::make('tax_id')
                     ->label('RIF'),
+                TextEntry::make('legal_name')
+                    ->label('Razón Social'),
                 TextEntry::make('taxpayer_type')
                     ->label('Tipo de Contribuyente')
                     ->columnSpanFull(),

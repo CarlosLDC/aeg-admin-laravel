@@ -21,7 +21,7 @@ class TaxResource extends Resource
 {
     protected static ?string $model = Tax::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentCurrencyDollar;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedReceiptPercent;
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -31,7 +31,7 @@ class TaxResource extends Resource
 
     protected static ?int $navigationSort = 2;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Gestión de Compras';
+    protected static string|UnitEnum|null $navigationGroup = 'Gestión de Ventas';
 
     public static function form(Schema $schema): Schema
     {

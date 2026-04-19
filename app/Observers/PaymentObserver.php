@@ -3,61 +3,61 @@
 namespace App\Observers;
 
 use App\Models\Payment;
-use App\Models\Purchase;
+use App\Models\Sale;
 
 class PaymentObserver
 {
     public function created(Payment $payment): void
     {
-        $this->updatePurchaseTotals($payment);
+        $this->updateSaleTotals($payment);
     }
 
     public function updated(Payment $payment): void
     {
-        if ($payment->wasChanged(['amount', 'currency', 'exchange_rate', 'igtf_rate', 'igtf_amount', 'total_amount', 'purchase_id'])) {
-            $this->updatePurchaseTotals($payment);
+        if ($payment->wasChanged(['amount', 'currency', 'exchange_rate', 'igtf_rate', 'igtf_amount', 'total_amount', 'sale_id'])) {
+            $this->updateSaleTotals($payment);
 
-            if ($payment->wasChanged('purchase_id')) {
-                $this->updatePreviousPurchaseTotals($payment);
+            if ($payment->wasChanged('sale_id')) {
+                $this->updatePreviousSaleTotals($payment);
             }
         }
     }
 
     public function deleted(Payment $payment): void
     {
-        $this->updatePurchaseTotals($payment);
+        $this->updateSaleTotals($payment);
     }
 
-    private function updatePurchaseTotals(Payment $payment): void
+    private function updateSaleTotals(Payment $payment): void
     {
-        $purchase = Purchase::query()->find($payment->purchase_id);
+        $sale = Sale::query()->find($payment->sale_id);
 
-        if (! $purchase) {
+        if (! $sale) {
             return;
         }
 
-        $purchase->recalculateTotals()->save();
-        Purchase::query()->whereKey($purchase->getKey())->update([
+        $sale->recalculateTotals()->save();
+        Sale::query()->whereKey($sale->getKey())->update([
             'updated_at' => now(),
         ]);
     }
 
-    private function updatePreviousPurchaseTotals(Payment $payment): void
+    private function updatePreviousSaleTotals(Payment $payment): void
     {
-        $oldPurchaseId = $payment->getOriginal('purchase_id');
+        $oldSaleId = $payment->getOriginal('sale_id');
 
-        if (! $oldPurchaseId) {
+        if (! $oldSaleId) {
             return;
         }
 
-        $oldPurchase = Purchase::query()->find($oldPurchaseId);
+        $oldSale = Sale::query()->find($oldSaleId);
 
-        if (! ($oldPurchase instanceof Purchase)) {
+        if (! ($oldSale instanceof Sale)) {
             return;
         }
 
-        $oldPurchase->recalculateTotals()->save();
-        Purchase::query()->whereKey($oldPurchase->getKey())->update([
+        $oldSale->recalculateTotals()->save();
+        Sale::query()->whereKey($oldSale->getKey())->update([
             'updated_at' => now(),
         ]);
     }

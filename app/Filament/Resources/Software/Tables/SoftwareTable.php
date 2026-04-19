@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Software\Tables;
 
+use App\Filament\Schemas\SoftwareSchemas;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -15,16 +16,10 @@ class SoftwareTable
     {
         return $table
             ->columns([
-                TextColumn::make('name')
-                    ->label('Nombre')
+                ...SoftwareSchemas::table(),
+                TextColumn::make('softwareProvider.branch.trade_name')
+                    ->label('Proveedor')
                     ->searchable(),
-                TextColumn::make('version')
-                    ->label('Versión')
-                    ->searchable(),
-                TextColumn::make('integration_date')
-                    ->label('Fecha de Integración')
-                    ->date()
-                    ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Branch;
 use App\Models\SoftwareProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,11 +19,7 @@ class SoftwareProviderFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->company(),
-            'tax_id' => fake()->unique()->regexify('[VEJPG][0-9]{9}'),
-            'phone' => fake()->e164PhoneNumber(),
-            'email' => fake()->freeEmail(),
-            'contact_person' => fake()->name(),
+            'branch_id' => Branch::factory(),
         ];
     }
 }

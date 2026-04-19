@@ -20,8 +20,8 @@ class PrinterModel extends Model
         'certification_date',
     ];
 
-    public function purchaseItems(): HasMany
+    public function saleItems(): HasMany
     {
-        return $this->hasMany(PurchaseItem::class);
+        return $this->hasMany(SaleItem::class);
     }
 }

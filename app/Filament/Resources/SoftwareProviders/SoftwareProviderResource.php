@@ -22,7 +22,7 @@ class SoftwareProviderResource extends Resource
 {
     protected static ?string $model = SoftwareProvider::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBuildingOffice2;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedComputerDesktop;
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -32,9 +32,9 @@ class SoftwareProviderResource extends Resource
 
     protected static bool $hasTitleCaseModelLabel = false;
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 4;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Software';
+    protected static string|UnitEnum|null $navigationGroup = 'Aliados y Clientes';
 
     public static function form(Schema $schema): Schema
     {

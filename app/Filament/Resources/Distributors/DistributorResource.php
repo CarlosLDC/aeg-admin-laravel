@@ -8,6 +8,7 @@ use App\Filament\Resources\Distributors\Pages\ListDistributors;
 use App\Filament\Resources\Distributors\Pages\ViewDistributor;
 use App\Filament\Resources\Distributors\RelationManagers\DistributorContactsRelationManager;
 use App\Filament\Resources\Distributors\RelationManagers\DistributorContractsRelationManager;
+use App\Filament\Resources\Distributors\RelationManagers\PrintersRelationManager;
 use App\Filament\Resources\Distributors\Schemas\DistributorForm;
 use App\Filament\Resources\Distributors\Schemas\DistributorInfolist;
 use App\Filament\Resources\Distributors\Tables\DistributorsTable;
@@ -29,7 +30,7 @@ class DistributorResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Distribuidoras';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 2;
 
     protected static string|UnitEnum|null $navigationGroup = 'Aliados y Clientes';
 
@@ -51,6 +52,7 @@ class DistributorResource extends Resource
     public static function getRelations(): array
     {
         return [
+            PrintersRelationManager::class,
             DistributorContactsRelationManager::class,
             DistributorContractsRelationManager::class,
         ];

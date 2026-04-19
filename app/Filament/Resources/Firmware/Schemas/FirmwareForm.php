@@ -24,6 +24,7 @@ class FirmwareForm
                     ->required(),
                 Textarea::make('description')
                     ->label('Descripción')
+                    ->required()
                     ->columnSpanFull(),
             ]);
     }

@@ -18,8 +18,8 @@ class Tax extends Model
         'is_active',
     ];
 
-    public function purchaseItems(): HasMany
+    public function saleItems(): HasMany
     {
-        return $this->hasMany(PurchaseItem::class);
+        return $this->hasMany(SaleItem::class);
     }
 }

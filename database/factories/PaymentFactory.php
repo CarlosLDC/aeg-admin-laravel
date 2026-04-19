@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Enums\PaymentMethod;
 use App\Models\Payment;
-use App\Models\Purchase;
+use App\Models\Sale;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -41,7 +41,7 @@ class PaymentFactory extends Factory
         };
 
         return [
-            'purchase_id' => Purchase::factory(),
+            'sale_id' => Sale::factory(),
             'amount' => $amount,
             'currency' => $currency,
             'exchange_rate' => $currency === 'USD' ? fake()->randomFloat(4, 35, 100) : 1,

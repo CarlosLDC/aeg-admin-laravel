@@ -21,13 +21,13 @@ class DatabaseSeeder extends Seeder
             ClientSeeder::class,
             // Software
             SoftwareProviderSeeder::class,
-            // Impresoras
+            // Printers
             PrinterModelSeeder::class,
             FirmwareSeeder::class,
-            ImpresoraSeeder::class,
-            PrecintoSeeder::class,
-            // Gestión de Compras
-            PurchaseSeeder::class,
+            PrinterSeeder::class,
+            PrecintSeeder::class,
+            // Gestión de Ventas
+            SaleSeeder::class,
             PaymentSeeder::class,
             TaxSeeder::class,
         ]);

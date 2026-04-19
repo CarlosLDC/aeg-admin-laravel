@@ -36,7 +36,7 @@ Este listado identifica cambios hechos en modo rapido (vibecode) que deben ser r
     - `exchange_rate` (tasa BCV)
     - `igtf_rate`, `igtf_amount`, `total_amount`
     - `paid_at`
-  - Indices por `purchase_id + payment_method` y `currency`.
+  - Indices por `sale_id + payment_method` y `currency`.
 - Riesgo a validar:
   - Precision de decimales para montos reales.
   - Regla legal/fiscal del IGTF usada (3%) y sus excepciones.
@@ -45,7 +45,7 @@ Este listado identifica cambios hechos en modo rapido (vibecode) que deben ser r
 - Archivo: app/Models/Payment.php
 - Estado: pendiente de revision
 - Cambio aplicado:
-  - `fillable`, `casts` (incluye enum `PaymentMethod`), relacion `purchase()`.
+  - `fillable`, `casts` (incluye enum `PaymentMethod`), relacion `sale()`.
   - Recalculo automatico en `saving()` para IGTF y total.
 - Riesgo a validar:
   - Formula fiscal real para IGTF en tu operacion.
@@ -59,12 +59,12 @@ Este listado identifica cambios hechos en modo rapido (vibecode) que deben ser r
 - Riesgo a validar:
   - Nomenclatura final y cobertura de todos los metodos reales del negocio.
 
-- Archivo: app/Models/Purchase.php
+- Archivo: app/Models/Sale.php
 - Estado: pendiente de revision
 - Cambio aplicado:
   - Relacion `payments()`.
 - Riesgo a validar:
-  - Que el agregado Purchase use/espere estos pagos en calculos finales.
+  - Que el agregado Sale use/espere estos pagos en calculos finales.
 
 ## 3) Datos de prueba y seeders (impacto medio)
 
@@ -74,15 +74,15 @@ Este listado identifica cambios hechos en modo rapido (vibecode) que deben ser r
   - Generacion realista por metodo, moneda, tasa BCV, IGTF, referencia y `paid_at`.
 - Riesgo a validar:
   - Distribucion de metodos de pago representativa del negocio.
-  - Rangos monetarios realistas para compras reales.
+  - Rangos monetarios realistas para ventas reales.
 
 - Archivo: database/seeders/PaymentSeeder.php
 - Estado: pendiente de revision
 - Cambio aplicado:
-  - Crea de 1 a 3 pagos por compra.
-  - Si no hay compras, crea compras via factory.
+  - Crea de 1 a 3 pagos por venta.
+  - Si no hay ventas, crea ventas via factory.
 - Riesgo a validar:
-  - Si una compra deberia poder existir sin pago.
+  - Si una venta deberia poder existir sin pago.
   - Si 1 a 3 pagos refleja la operacion real.
 
 - Archivo: database/seeders/DatabaseSeeder.php

@@ -2,8 +2,9 @@
 
 namespace App\Filament\Resources\Clients\Schemas;
 
-use App\Filament\Support\BranchSelect;
+use App\Filament\Schemas\BranchSpecializationSchemas;
 use App\Filament\Support\DistributorSelect;
+use App\Filament\Support\SearchPromptText;
 use App\Models\Distributor;
 use Closure;
 use Filament\Forms\Components\Select;
@@ -16,21 +17,14 @@ class ClientForm
     {
         return $schema
             ->components([
-                Select::make('branch_id')
-                    ->label('Sucursal')
-                    ->required()
-                    ->unique()
-                    ->searchable()
-                    ->getSearchResultsUsing(BranchSelect::searchResults(...))
-                    ->getOptionLabelUsing(BranchSelect::optionLabel(...))
-                    ->searchPrompt('Buscar por Nombre Comercial, Razón Social o RIF...'),
+                ...BranchSpecializationSchemas::form(),
                 Select::make('distributor_id')
                     ->label('Distribuidora')
                     ->required()
                     ->searchable()
                     ->getSearchResultsUsing(DistributorSelect::searchResults(...))
                     ->getOptionLabelUsing(DistributorSelect::optionLabel(...))
-                    ->searchPrompt('Buscar por Nombre Comercial, Razón Social o RIF...')
+                    ->searchPrompt(SearchPromptText::branchCompanyLegalNameTaxId())
                     ->rules([
                         fn (Get $get): Closure => function (string $attribute, $value, Closure $fail) use ($get): void {
                             if (blank($value) || blank($get('branch_id'))) {

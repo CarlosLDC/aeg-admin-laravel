@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\SoftwareProviders\Schemas;
 
+use App\Filament\Schemas\BranchSpecializationSchemas;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
 
@@ -11,16 +12,7 @@ class SoftwareProviderInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('name')
-                    ->label('Nombre'),
-                TextEntry::make('tax_id')
-                    ->label('RIF'),
-                TextEntry::make('phone')
-                    ->label('Teléfono'),
-                TextEntry::make('email')
-                    ->label('Correo Electrónico'),
-                TextEntry::make('contact_person')
-                    ->label('Persona de Contacto'),
+                ...BranchSpecializationSchemas::infolist(),
                 TextEntry::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),

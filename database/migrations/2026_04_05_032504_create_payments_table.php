@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('purchase_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('sale_id')->constrained()->cascadeOnDelete();
 
             // Base imponible del pago antes de IGTF.
             $table->decimal('amount', total: 8, places: 2);
@@ -34,7 +34,7 @@ return new class extends Migration
             $table->timestamp('paid_at')->nullable();
             $table->timestamps();
 
-            $table->index(['purchase_id', 'payment_method']);
+            $table->index(['sale_id', 'payment_method']);
             $table->index('currency');
         });
     }

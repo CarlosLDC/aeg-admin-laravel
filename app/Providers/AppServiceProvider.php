@@ -31,7 +31,13 @@ class AppServiceProvider extends ServiceProvider
 
             $action->using(function (Model $record): bool {
                 try {
-                    return (bool) $record->delete();
+                    $result = $record->delete();
+
+                    if (is_null($result)) {
+                        return true;
+                    }
+
+                    return $result;
                 } catch (QueryException) {
                     return false;
                 }

@@ -2,7 +2,7 @@
 
 use App\Enums\PaymentMethod;
 use App\Models\Payment;
-use App\Models\Purchase;
+use App\Models\Sale;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 
@@ -11,10 +11,10 @@ use function Pest\Laravel\assertDatabaseHas;
 uses(LazilyRefreshDatabase::class);
 
 it('recalculates payment totals when it is saved', function () {
-    $purchase = Purchase::factory()->create();
+    $sale = Sale::factory()->create();
 
     Payment::create([
-        'purchase_id' => $purchase->id,
+        'sale_id' => $sale->id,
         'amount' => 100,
         'currency' => 'USD',
         'exchange_rate' => 40.5,
@@ -33,19 +33,19 @@ it('recalculates payment totals when it is saved', function () {
     ]);
 });
 
-it('touches the related purchases when a payment is moved to another purchase', function () {
-    $firstPurchase = Purchase::factory()->create();
-    $secondPurchase = Purchase::factory()->create();
+it('touches the related sales when a payment is moved to another sale', function () {
+    $firstSale = Sale::factory()->create();
+    $secondSale = Sale::factory()->create();
 
-    $payment = Payment::factory()->for($firstPurchase)->create();
+    $payment = Payment::factory()->for($firstSale)->create();
 
-    $firstUpdatedAt = $firstPurchase->fresh()->updated_at;
-    $secondUpdatedAt = $secondPurchase->fresh()->updated_at;
+    $firstUpdatedAt = $firstSale->fresh()->updated_at;
+    $secondUpdatedAt = $secondSale->fresh()->updated_at;
 
     Carbon::setTestNow(now()->addSecond());
 
     $payment->update([
-        'purchase_id' => $secondPurchase->id,
+        'sale_id' => $secondSale->id,
         'amount' => 120,
         'currency' => 'USD',
         'exchange_rate' => 40,
@@ -56,15 +56,15 @@ it('touches the related purchases when a payment is moved to another purchase', 
 
     Carbon::setTestNow();
 
-    expect($firstPurchase->fresh()->updated_at->greaterThan($firstUpdatedAt))->toBeTrue();
-    expect($secondPurchase->fresh()->updated_at->greaterThan($secondUpdatedAt))->toBeTrue();
+    expect($firstSale->fresh()->updated_at->greaterThan($firstUpdatedAt))->toBeTrue();
+    expect($secondSale->fresh()->updated_at->greaterThan($secondUpdatedAt))->toBeTrue();
 });
 
-it('touches the related purchase when a payment is deleted', function () {
-    $purchase = Purchase::factory()->create();
-    $payment = Payment::factory()->for($purchase)->create();
+it('touches the related sale when a payment is deleted', function () {
+    $sale = Sale::factory()->create();
+    $payment = Payment::factory()->for($sale)->create();
 
-    $beforeDelete = $purchase->fresh()->updated_at;
+    $beforeDelete = $sale->fresh()->updated_at;
 
     Carbon::setTestNow(now()->addSecond());
 
@@ -72,5 +72,5 @@ it('touches the related purchase when a payment is deleted', function () {
 
     Carbon::setTestNow();
 
-    expect($purchase->fresh()->updated_at->greaterThan($beforeDelete))->toBeTrue();
+    expect($sale->fresh()->updated_at->greaterThan($beforeDelete))->toBeTrue();
 });

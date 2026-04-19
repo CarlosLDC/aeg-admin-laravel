@@ -3,7 +3,7 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Payment;
-use App\Models\Purchase;
+use App\Models\Sale;
 use Carbon\CarbonImmutable;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -22,10 +22,10 @@ class DashboardOverview extends StatsOverviewWidget
         $monthStart = CarbonImmutable::now()->startOfMonth();
         $monthEnd = CarbonImmutable::now()->endOfMonth();
 
-        $purchasesTotal = (float) Purchase::query()->sum('total');
+        $salesTotal = (float) Sale::query()->sum('total');
 
-        $purchasesThisMonth = (float) Purchase::query()
-            ->whereBetween('purchase_date', [$monthStart, $monthEnd])
+        $salesThisMonth = (float) Sale::query()
+            ->whereBetween('sale_date', [$monthStart, $monthEnd])
             ->sum('total');
 
         $paymentsThisMonth = (float) Payment::query()
@@ -33,7 +33,7 @@ class DashboardOverview extends StatsOverviewWidget
             ->sum('total_amount');
 
         return [
-            Stat::make('Compras acumuladas', '$'.number_format($purchasesTotal, 2, ',', '.'))
+            Stat::make('Ventas acumuladas', '$'.number_format($salesTotal, 2, ',', '.'))
                 ->description('Total histórico')
                 ->descriptionIcon('heroicon-m-arrow-trending-up')
                 ->color('primary'),
@@ -43,7 +43,7 @@ class DashboardOverview extends StatsOverviewWidget
                 ->descriptionIcon('heroicon-m-banknotes')
                 ->color('success'),
 
-            Stat::make('Compras del mes', '$'.number_format($purchasesThisMonth, 2, ',', '.'))
+            Stat::make('Ventas del mes', '$'.number_format($salesThisMonth, 2, ',', '.'))
                 ->description('Mes actual')
                 ->descriptionIcon('heroicon-m-shopping-cart')
                 ->color('warning'),

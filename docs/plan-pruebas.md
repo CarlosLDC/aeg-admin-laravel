@@ -9,8 +9,8 @@ Validar que los recursos de Filament, los modelos, las migraciones, los observer
 ## 2. Alcance
 
 ### Incluido
-- Impresoras
-- Precintos
+- Printers
+- Precints
 - Payments
 - Manejo global de deletes bloqueados por restricción referencial
 - Seeders y factories asociados
@@ -28,20 +28,20 @@ Validar que los recursos de Filament, los modelos, las migraciones, los observer
 - Tener un usuario Filament creado y autenticado
 
 ### Datos base
-- Modelos de impresora existentes
+- Modelos de printer existentes
 - Versiones de firmware existentes
-- Compras existentes
+- Ventas existentes
 - Sucursales, distribuidoras y software cargados por seeders
 
 ## 4. Casos de prueba por módulo
 
-## 4.1 Impresoras
+## 4.1 Printers
 
 ### Flujo CRUD
-- Crear una impresora con modelo, serial fiscal, estado y tipo de dispositivo.
-- Editar una impresora existente.
-- Ver una impresora desde la vista detalle.
-- Eliminar una impresora desde el panel.
+- Crear una printer con modelo, serial fiscal, estado y tipo de dispositivo.
+- Editar una printer existente.
+- Ver una printer desde la vista detalle.
+- Eliminar una printer desde el panel.
 
 ### Validaciones
 - No permitir serial fiscal fuera del formato esperado.
@@ -50,23 +50,23 @@ Validar que los recursos de Filament, los modelos, las migraciones, los observer
 - Validar que el precio de venta final no sea negativo.
 
 ### Relaciones
-- Asociar una impresora a una compra opcionalmente.
-- Asociar una impresora a un firmware opcionalmente.
-- Asociar una impresora a un software opcionalmente.
-- Asociar una impresora a una sucursal opcionalmente.
-- Asociar una impresora a una distribuidora opcionalmente.
+- Asociar una printer a una venta opcionalmente.
+- Asociar una printer a un firmware opcionalmente.
+- Asociar una printer a un software opcionalmente.
+- Asociar una printer a una sucursal opcionalmente.
+- Asociar una printer a una distribuidora opcionalmente.
 
 ### Visualización
 - Confirmar que los badges de estado y tipo de dispositivo muestran color.
 - Confirmar que la tabla lista correctamente modelo, serial, estatus y relaciones.
 
-## 4.2 Precintos
+## 4.2 Precints
 
 ### Flujo CRUD
-- Crear un precinto asociado o no a una impresora.
-- Editar un precinto existente.
-- Ver un precinto desde la vista detalle.
-- Eliminar un precinto desde el panel.
+- Crear un precint asociado o no a una printer.
+- Editar un precint existente.
+- Ver un precint desde la vista detalle.
+- Eliminar un precint desde el panel.
 
 ### Validaciones
 - No permitir serial vacío.
@@ -74,17 +74,17 @@ Validar que los recursos de Filament, los modelos, las migraciones, los observer
 - Validar que color y estatus sean seleccionables desde los enums.
 
 ### Relaciones
-- Verificar que la relación opcional con impresora se puede guardar y mostrar.
+- Verificar que la relación opcional con printer se puede guardar y mostrar.
 - Verificar fechas de instalación y retiro nulas o pobladas según el estado.
 
 ### Visualización
 - Confirmar que los badges de color y estatus muestran colores consistentes.
-- Confirmar que la tabla y la vista detalle muestran el serial y la relación con impresora.
+- Confirmar que la tabla y la vista detalle muestran el serial y la relación con printer.
 
 ## 4.3 Payments
 
 ### Flujo CRUD
-- Crear pagos dentro del contexto de una compra.
+- Crear pagos dentro del contexto de una venta.
 - Editar un pago existente.
 - Ver un pago desde la vista detalle.
 - Eliminar un pago desde el panel.
@@ -92,8 +92,8 @@ Validar que los recursos de Filament, los modelos, las migraciones, los observer
 ### Reglas de negocio
 - Verificar que el total se recalcula al guardar.
 - Verificar que el IGTF solo aplique cuando la moneda no sea VES.
-- Verificar que el cambio de `purchase_id` actualice también la compra anterior.
-- Verificar que el observer actualiza el total de Purchase después de crear, editar o eliminar un Payment.
+- Verificar que el cambio de `sale_id` actualice también la venta anterior.
+- Verificar que el observer actualiza el total de Sale después de crear, editar o eliminar un Payment.
 
 ### Validaciones
 - No permitir referencias duplicadas.
@@ -120,18 +120,18 @@ Validar que los recursos de Filament, los modelos, las migraciones, los observer
 
 ### Validación de seeders
 - Ejecutar `php artisan migrate:fresh --seed` sin errores.
-- Confirmar que se crean impresoras, precintos y pagos con datos coherentes.
+- Confirmar que se crean printers, precints y pagos con datos coherentes.
 - Confirmar que los factories no generan valores fuera de formato.
 
 ### Consistencia entre modelos
-- Verificar que `ImpresoraFactory`, `PrecintoFactory` y `PaymentFactory` generan relaciones válidas.
+- Verificar que `PrinterFactory`, `PrecintFactory` y `PaymentFactory` generan relaciones válidas.
 - Verificar que los observadores no rompen el guardado en cascada.
 
 ## 6. Pruebas automatizables recomendadas
 
-- Feature test para crear/editar/eliminar Impresora.
-- Feature test para crear/editar/eliminar Precinto.
-- Feature test para PaymentObserver y recálculo de Purchase.
+- Feature test para crear/editar/eliminar Printer.
+- Feature test para crear/editar/eliminar Precint.
+- Feature test para PaymentObserver y recálculo de Sale.
 - Feature test para manejo global de delete bloqueado.
 - Unit test para reglas de negocio de cálculo de IGTF.
 
@@ -147,8 +147,8 @@ Se considera aprobado cuando:
 ## 8. Orden sugerido de ejecución
 
 1. Migraciones y seeders.
-2. Impresoras.
-3. Precintos.
+2. Printers.
+3. Precints.
 4. Payments.
 5. Deletes bloqueados.
 6. Revisión visual de badges.

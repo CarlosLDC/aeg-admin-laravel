@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Clients\Tables;
 
+use App\Filament\Schemas\BranchSpecializationSchemas;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -15,29 +16,7 @@ class ClientsTable
     {
         return $table
             ->columns([
-                TextColumn::make('branch.trade_name')
-                    ->label('Sucursal')
-                    ->searchable(),
-                TextColumn::make('branch.company.tax_id')
-                    ->label('RIF')
-                    ->searchable(),
-                TextColumn::make('branch.state')
-                    ->label('Estado')
-                    ->searchable()
-                    ->sortable(),
-                TextColumn::make('branch.city')
-                    ->label('Ciudad')
-                    ->searchable()
-                    ->sortable(),
-                TextColumn::make('branch.phone')
-                    ->label('Teléfono')
-                    ->searchable(),
-                TextColumn::make('branch.email')
-                    ->label('Correo Electrónico')
-                    ->searchable(),
-                TextColumn::make('branch.contact_person')
-                    ->label('Persona de Contacto')
-                    ->searchable(),
+                ...BranchSpecializationSchemas::table(),
                 TextColumn::make('distributor.branch.trade_name')
                     ->label('Distribuidora')
                     ->searchable(),

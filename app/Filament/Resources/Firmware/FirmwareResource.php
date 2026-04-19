@@ -31,9 +31,9 @@ class FirmwareResource extends Resource
 
     protected static bool $hasTitleCaseModelLabel = false;
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 3;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Impresoras';
+    protected static string|UnitEnum|null $navigationGroup = 'Gestión de Equipos';
 
     public static function form(Schema $schema): Schema
     {
