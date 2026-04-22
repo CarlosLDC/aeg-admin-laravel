@@ -41,7 +41,7 @@ it('can create a precint', function () {
 
     Livewire::test(CreatePrecint::class)
         ->fillForm([
-            'id_printer' => $printer->id,
+            'printer_id' => $printer->id,
             'serial' => 'AB12CD34EF',
             'color' => ColorPrecint::Rojo->value,
             'estatus' => EstatusPrecint::Disponible->value,
@@ -54,7 +54,7 @@ it('can create a precint', function () {
 
     assertDatabaseHas(Precint::class, [
         'serial' => 'AB12CD34EF',
-        'id_printer' => $printer->id,
+        'printer_id' => $printer->id,
         'color' => ColorPrecint::Rojo->value,
         'estatus' => EstatusPrecint::Disponible->value,
     ]);

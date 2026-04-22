@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('software_provider_id')->constrained()->restrictOnDelete();
             $table->string('name');
             $table->string('version');
+            $table->unique(['name', 'version']);
+            $table->string('full_name')->virtualAs("name || ' ' || 'v' || version");
             $table->date('integration_date');
             $table->json('operating_systems');
             $table->json('programming_languages');

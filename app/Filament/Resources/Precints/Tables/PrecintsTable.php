@@ -17,11 +17,11 @@ class PrecintsTable
     {
         return $table
             ->columns([
-                TextColumn::make('printer.serial_fiscal')
-                    ->label('Impresora')
-                    ->searchable(),
                 TextColumn::make('serial')
                     ->label('Serial')
+                    ->searchable(),
+                TextColumn::make('printer.fiscal_serial_number')
+                    ->label('Serial Fiscal de Impresora')
                     ->searchable(),
                 TextColumn::make('color')
                     ->label('Color')

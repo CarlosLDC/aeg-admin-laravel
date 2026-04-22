@@ -23,7 +23,7 @@ class PrinterModelResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'search_name';
+    protected static ?string $recordTitleAttribute = 'full_name';
 
     protected static ?string $modelLabel = 'Modelo de Impresora';
 

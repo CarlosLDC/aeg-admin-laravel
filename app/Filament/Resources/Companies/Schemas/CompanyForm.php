@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\Companies\Schemas;
 
 use App\Enums\TaxpayerType;
-use App\Filament\Support\HintIconText;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
@@ -17,9 +16,7 @@ class CompanyForm
                 TextInput::make('tax_id')
                     ->label('RIF')
                     ->required()
-                    ->regex('/^[VEJPG][0-9]{9}$/')
-                    ->placeholder('J123456789')
-                    ->hintIcon('heroicon-m-question-mark-circle', tooltip: HintIconText::rif()),
+                    ->regex('/^[vejgcpVEJGCP]-?\d{8}-?\d$/'),
                 TextInput::make('legal_name')
                     ->label('Razón Social')
                     ->required(),

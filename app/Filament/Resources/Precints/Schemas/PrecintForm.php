@@ -15,9 +15,9 @@ class PrecintForm
     {
         return $schema
             ->components([
-                Select::make('id_printer')
+                Select::make('printer_id')
                     ->label('Impresora')
-                    ->relationship('printer', 'serial_fiscal')
+                    ->relationship('printer', 'fiscal_serial_number')
                     ->searchable()
                     ->preload()
                     ->nullable(),

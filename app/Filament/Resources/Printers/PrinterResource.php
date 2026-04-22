@@ -23,13 +23,11 @@ class PrinterResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPrinter;
 
-    protected static ?string $recordTitleAttribute = 'serial_fiscal';
+    protected static ?string $recordTitleAttribute = 'fiscal_serial_number';
 
     protected static ?string $modelLabel = 'Impresora';
 
     protected static ?string $pluralModelLabel = 'Impresoras';
-
-    protected static bool $hasTitleCaseModelLabel = false;
 
     protected static ?int $navigationSort = 1;
 

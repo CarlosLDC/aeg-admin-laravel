@@ -11,10 +11,11 @@ class PrecintInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('printer.serial_fiscal')
-                    ->label('Impresora'),
                 TextEntry::make('serial')
                     ->label('Serial'),
+                TextEntry::make('printer.fiscal_serial_number')
+                    ->label('Serial Fiscal de Impresora')
+                    ->placeholder('-'),
                 TextEntry::make('color')
                     ->label('Color'),
                 TextEntry::make('estatus')

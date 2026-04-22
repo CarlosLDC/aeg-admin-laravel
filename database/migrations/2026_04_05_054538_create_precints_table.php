@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('precints', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_printer')->nullable()->constrained('printers');
+
+            // Relación con impresora
+            $table->foreignId('printer_id')->nullable()->constrained('printers')->restrictOnDelete();
+
+            // Datos del precinto
             $table->text('serial');
             $table->timestampTz('created_at')->useCurrent();
             $table->timestampTz('fecha_instalacion')->nullable();

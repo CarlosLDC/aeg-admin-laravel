@@ -14,22 +14,29 @@ return new class extends Migration
         Schema::create('printers', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('id_modelo_printer')->constrained('printer_models');
-            $table->foreignId('id_software')->nullable()->constrained('software');
-            $table->foreignId('id_venta')->nullable()->constrained('sales');
-            $table->foreignId('id_sucursal')->nullable()->constrained('branches');
+            // Identificación
+            $table->string('fiscal_serial_number')->unique();
+            $table->foreignId('printer_model_id')->constrained('printer_models')->restrictOnDelete();
+            $table->string('mac_address')->nullable();
 
-            $table->text('serial_fiscal')->unique();
-            $table->decimal('precio_venta_final', total: 8, places: 2)->nullable();
-            $table->string('estatus')->default('laboratorio');
-            $table->foreignId('id_firmware')->nullable()->constrained('firmware');
-            $table->foreignId('id_distribuidora')->nullable()->constrained('distributors');
-            $table->boolean('se_pago')->default(false);
-            $table->timestampTz('fecha_instalacion')->nullable();
-            $table->text('version_firmware')->nullable();
-            $table->text('direccion_mac')->nullable();
-            $table->string('tipo_dispositivo')->default('interno');
-            $table->timestampTz('created_at')->useCurrent();
+            // Especificaciones Técnicas
+            $table->foreignId('firmware_id')->nullable()->constrained('firmware')->restrictOnDelete();
+            $table->foreignId('software_id')->nullable()->constrained('software')->restrictOnDelete();
+
+            // Estado y Asignación
+            $table->string('status');
+            $table->foreignId('client_id')->nullable()->constrained('clients')->restrictOnDelete();
+            $table->date('installation_date')->nullable();
+
+            // Información de Venta
+            $table->foreignId('sale_id')->nullable()->constrained('sales')->restrictOnDelete();
+            $table->decimal('final_sale_price', total: 8, places: 2)->nullable();
+            $table->boolean('is_paid');
+
+            // Encabezados
+            $table->json('headers')->nullable();
+
+            $table->timestamps();
         });
     }
 

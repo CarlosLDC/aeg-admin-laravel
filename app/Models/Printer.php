@@ -2,76 +2,71 @@
 
 namespace App\Models;
 
-use App\Enums\DeviceType;
 use App\Enums\PrinterStatus;
 use Database\Factories\PrinterFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
 
 class Printer extends Model
 {
     /** @use HasFactory<PrinterFactory> */
     use HasFactory;
 
-    public $timestamps = false;
-
     protected $fillable = [
-        'id_modelo_printer',
-        'id_software',
-        'id_venta',
-        'id_sucursal',
-        'serial_fiscal',
-        'precio_venta_final',
-        'estatus',
-        'id_firmware',
-        'id_distribuidora',
-        'se_pago',
-        'fecha_instalacion',
-        'direccion_mac',
-        'tipo_dispositivo',
-        'created_at',
+        'fiscal_serial_number',
+        'printer_model_id',
+        'mac_address',
+        'firmware_id',
+        'software_id',
+        'status',
+        'installation_date',
+        'client_id',
+        'sale_id',
+        'final_sale_price',
+        'is_paid',
+        'headers',
     ];
 
     protected function casts(): array
     {
         return [
-            'precio_venta_final' => 'decimal:2',
-            'estatus' => PrinterStatus::class,
-            'se_pago' => 'boolean',
-            'fecha_instalacion' => 'datetime',
-            'tipo_dispositivo' => DeviceType::class,
-            'created_at' => 'datetime',
+            'status' => PrinterStatus::class,
+            'headers' => 'array',
         ];
+    }
+
+    protected function fiscal_serial_number(): Attribute
+    {
+        return Attribute::make(
+            set: fn(string $value) => Str::upper($value),
+        );
     }
 
     public function printerModel(): BelongsTo
     {
-        return $this->belongsTo(PrinterModel::class, 'id_modelo_printer');
-    }
-
-    public function software(): BelongsTo
-    {
-        return $this->belongsTo(Software::class, 'id_software');
-    }
-
-    public function sale(): BelongsTo
-    {
-        return $this->belongsTo(Sale::class, 'id_venta');
-    }
-
-    public function branch(): BelongsTo
-    {
-        return $this->belongsTo(Branch::class, 'id_sucursal');
+        return $this->belongsTo(PrinterModel::class);
     }
 
     public function firmware(): BelongsTo
     {
-        return $this->belongsTo(Firmware::class, 'id_firmware');
+        return $this->belongsTo(Firmware::class);
     }
 
-    public function distributor(): BelongsTo
+    public function software(): BelongsTo
     {
-        return $this->belongsTo(Distributor::class, 'id_distribuidora');
+        return $this->belongsTo(Software::class);
+    }
+
+    public function client(): BelongsTo
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function sale(): BelongsTo
+    {
+        return $this->belongsTo(Sale::class);
     }
 }

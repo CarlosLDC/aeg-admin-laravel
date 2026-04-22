@@ -15,14 +15,16 @@ class PrinterModelInfolist
                     ->label('Marca'),
                 TextEntry::make('model')
                     ->label('Modelo'),
-                TextEntry::make('price')
-                    ->label('Precio')
-                    ->money(),
+                TextEntry::make('device_type')
+                    ->label('Tipo de Dispositivo'),
                 TextEntry::make('administrative_act')
                     ->label('Providencia'),
                 TextEntry::make('certification_date')
                     ->label('Fecha de Homologación')
                     ->date(),
+                TextEntry::make('price')
+                    ->label('Precio')
+                    ->money(),
                 TextEntry::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),

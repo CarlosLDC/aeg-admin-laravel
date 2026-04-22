@@ -21,6 +21,9 @@ class PrinterModelsTable
                 TextColumn::make('model')
                     ->label('Modelo')
                     ->searchable(),
+                TextColumn::make('device_type')
+                    ->label('Tipo de Dispositivo')
+                    ->searchable(),
                 TextColumn::make('price')
                     ->label('Precio')
                     ->money()

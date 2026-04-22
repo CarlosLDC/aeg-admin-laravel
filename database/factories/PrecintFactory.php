@@ -25,7 +25,7 @@ class PrecintFactory extends Factory
         $hasRetireDate = $status === EstatusPrecint::Retirado;
 
         return [
-            'id_printer' => fake()->boolean(80) ? (Printer::query()->inRandomOrder()->value('id') ?? Printer::factory()) : null,
+            'printer_id' => fake()->boolean(80) ? (Printer::query()->inRandomOrder()->value('id') ?? Printer::factory()) : null,
             'serial' => fake()->unique()->regexify('[A-Z0-9]{10,16}'),
             'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
             'fecha_instalacion' => $hasInstallationDate ? fake()->dateTimeBetween('-1 year', 'now') : null,

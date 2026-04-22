@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Distributor extends Model
 {
@@ -37,13 +38,13 @@ class Distributor extends Model
         return $this->hasMany(Client::class);
     }
 
-    public function printers(): HasMany
-    {
-        return $this->hasMany(Printer::class, 'id_distribuidora');
-    }
-
     public function sales(): HasMany
     {
         return $this->hasMany(Sale::class);
     }
+
+    public function printers(): HasManyThrough
+{
+    return $this->hasManyThrough(Printer::class, Sale::class);
+}
 }

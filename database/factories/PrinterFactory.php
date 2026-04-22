@@ -2,10 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Enums\DeviceType;
 use App\Enums\PrinterStatus;
-use App\Models\Branch;
-use App\Models\Distributor;
 use App\Models\Firmware;
 use App\Models\Printer;
 use App\Models\PrinterModel;
@@ -25,27 +22,19 @@ class PrinterFactory extends Factory
      */
     public function definition(): array
     {
-        $relatedId = static fn (string $modelClass, Factory $factory): int|Factory => $modelClass::query()->inRandomOrder()->value('id') ?? $factory;
-
-        $status = fake()->randomElement(PrinterStatus::cases());
-        $deviceType = fake()->randomElement(DeviceType::cases());
-        $hasInstallationDate = in_array($status, [PrinterStatus::Installed, PrinterStatus::Maintenance], true);
-
         return [
-            'id_modelo_printer' => $relatedId(PrinterModel::class, PrinterModel::factory()),
-            'id_software' => fake()->boolean(70) ? $relatedId(Software::class, Software::factory()) : null,
-            'id_venta' => fake()->boolean(60) ? $relatedId(Sale::class, Sale::factory()) : null,
-            'id_sucursal' => fake()->boolean(85) ? $relatedId(Branch::class, Branch::factory()) : null,
-            'serial_fiscal' => fake()->unique()->regexify('[A-Z]{3}[0-9]{7}'),
-            'precio_venta_final' => fake()->randomFloat(2, 120, 2500),
-            'estatus' => $status,
-            'id_firmware' => fake()->boolean(70) ? $relatedId(Firmware::class, Firmware::factory()) : null,
-            'id_distribuidora' => fake()->boolean(60) ? $relatedId(Distributor::class, Distributor::factory()) : null,
-            'se_pago' => fake()->boolean(80),
-            'fecha_instalacion' => $hasInstallationDate ? fake()->dateTimeBetween('-1 year', 'now') : null,
-            'direccion_mac' => strtoupper(fake()->macAddress()),
-            'tipo_dispositivo' => $deviceType,
-            'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
+            'fiscal_serial_number' => fake()->unique()->regexify('GRA[0-9]{7}'),
+            'printer_model_id' => PrinterModel::factory(),
+            'mac_address' => fake()->optional()->macAddress(),
+            'firmware_id' => fake()->boolean(70) ? Firmware::factory() : null,
+            'software_id' => fake()->boolean(70) ? Software::factory() : null,
+            'status' => fake()->randomElement(PrinterStatus::cases()),
+            'installation_date' => fake()->optional()->date(),
+            'client_id' => null,
+            'sale_id' => fake()->boolean(50) ? Sale::factory() : null,
+            'final_sale_price' => fake()->optional()->randomFloat(2, min: 1000, max: 1100),
+            'is_paid' => fake()->boolean(),
+            'headers' => null,
         ];
     }
 }

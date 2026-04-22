@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\PrinterModels\Schemas;
 
+use App\Enums\DeviceType;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
@@ -20,21 +21,25 @@ class PrinterModelForm
                 TextInput::make('model')
                     ->label('Modelo')
                     ->required(),
+                TextInput::make('device_type')
+                    ->label('Tipo de Dispositivo')
+                    ->required()
+                    ->options(DeviceType::cases())
+                    ->default(DeviceType::Internal->value),
+                TextInput::make('administrative_act')
+                    ->label('Providencia')
+                    ->required()
+                    ->placeholder('SNAT/2025/0001')
+                    ->regex('/^SNAT\/\d{4}\/\d{4,6}$/i'),
+                DatePicker::make('certification_date')
+                    ->label('Fecha de Homologación')
+                    ->required(),
                 TextInput::make('price')
                     ->label('Precio')
                     ->required()
                     ->numeric()
                     ->prefix('$')
                     ->gt('0'),
-                TextInput::make('administrative_act')
-                    ->label('Providencia')
-                    ->required()
-                    ->mask('aaaa/9999/9999')
-                    ->placeholder('snat/2024/0001')
-                    ->regex('/^[a-z]{4}\/\d{4}\/\d{4}$/'),
-                DatePicker::make('certification_date')
-                    ->label('Fecha de Homologación')
-                    ->required(),
             ]);
     }
 }

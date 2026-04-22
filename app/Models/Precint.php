@@ -17,7 +17,7 @@ class Precint extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'id_printer',
+        'printer_id',
         'serial',
         'created_at',
         'fecha_instalacion',
@@ -39,6 +39,6 @@ class Precint extends Model
 
     public function printer(): BelongsTo
     {
-        return $this->belongsTo(Printer::class, 'id_printer');
+        return $this->belongsTo(Printer::class);
     }
 }
