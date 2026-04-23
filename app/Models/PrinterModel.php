@@ -7,7 +7,7 @@ use Database\Factories\PrinterModelFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Str;
 
 class PrinterModel extends Model
@@ -38,8 +38,13 @@ class PrinterModel extends Model
         );
     }
 
-    public function saleItems(): HasMany
+    public function saleItems(): HasManyThrough
     {
-        return $this->hasMany(SaleItem::class);
+        return $this->hasManyThrough(
+            SaleItem::class,
+            Printer::class,
+            'printer_model_id',
+            'printer_id',
+        );
     }
 }

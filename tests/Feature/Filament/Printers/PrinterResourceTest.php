@@ -1,11 +1,9 @@
 <?php
 
-use App\Enums\DeviceType;
 use App\Enums\PrinterStatus;
 use App\Filament\Resources\Printers\Pages\CreatePrinter;
 use App\Filament\Resources\Printers\Pages\EditPrinter;
 use App\Filament\Resources\Printers\Pages\ListPrinters;
-use App\Models\Branch;
 use App\Models\Distributor;
 use App\Models\Firmware;
 use App\Models\Precint;
@@ -45,35 +43,30 @@ it('can create an printer', function () {
     $printerModel = PrinterModel::factory()->create();
     $software = Software::factory()->create();
     $sale = Sale::factory()->create();
-    $branch = Branch::factory()->create();
     $firmware = Firmware::factory()->create();
-    $distributor = Distributor::factory()->create();
+    Distributor::factory()->create();
 
     Livewire::test(CreatePrinter::class)
         ->fillForm([
-            'id_modelo_printer' => $printerModel->id,
-            'id_software' => $software->id,
-            'id_venta' => $sale->id,
-            'id_sucursal' => $branch->id,
-            'serial_fiscal' => 'ABC1234567',
-            'precio_venta_final' => 1500,
-            'estatus' => PrinterStatus::Installed->value,
-            'id_firmware' => $firmware->id,
-            'id_distribuidora' => $distributor->id,
-            'se_pago' => true,
-            'fecha_instalacion' => now()->toDateTimeString(),
-            'direccion_mac' => 'AA:BB:CC:DD:EE:FF',
-            'tipo_dispositivo' => DeviceType::External->value,
+            'printer_model_id' => $printerModel->id,
+            'software_id' => $software->id,
+            'sale_id' => $sale->id,
+            'fiscal_serial_number' => 'ABC1234567',
+            'final_sale_price' => 1500,
+            'status' => PrinterStatus::Installed->value,
+            'firmware_id' => $firmware->id,
+            'is_paid' => true,
+            'installation_date' => now()->toDateString(),
+            'mac_address' => 'AA:BB:CC:DD:EE:FF',
         ])
         ->call('create')
         ->assertNotified()
         ->assertRedirect();
 
     assertDatabaseHas(Printer::class, [
-        'serial_fiscal' => 'ABC1234567',
-        'id_modelo_printer' => $printerModel->id,
-        'estatus' => PrinterStatus::Installed->value,
-        'tipo_dispositivo' => DeviceType::External->value,
+        'fiscal_serial_number' => 'ABC1234567',
+        'printer_model_id' => $printerModel->id,
+        'status' => PrinterStatus::Installed->value,
     ]);
 });
 

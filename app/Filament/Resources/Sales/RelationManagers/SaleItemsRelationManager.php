@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Sales\RelationManagers;
 
 use App\Filament\Resources\Sales\Resources\SaleItems\SaleItemResource;
+use App\Filament\Resources\Sales\Resources\SaleItems\Tables\SaleItemsTable;
 use Filament\Actions\CreateAction;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Table;
@@ -15,7 +16,7 @@ class SaleItemsRelationManager extends RelationManager
 
     public function table(Table $table): Table
     {
-        return $table
+        return SaleItemsTable::configure($table)
             ->headerActions([
                 CreateAction::make()
                     ->successRedirectUrl(fn (): string => url()->previous()),

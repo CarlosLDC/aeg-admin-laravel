@@ -14,11 +14,10 @@ return new class extends Migration
         Schema::create('sale_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('sale_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('printer_model_id')->constrained()->restrictOnDelete();
+            $table->foreignId('printer_id')->constrained('printers')->restrictOnDelete()->unique();
             $table->foreignId('tax_id')->constrained()->restrictOnDelete();
 
             // Llenados por el usuario
-            $table->integer('quantity');
             $table->decimal('unit_price', total: 8, places: 2);
             $table->decimal('discount', total: 8, places: 2);
             $table->decimal('applied_tax_rate', total: 5, places: 4);

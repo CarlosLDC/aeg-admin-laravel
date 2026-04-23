@@ -11,14 +11,11 @@ class SaleItemInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('printerModel.name')
-                    ->label('Impresora'),
+                TextEntry::make('printer.fiscal_serial_number')
+                    ->label('Serial Fiscal'),
                 TextEntry::make('unit_price')
-                    ->label('Precio Unitario')
+                    ->label('Precio de Venta Final')
                     ->money(),
-                TextEntry::make('quantity')
-                    ->label('Cantidad')
-                    ->numeric(),
                 TextEntry::make('discount')
                     ->label('Descuento')
                     ->money(),

@@ -43,24 +43,20 @@ class SaleForm
                             ->label('Subtotal')
                             ->prefix('$')
                             ->default(0)
-                            ->live()
                             ->readOnly(),
                         TextInput::make('total_tax')
                             ->label('Total de Impuestos')
                             ->prefix('$')
                             ->default(0)
-                            ->live()
                             ->readOnly(),
                         TextInput::make('total')
                             ->label('Total')
                             ->prefix('$')
                             ->default(0)
-                            ->live()
                             ->readOnly(),
                     ])
                     ->columns(3)
-                    ->columnSpanFull()
-                    ->hiddenOn('create'),
+                    ->columnSpanFull(),
             ]);
     }
 }

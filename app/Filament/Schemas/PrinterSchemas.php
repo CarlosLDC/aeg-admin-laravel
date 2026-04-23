@@ -3,6 +3,7 @@
 namespace App\Filament\Schemas;
 
 use App\Enums\PrinterStatus;
+use App\Models\Printer;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\Select;
@@ -38,7 +39,7 @@ class PrinterSchemas
                                 ->label('Dirección MAC')
                                 ->macAddress()
                                 ->placeholder('AA:BB:CC:DD:EE:FF'),
-                        ])
+                        ]),
                 ])
                 ->columnSpanFull(),
             Section::make('Especificaciones Ténicas')
@@ -86,7 +87,9 @@ class PrinterSchemas
                                 ->label('Número de Factura')
                                 ->relationship('sale', 'invoice_number')
                                 ->searchable()
-                                ->preload(),
+                                ->preload()
+                                ->helperText('La asignación operativa se gestiona desde la venta.')
+                                ->disabled(fn (?Printer $record) => filled($record?->sale_id)),
                             TextInput::make('final_sale_price')
                                 ->label('Precio de Venta Final')
                                 ->numeric()

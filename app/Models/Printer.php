@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\PrinterStatus;
 use Database\Factories\PrinterFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -41,7 +42,7 @@ class Printer extends Model
     protected function fiscal_serial_number(): Attribute
     {
         return Attribute::make(
-            set: fn(string $value) => Str::upper($value),
+            set: fn (string $value) => Str::upper($value),
         );
     }
 
@@ -68,5 +69,10 @@ class Printer extends Model
     public function sale(): BelongsTo
     {
         return $this->belongsTo(Sale::class);
+    }
+
+    public function scopeAvailableForSale(Builder $query): Builder
+    {
+        return $query->whereNull('sale_id');
     }
 }

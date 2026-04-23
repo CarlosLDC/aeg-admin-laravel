@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\Sales\Resources\SaleItems\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -15,15 +15,11 @@ class SaleItemsTable
     {
         return $table
             ->columns([
-                TextColumn::make('printerModel.name')
-                    ->label('Impresora')
+                TextColumn::make('printer.fiscal_serial_number')
+                    ->label('Serial Fiscal')
                     ->searchable(),
-                TextColumn::make('quantity')
-                    ->label('Cantidad')
-                    ->numeric()
-                    ->sortable(),
                 TextColumn::make('unit_price')
-                    ->label('Precio Unitario')
+                    ->label('Precio de Venta Final')
                     ->money()
                     ->sortable(),
                 TextColumn::make('discount')
@@ -62,8 +58,9 @@ class SaleItemsTable
                 //
             ])
             ->recordActions([
-                // ViewAction::make(),
                 EditAction::make()
+                    ->successRedirectUrl(fn (): string => url()->previous()),
+                DeleteAction::make()
                     ->successRedirectUrl(fn (): string => url()->previous()),
             ])
             ->toolbarActions([

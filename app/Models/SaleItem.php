@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Validation\ValidationException;
 
 #[ObservedBy(SaleItemObserver::class)]
 class SaleItem extends Model
@@ -17,9 +18,8 @@ class SaleItem extends Model
 
     protected $fillable = [
         'sale_id',
-        'printer_model_id',
+        'printer_id',
         'tax_id',
-        'quantity',
         'unit_price',
         'discount',
         'applied_tax_rate',
@@ -28,13 +28,29 @@ class SaleItem extends Model
     public static function booted(): void
     {
         static::saving(function (SaleItem $saleItem) {
+            $saleId = $saleItem->sale_id;
+
+            if ($saleId && $saleItem->printer_id) {
+                $isAssignedToAnotherSale = Printer::query()
+                    ->whereKey($saleItem->printer_id)
+                    ->whereNotNull('sale_id')
+                    ->where('sale_id', '!=', $saleId)
+                    ->exists();
+
+                if ($isAssignedToAnotherSale) {
+                    throw ValidationException::withMessages([
+                        'printer_id' => 'La impresora seleccionada ya fue asignada a otra venta.',
+                    ]);
+                }
+            }
+
             $saleItem->recalculateTotals();
         });
     }
 
     public function recalculateTotals(): self
     {
-        $lineTotal = ($this->quantity * $this->unit_price) - $this->discount;
+        $lineTotal = $this->unit_price - $this->discount;
         $taxAmount = $lineTotal * $this->applied_tax_rate;
         $total = $lineTotal + $taxAmount;
 
@@ -50,9 +66,9 @@ class SaleItem extends Model
         return $this->belongsTo(Sale::class);
     }
 
-    public function printerModel(): BelongsTo
+    public function printer(): BelongsTo
     {
-        return $this->belongsTo(PrinterModel::class);
+        return $this->belongsTo(Printer::class);
     }
 
     public function tax(): BelongsTo

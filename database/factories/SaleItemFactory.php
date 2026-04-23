@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\PrinterModel;
+use App\Models\Printer;
 use App\Models\Sale;
 use App\Models\SaleItem;
 use App\Models\Tax;
@@ -22,9 +22,11 @@ class SaleItemFactory extends Factory
     {
         return [
             'sale_id' => Sale::factory(),
-            'printer_model_id' => PrinterModel::factory(),
+            'printer_id' => Printer::factory()->state([
+                'sale_id' => null,
+                'final_sale_price' => null,
+            ]),
             'tax_id' => Tax::factory(),
-            'quantity' => $this->faker->numberBetween(1, 10),
             'unit_price' => $this->faker->randomFloat(2, 10, 100),
             'discount' => $this->faker->randomFloat(2, 0, 20),
             'applied_tax_rate' => $this->faker->randomFloat(4, 0, 0.25),
