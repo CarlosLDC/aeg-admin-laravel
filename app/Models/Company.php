@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
+use Illuminate\Support\Stringable;
 
 class Company extends Model
 {
@@ -28,11 +29,22 @@ class Company extends Model
         ];
     }
 
-    protected function tax_id(): Attribute
+    protected function taxId(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => Str::of($value)->substrReplace('-', 1, 0)->substrReplace('-', -1, 0),
-            set: fn (string $value) => Str::of($value)->remove('-')->upper()->toString(),
+            get: fn(string $value) => Str::of($value)
+                ->substrReplace('-', 1, 0)
+                ->when(
+                    in_array($value[0], ['J', 'G', 'C', 'P']),
+                    fn(Stringable $string) => $string->substrReplace('-', -1, 0),
+                )
+                ->toString(),
+            set: fn(string $value) => Str::of($value)
+                ->substr(1)
+                ->padLeft(9, '0')
+                ->prepend($value[0])
+                ->upper()
+                ->toString(),
         );
     }
 

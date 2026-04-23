@@ -17,19 +17,19 @@ class ServiceCenterContactForm
                     ->required(),
                 TextInput::make('national_id')
                     ->label('Cédula')
-                    ->placeholder('V12345678')
-                    ->hintIcon('heroicon-m-question-mark-circle', tooltip: HintIconText::nationalId())
                     ->required()
                     ->unique()
-                    ->regex('/^[VE][0-9]{7,8}$/'),
+                    ->regex('/^[VE][0-9]{1,8}$/i')
+                    ->stripCharacters('-')
+                    ->hintIcon('heroicon-m-question-mark-circle', tooltip: HintIconText::nationalId()),
                 TextInput::make('phone')
                     ->label('Teléfono')
-                    ->tel()
-                    ->required(),
+                    ->required()
+                    ->tel(),
                 TextInput::make('email')
                     ->label('Correo Electrónico')
-                    ->email()
-                    ->required(),
+                    ->required()
+                    ->email(),
             ]);
     }
 }

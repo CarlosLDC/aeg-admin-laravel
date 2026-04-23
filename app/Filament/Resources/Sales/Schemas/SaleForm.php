@@ -22,7 +22,7 @@ class SaleForm
                     ->searchable()
                     ->getSearchResultsUsing(DistributorSelect::searchResults(...))
                     ->getOptionLabelUsing(DistributorSelect::optionLabel(...))
-                    ->searchPrompt(SearchPromptText::branchCompanyLegalNameTaxId()),
+                    ->searchPrompt(SearchPromptText::tradeNameLegalNameOrTaxId()),
                 TextInput::make('invoice_number')
                     ->label('Número de Factura')
                     ->unique()

@@ -24,7 +24,7 @@ class ClientForm
                     ->searchable()
                     ->getSearchResultsUsing(DistributorSelect::searchResults(...))
                     ->getOptionLabelUsing(DistributorSelect::optionLabel(...))
-                    ->searchPrompt(SearchPromptText::branchCompanyLegalNameTaxId())
+                    ->searchPrompt(SearchPromptText::tradeNameLegalNameOrTaxId())
                     ->rules([
                         fn (Get $get): Closure => function (string $attribute, $value, Closure $fail) use ($get): void {
                             if (blank($value) || blank($get('branch_id'))) {

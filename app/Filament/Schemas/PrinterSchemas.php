@@ -93,7 +93,7 @@ class PrinterSchemas
                                 ->minValue(0)
                                 ->prefix('$'),
                             Toggle::make('is_paid')
-                                ->label('¿Pagada?'),
+                                ->label('Pagada'),
                         ]),
                 ])
                 ->columnSpanFull(),
@@ -144,7 +144,7 @@ class PrinterSchemas
                 ->money()
                 ->sortable(),
             IconColumn::make('is_paid')
-                ->label('¿Pagada?')
+                ->label('Pagada')
                 ->boolean()
                 ->sortable(),
         ];

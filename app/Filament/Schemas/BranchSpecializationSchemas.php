@@ -36,7 +36,7 @@ class BranchSpecializationSchemas
                         ->where('branches.id', $value)
                         ->value('branches.trade_name')
                 )
-                ->searchPrompt(SearchPromptText::branchCompanyTaxId()),
+                ->searchPrompt(SearchPromptText::tradeNameLegalNameOrTaxId()),
         ];
     }
 

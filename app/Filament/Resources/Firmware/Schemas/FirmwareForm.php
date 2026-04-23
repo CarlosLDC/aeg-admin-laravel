@@ -16,9 +16,9 @@ class FirmwareForm
                 TextInput::make('version')
                     ->label('Versión')
                     ->required()
+                    ->regex('/^\d\.\d\.\d$/')
                     ->mask('9.9.9')
-                    ->placeholder('1.0.0')
-                    ->regex('/^\d\.\d\.\d$/'),
+                    ->placeholder('1.0.0'),
                 DatePicker::make('release_date')
                     ->label('Fecha de Lanzamiento')
                     ->required(),

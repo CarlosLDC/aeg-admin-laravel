@@ -43,7 +43,7 @@ class PrinterInfolist
                     ->money()
                     ->placeholder('-'),                
                 TextEntry::make('is_paid')
-                    ->label('¿Pagada?')
+                    ->label('Pagada')
                     ->boolean()
                     ->placeholder('-'),
                 TextEntry::make('created_at')

@@ -28,14 +28,13 @@ class AdminPanelProvider extends PanelProvider
                 'Aliados y Clientes',
                 'Gestión de Impresoras',
                 'Gestión de Ventas',
-                'Gestión de Usuarios',
             ])
             ->unsavedChangesAlerts()
 
             // Configuracion base del panel
             ->default()
             ->id('admin')
-            ->path('')
+            ->path('admin')
             ->authGuard('web')
             // ->resourceCreatePageRedirect('edit')
             ->login()

@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('brand');
             $table->string('model');
-            $table->unique(['brand', 'model']);
-            $table->string('full_name')->virtualAs("brand || '-' || model");
             $table->string('device_type');
             $table->string('administrative_act');
             $table->date('certification_date');
             $table->decimal('price', total: 8, places: 2);
+            $table->string('full_name')->virtualAs("brand || '-' || model");
             $table->timestamps();
+            $table->unique(['brand', 'model']);
         });
     }
 
