@@ -29,7 +29,6 @@ class DatabaseSeeder extends Seeder
             // Gestión de Ventas
             SaleSeeder::class,
             PaymentSeeder::class,
-            TaxSeeder::class,
         ]);
     }
 }

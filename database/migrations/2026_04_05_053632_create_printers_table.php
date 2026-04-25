@@ -31,6 +31,7 @@ return new class extends Migration
             // Información de Venta
             $table->foreignId('sale_id')->nullable()->constrained('sales')->restrictOnDelete();
             $table->decimal('final_sale_price', total: 8, places: 2)->nullable();
+            $table->foreignId('tax_id')->nullable()->constrained('taxes')->restrictOnDelete();
             $table->boolean('is_paid');
 
             // Encabezados

@@ -27,6 +27,7 @@ class Printer extends Model
         'client_id',
         'sale_id',
         'final_sale_price',
+        'tax_id',
         'is_paid',
         'headers',
     ];
@@ -69,6 +70,11 @@ class Printer extends Model
     public function sale(): BelongsTo
     {
         return $this->belongsTo(Sale::class);
+    }
+
+    public function tax(): BelongsTo
+    {
+        return $this->belongsTo(Tax::class);
     }
 
     public function scopeAvailableForSale(Builder $query): Builder

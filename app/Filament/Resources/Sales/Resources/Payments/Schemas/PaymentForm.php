@@ -90,7 +90,6 @@ class PaymentForm
                 DateTimePicker::make('paid_at')
                     ->label('Fecha y Hora de Pago')
                     ->seconds(false)
-                    ->native(false)
                     ->default(now())
                     ->required(),
                 Fieldset::make('Totales')

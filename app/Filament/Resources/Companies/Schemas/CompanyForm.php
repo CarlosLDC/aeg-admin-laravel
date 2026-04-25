@@ -27,8 +27,7 @@ class CompanyForm
                     ->label('Tipo de Contribuyente')
                     ->required()
                     ->options(TaxpayerType::class)
-                    ->default('ordinario')
-                    ->native(false),
+                    ->default('ordinario'),
             ]);
     }
 }

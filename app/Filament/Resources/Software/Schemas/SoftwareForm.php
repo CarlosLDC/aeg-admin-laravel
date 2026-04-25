@@ -7,7 +7,6 @@ use App\Filament\Support\SearchPromptText;
 use App\Models\SoftwareProvider;
 use Filament\Forms\Components\Select;
 use Filament\Schemas\Schema;
-use Illuminate\Database\Eloquent\Builder;
 
 class SoftwareForm
 {
@@ -16,15 +15,12 @@ class SoftwareForm
         return $schema
             ->components([
                 Select::make('software_provider_id')
-                    ->label('Proveedor')
+                    ->label('Casa de Software')
                     ->required()
-                    ->relationship(
-                        name: 'softwareProvider',
-                        titleAttribute: 'trade_name',
-                        modifyQueryUsing: fn(Builder $query) => $query->withTrashed(),
+                    ->relationship('softwareProvider', 'id')
+                    ->getOptionLabelFromRecordUsing(
+                        fn (SoftwareProvider $softwareProvider) => $softwareProvider->branch->trade_name
                     )
-                    ->searchable()
-                    ->preload()
                     ->searchPrompt(SearchPromptText::tradeNameLegalNameOrTaxId()),
                 ...SoftwareSchemas::form(),
             ]);

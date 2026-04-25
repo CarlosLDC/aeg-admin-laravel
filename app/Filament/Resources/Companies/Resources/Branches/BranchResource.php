@@ -55,9 +55,9 @@ class BranchResource extends Resource
     public static function getPages(): array
     {
         return [
-            // 'create' => CreateBranch::route('/create'),
+            'create' => CreateBranch::route('/create'),
             // 'view' => ViewBranch::route('/{record}'),
-            // 'edit' => EditBranch::route('/{record}/edit'),
+            'edit' => EditBranch::route('/{record}/edit'),
         ];
     }
 }

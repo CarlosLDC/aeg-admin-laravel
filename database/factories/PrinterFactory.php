@@ -8,6 +8,7 @@ use App\Models\Printer;
 use App\Models\PrinterModel;
 use App\Models\Sale;
 use App\Models\Software;
+use App\Models\Tax;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -33,6 +34,7 @@ class PrinterFactory extends Factory
             'client_id' => null,
             'sale_id' => fake()->boolean(50) ? Sale::factory() : null,
             'final_sale_price' => fake()->optional()->randomFloat(2, min: 1000, max: 1100),
+            'tax_id' => Tax::factory(),
             'is_paid' => fake()->boolean(),
             'headers' => null,
         ];

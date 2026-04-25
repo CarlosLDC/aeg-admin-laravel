@@ -4,16 +4,15 @@ namespace App\Enums;
 
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
-use Illuminate\Contracts\Support\Htmlable;
 
-enum PrinterStatus: string implements HasLabel, HasColor
+enum PrinterStatus: string implements HasColor, HasLabel
 {
     case Testing = 'laboratorio';
     case Installed = 'instalada';
     case Maintenance = 'mantenimiento';
     case Retired = 'retirada';
 
-    public function getLabel(): string|Htmlable|null
+    public function getLabel(): ?string
     {
         return match ($this) {
             self::Testing => 'Laboratorio',
@@ -23,7 +22,7 @@ enum PrinterStatus: string implements HasLabel, HasColor
         };
     }
 
-    public function getColor(): string|array|null
+    public function getColor(): ?string
     {
         return match ($this) {
             self::Testing => 'info',

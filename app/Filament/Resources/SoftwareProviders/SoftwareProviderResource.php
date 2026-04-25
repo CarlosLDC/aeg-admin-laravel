@@ -26,9 +26,9 @@ class SoftwareProviderResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $modelLabel = 'Proveedor de Software';
+    protected static ?string $modelLabel = 'Casa de Software';
 
-    protected static ?string $pluralModelLabel = 'Proveedores de Software';
+    protected static ?string $pluralModelLabel = 'Casas de Software';
 
     protected static bool $hasTitleCaseModelLabel = false;
 

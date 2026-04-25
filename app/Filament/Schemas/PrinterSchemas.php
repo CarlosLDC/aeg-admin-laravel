@@ -3,7 +3,7 @@
 namespace App\Filament\Schemas;
 
 use App\Enums\PrinterStatus;
-use App\Models\Printer;
+use App\Models\Client;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\Select;
@@ -67,11 +67,13 @@ class PrinterSchemas
                                 ->label('Estatus')
                                 ->required()
                                 ->options(PrinterStatus::class)
-                                ->default(PrinterStatus::Testing->value)
-                                ->native(false),
+                                ->default(PrinterStatus::Testing->value),
                             Select::make('client_id')
                                 ->label('Cliente')
                                 ->relationship('client', 'id')
+                                ->getOptionLabelFromRecordUsing(
+                                    fn (Client $client) => $client->branch->trade_name
+                                )
                                 ->searchable()
                                 ->preload(),
                             DatePicker::make('installation_date')
@@ -87,17 +89,19 @@ class PrinterSchemas
                                 ->label('Número de Factura')
                                 ->relationship('sale', 'invoice_number')
                                 ->searchable()
-                                ->preload()
-                                ->helperText('La asignación operativa se gestiona desde la venta.')
-                                ->disabled(fn (?Printer $record) => filled($record?->sale_id)),
+                                ->preload(),
                             TextInput::make('final_sale_price')
                                 ->label('Precio de Venta Final')
                                 ->numeric()
                                 ->minValue(0)
                                 ->prefix('$'),
-                            Toggle::make('is_paid')
-                                ->label('Pagada'),
+                            Select::make('tax_id')
+                                ->label('Alícuota')
+                                ->relationship('tax', 'name')
+                                ->preload(),
                         ]),
+                    Toggle::make('is_paid')
+                        ->label('Pagada'),
                 ])
                 ->columnSpanFull(),
             Section::make('Encabezados')
@@ -117,7 +121,7 @@ class PrinterSchemas
                 ->label('Serial Fiscal')
                 ->searchable(),
             TextColumn::make('printerModel.full_name')
-                ->label('Modelo de Impresora')
+                ->label('Modelo')
                 ->searchable(),
             TextColumn::make('mac_address')
                 ->label('Dirección MAC')
@@ -131,9 +135,9 @@ class PrinterSchemas
             TextColumn::make('status')
                 ->label('Estatus')
                 ->badge()
-                ->sortable(),
+                ->searchable(),
             TextColumn::make('client.id')
-                ->label('ID del Cliente')
+                ->label('Cliente')
                 ->searchable(),
             TextColumn::make('installation_date')
                 ->label('Fecha de Instalación')
@@ -146,6 +150,9 @@ class PrinterSchemas
                 ->label('Precio de Venta Final')
                 ->money()
                 ->sortable(),
+            TextColumn::make('tax.name')
+                ->label('Alícuota')
+                ->searchable(),
             IconColumn::make('is_paid')
                 ->label('Pagada')
                 ->boolean()

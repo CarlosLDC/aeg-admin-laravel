@@ -37,12 +37,10 @@ class PrecintForm
                 DateTimePicker::make('fecha_instalacion')
                     ->label('Fecha de Instalación')
                     ->seconds(false)
-                    ->native(false)
                     ->nullable(),
                 DateTimePicker::make('fecha_retiro')
                     ->label('Fecha de Retiro')
                     ->seconds(false)
-                    ->native(false)
                     ->nullable(),
             ]);
     }

@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Printers\Schemas;
 
-use Dom\Text;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
 
@@ -29,7 +28,7 @@ class PrinterInfolist
                     ->label('Estatus')
                     ->placeholder('-'),
                 TextEntry::make('client.id')
-                    ->label('ID de Cliente')
+                    ->label('Cliente')
                     ->placeholder('-'),
                 TextEntry::make('installation_date')
                     ->label('Fecha de Instalación')
@@ -41,7 +40,10 @@ class PrinterInfolist
                 TextEntry::make('final_sale_price')
                     ->label('Precio de Venta Final')
                     ->money()
-                    ->placeholder('-'),                
+                    ->placeholder('-'),
+                TextEntry::make('tax.name')
+                    ->label('Alícuota')
+                    ->placeholder('-'),
                 TextEntry::make('is_paid')
                     ->label('Pagada')
                     ->boolean()

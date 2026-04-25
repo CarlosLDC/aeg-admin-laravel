@@ -25,8 +25,7 @@ class PrinterModelForm
                     ->label('Tipo de Dispositivo')
                     ->required()
                     ->options(DeviceType::class)
-                    ->default(DeviceType::Internal->value)
-                    ->native(false),
+                    ->default(DeviceType::Internal->value),
                 TextInput::make('price')
                     ->label('Precio')
                     ->required()
