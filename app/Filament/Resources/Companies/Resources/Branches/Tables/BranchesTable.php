@@ -2,10 +2,13 @@
 
 namespace App\Filament\Resources\Companies\Resources\Branches\Tables;
 
+use App\Enums\BranchRoles;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -18,6 +21,13 @@ class BranchesTable
                 TextColumn::make('trade_name')
                     ->label('Nombre Comercial')
                     ->searchable(),
+                IconColumn::make('roles')
+                    ->icon(fn (string $state): Heroicon => match ($state) {
+                        BranchRoles::Distributor->value => Heroicon::Truck,
+                        BranchRoles::ServiceCenter->value => Heroicon::WrenchScrewdriver,
+                        BranchRoles::SoftwareProvider->value => Heroicon::ComputerDesktop,
+                        BranchRoles::Client->value => Heroicon::BuildingStorefront,
+                    }),
                 TextColumn::make('state')
                     ->label('Estado')
                     ->searchable(),

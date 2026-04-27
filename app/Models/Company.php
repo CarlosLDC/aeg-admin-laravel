@@ -34,10 +34,10 @@ class Company extends Model
     {
         return Attribute::make(
             get: fn (string $value) => Str::of($value)
-                ->substrReplace('-', 1, 0)
+                ->substrReplace('-', offset: 1, length: 0)
                 ->when(
-                    in_array($value[0], ['J', 'G', 'C', 'P']),
-                    fn (Stringable $string) => $string->substrReplace('-', -1, 0),
+                    fn (Stringable $string) => $string->startsWith(['J', 'G', 'C', 'P']),
+                    fn (Stringable $string) => $string->substrReplace('-', offset: -1, length: 0),
                 )
                 ->toString(),
             set: fn (string $value) => Str::of($value)
@@ -67,5 +67,10 @@ class Company extends Model
     public function softwareProviders(): HasManyThrough
     {
         return $this->hasManyThrough(SoftwareProvider::class, Branch::class);
+    }
+
+    public function clients(): HasManyThrough
+    {
+        return $this->hasManyThrough(Client::class, Branch::class);
     }
 }

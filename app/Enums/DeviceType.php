@@ -2,9 +2,10 @@
 
 namespace App\Enums;
 
+use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
 
-enum DeviceType: string implements HasLabel
+enum DeviceType: string implements HasColor, HasLabel
 {
     case Internal = 'interno';
     case External = 'externo';
@@ -14,6 +15,14 @@ enum DeviceType: string implements HasLabel
         return match ($this) {
             self::Internal => 'Interno',
             self::External => 'Externo',
+        };
+    }
+
+    public function getColor(): ?string
+    {
+        return match ($this) {
+            self::Internal => 'info',
+            self::External => 'success',
         };
     }
 }

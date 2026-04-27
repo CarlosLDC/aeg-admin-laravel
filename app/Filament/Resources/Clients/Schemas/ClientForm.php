@@ -20,7 +20,6 @@ class ClientForm
                 ...BranchSpecializationSchemas::form(),
                 Select::make('distributor_id')
                     ->label('Distribuidora')
-                    ->required()
                     ->searchable()
                     ->getSearchResultsUsing(DistributorSelect::searchResults(...))
                     ->getOptionLabelUsing(DistributorSelect::optionLabel(...))

@@ -34,7 +34,7 @@ class AdminPanelProvider extends PanelProvider
             // Configuracion base del panel
             ->default()
             ->id('admin')
-            ->path('admin')
+            ->path('')
             ->authGuard('web')
             // ->resourceCreatePageRedirect('edit')
             ->login()

@@ -17,7 +17,7 @@ class SoftwareTable
         return $table
             ->columns([
                 TextColumn::make('softwareProvider.branch.trade_name')
-                    ->label('Proveedor')
+                    ->label('Casa de Software')
                     ->searchable(),
                 ...SoftwareSchemas::table(),
                 TextColumn::make('created_at')

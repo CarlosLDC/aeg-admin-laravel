@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->foreignId('branch_id')->unique()->constrained()->restrictOnDelete();
-            $table->foreignId('distributor_id')->constrained()->restrictOnDelete();
+            $table->foreignId('distributor_id')->nullable()->constrained()->restrictOnDelete();
             $table->timestamps();
         });
     }

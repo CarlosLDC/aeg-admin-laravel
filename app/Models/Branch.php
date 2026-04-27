@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Enums\BranchRoles;
 use App\Enums\VenezuelaState;
 use Database\Factories\BranchFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -26,16 +28,38 @@ class Branch extends Model
         'contact_person',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
             'state' => VenezuelaState::class,
         ];
+    }
+
+    protected function roles(): Attribute
+    {
+        return Attribute::get(
+            function () {
+                $roles = [];
+
+                if ($this->distributor()->exists()) {
+                    $roles[] = BranchRoles::Distributor->value;
+                }
+
+                if ($this->serviceCenter()->exists()) {
+                    $roles[] = BranchRoles::ServiceCenter->value;
+                }
+
+                if ($this->softwareProvider()->exists()) {
+                    $roles[] = BranchRoles::SoftwareProvider->value;
+                }
+
+                if ($this->client()->exists()) {
+                    $roles[] = BranchRoles::Client->value;
+                }
+
+                return $roles;
+            },
+        );
     }
 
     public function company(): BelongsTo

@@ -22,6 +22,9 @@ class FirmwareTable
                     ->label('Fecha de Lanzamiento')
                     ->date()
                     ->sortable(),
+                TextColumn::make('description')
+                    ->label('Descripción')
+                    ->limit(50),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

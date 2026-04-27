@@ -6,6 +6,6 @@ final class SearchPromptText
 {
     public static function tradeNameLegalNameOrTaxId(): string
     {
-        return 'Buscar por RIF o Razón Social';
+        return 'Buscar por RIF, Razón Social o Nombre Comercial...';
     }
 }

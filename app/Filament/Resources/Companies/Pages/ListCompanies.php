@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Companies\Pages;
 
 use App\Filament\Resources\Companies\CompanyResource;
+use App\Models\Client;
 use App\Models\Company;
 use App\Models\Distributor;
 use App\Models\ServiceCenter;
@@ -36,6 +37,9 @@ class ListCompanies extends ListRecords
             'softwareProviders' => Tab::make('Casas de Software')
                 ->modifyQueryUsing(fn ($query) => $query->has('softwareProviders'))
                 ->badge(SoftwareProvider::count()),
+            'clients' => Tab::make('Clientes')
+                ->modifyQueryUsing(fn ($query) => $query->has('clients'))
+                ->badge(Client::count()),
         ];
     }
 }

@@ -11,25 +11,13 @@ class SaleInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('distributor.branch.trade_name')
-                    ->label('Distribuidora'),
                 TextEntry::make('invoice_number')
                     ->label('Número de Factura'),
                 TextEntry::make('sale_date')
                     ->label('Fecha de Venta')
                     ->date(),
-                TextEntry::make('subtotal')
-                    ->label('Subtotal')
-                    ->numeric()
-                    ->prefix('$'),
-                TextEntry::make('global_discount')
-                    ->label('Descuento Global')
-                    ->numeric()
-                    ->prefix('$'),
-                TextEntry::make('total_tax')
-                    ->label('Impuesto Total')
-                    ->numeric()
-                    ->prefix('$'),
+                TextEntry::make('distributor.branch.trade_name')
+                    ->label('Distribuidora'),
                 TextEntry::make('total')
                     ->label('Total')
                     ->numeric()

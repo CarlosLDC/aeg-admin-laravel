@@ -18,14 +18,18 @@ class BranchForm
             ->components([
                 Section::make('Información General')
                     ->schema([
-                        TextInput::make('trade_name')
-                            ->label('Nombre Comercial')
-                            ->required(),
+                        Grid::make()
+                            ->schema([
+                                TextInput::make('trade_name')
+                                    ->label('Nombre Comercial')
+                                    ->required()
+                                    ->placeholder('Sucursal Caracas'),
+                            ]),
                     ])
                     ->columnSpanFull(),
                 Section::make('Ubicación')
                     ->schema([
-                        Grid::make()
+                        Grid::make(2)
                             ->schema([
                                 Select::make('state')
                                     ->label('Estado')
@@ -34,31 +38,37 @@ class BranchForm
                                     ->searchable(),
                                 TextInput::make('city')
                                     ->label('Ciudad')
-                                    ->required(),
+                                    ->required()
+                                    ->placeholder('Caracas'),
                             ]),
                         Textarea::make('address')
                             ->label('Dirección')
-                            ->required(),
+                            ->required()
+                            ->placeholder('Av. Principal, edificio, piso y referencia'),
                     ])
                     ->columnSpanFull(),
                 Section::make('Contacto')
                     ->schema([
-                        Grid::make()
+                        Grid::make(2)
                             ->schema([
                                 TextInput::make('phone_primary')
                                     ->label('Teléfono Principal')
                                     ->required()
-                                    ->tel(),
+                                    ->tel()
+                                    ->placeholder('0212-555-0000'),
                                 TextInput::make('phone_secondary')
                                     ->label('Teléfono Secundario')
-                                    ->tel(),
+                                    ->tel()
+                                    ->placeholder('0212-555-0001'),
                                 TextInput::make('email')
                                     ->label('Correo Electrónico')
                                     ->required()
-                                    ->email(),
+                                    ->email()
+                                    ->placeholder('contacto@empresa.com'),
                                 TextInput::make('contact_person')
                                     ->label('Persona de Contacto')
-                                    ->required(),
+                                    ->required()
+                                    ->placeholder('Nombre y apellido'),
                             ]),
                     ])
                     ->columnSpanFull(),

@@ -31,6 +31,40 @@ it('can load the sales resource pages', function () {
     Livewire::test(EditSale::class, ['record' => $sale->id])->assertOk();
 });
 
+it('shows the sales form sections with visual hierarchy', function () {
+    $saleForm = file_get_contents(base_path('app/Filament/Resources/Sales/Schemas/SaleForm.php'));
+
+    expect($saleForm)
+        ->toContain('Información de Venta')
+        ->toContain('Resumen de Totales')
+        ->toContain('->disabled()');
+});
+
+it('orders invoice number and date before distributor across sales surfaces', function () {
+    $saleForm = file_get_contents(base_path('app/Filament/Resources/Sales/Schemas/SaleForm.php'));
+    $saleInfolist = file_get_contents(base_path('app/Filament/Resources/Sales/Schemas/SaleInfolist.php'));
+    $salesTable = file_get_contents(base_path('app/Filament/Resources/Sales/Tables/SalesTable.php'));
+
+    expect(strpos($saleForm, "TextInput::make('invoice_number')"))->toBeLessThan(strpos($saleForm, "DatePicker::make('sale_date')"));
+    expect(strpos($saleForm, "DatePicker::make('sale_date')"))->toBeLessThan(strpos($saleForm, "Select::make('distributor_id')"));
+
+    expect(strpos($saleInfolist, "TextEntry::make('invoice_number')"))->toBeLessThan(strpos($saleInfolist, "TextEntry::make('sale_date')"));
+    expect(strpos($saleInfolist, "TextEntry::make('sale_date')"))->toBeLessThan(strpos($saleInfolist, "TextEntry::make('distributor.branch.trade_name')"));
+
+    expect(strpos($salesTable, "TextColumn::make('invoice_number')"))->toBeLessThan(strpos($salesTable, "TextColumn::make('sale_date')"));
+    expect(strpos($salesTable, "TextColumn::make('sale_date')"))->toBeLessThan(strpos($salesTable, "TextColumn::make('distributor.branch.trade_name')"));
+});
+
+it('allows inactive taxes to be selected in sales forms', function () {
+    $saleItemForm = file_get_contents(base_path('app/Filament/Resources/Sales/Resources/SaleItems/Schemas/SaleItemForm.php'));
+    $printerSchemas = file_get_contents(base_path('app/Filament/Schemas/PrinterSchemas.php'));
+
+    expect($saleItemForm)->toContain('modifyQueryUsing: fn (Builder $query): Builder => $query')
+        ->and($saleItemForm)->toContain('(Inactiva)')
+        ->and($printerSchemas)->toContain('modifyQueryUsing: fn (Builder $query): Builder => $query')
+        ->and($printerSchemas)->toContain('(Inactiva)');
+});
+
 it('can create a sale and assign printers from sale items relation', function () {
     /** @var User $user */
     $user = User::factory()->createOne();

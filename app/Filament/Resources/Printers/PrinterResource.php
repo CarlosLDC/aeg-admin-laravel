@@ -64,4 +64,9 @@ class PrinterResource extends Resource
             'edit' => EditPrinter::route('/{record}/edit'),
         ];
     }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 }

@@ -44,7 +44,7 @@ class BranchSpecializationSchemas
     {
         return [
             TextEntry::make('branch.trade_name')
-                ->label('Sucursal'),
+                ->label('Nombre Comercial'),
             TextEntry::make('branch.company.tax_id')
                 ->label('RIF'),
             TextEntry::make('branch.state')
@@ -67,7 +67,7 @@ class BranchSpecializationSchemas
     {
         return [
             TextColumn::make('branch.trade_name')
-                ->label('Sucursal')
+                ->label('Nombre Comercial')
                 ->searchable(),
             TextColumn::make('branch.company.tax_id')
                 ->label('RIF')

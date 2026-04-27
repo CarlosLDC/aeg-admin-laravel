@@ -15,9 +15,6 @@ class SalesTable
     {
         return $table
             ->columns([
-                TextColumn::make('distributor.branch.trade_name')
-                    ->label('Distribuidora')
-                    ->searchable(),
                 TextColumn::make('invoice_number')
                     ->label('Número de Factura')
                     ->searchable(),
@@ -25,21 +22,9 @@ class SalesTable
                     ->label('Fecha de Venta')
                     ->date()
                     ->sortable(),
-                TextColumn::make('subtotal')
-                    ->label('Subtotal')
-                    ->numeric()
-                    ->prefix('$')
-                    ->sortable(),
-                TextColumn::make('global_discount')
-                    ->label('Descuento Global')
-                    ->numeric()
-                    ->prefix('$')
-                    ->sortable(),
-                TextColumn::make('total_tax')
-                    ->label('Impuesto Total')
-                    ->numeric()
-                    ->prefix('$')
-                    ->sortable(),
+                TextColumn::make('distributor.branch.trade_name')
+                    ->label('Distribuidora')
+                    ->searchable(),
                 TextColumn::make('total')
                     ->label('Total')
                     ->numeric()

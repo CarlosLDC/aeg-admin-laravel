@@ -16,7 +16,8 @@ class PrinterModelInfolist
                 TextEntry::make('model')
                     ->label('Modelo'),
                 TextEntry::make('device_type')
-                    ->label('Tipo de Dispositivo'),
+                    ->label('Tipo de Dispositivo')
+                    ->badge(),
                 TextEntry::make('price')
                     ->label('Precio')
                     ->money(),

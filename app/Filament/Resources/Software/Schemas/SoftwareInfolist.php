@@ -11,6 +11,8 @@ class SoftwareInfolist
     {
         return $schema
             ->components([
+                TextEntry::make('software_provider')
+                    ->label('Casa de Software'),
                 TextEntry::make('name')
                     ->label('Nombre'),
                 TextEntry::make('version')

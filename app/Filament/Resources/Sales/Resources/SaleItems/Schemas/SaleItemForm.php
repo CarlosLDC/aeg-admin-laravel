@@ -68,7 +68,14 @@ class SaleItemForm
                     ->default(0),
                 Select::make('tax_id')
                     ->label('Alícuota')
-                    ->relationship('tax', 'name')
+                    ->relationship(
+                        name: 'tax',
+                        titleAttribute: 'name',
+                        modifyQueryUsing: fn (Builder $query): Builder => $query,
+                    )
+                    ->getOptionLabelFromRecordUsing(
+                        fn (Tax $tax): string => $tax->name.(! $tax->is_active ? ' (Inactiva)' : '')
+                    )
                     ->searchable()
                     ->preload()
                     ->required()
