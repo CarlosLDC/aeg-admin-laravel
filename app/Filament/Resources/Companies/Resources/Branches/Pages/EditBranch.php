@@ -11,8 +11,8 @@ use Filament\Actions\ViewAction;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 
 class EditBranch extends EditRecord
 {
@@ -23,12 +23,17 @@ class EditBranch extends EditRecord
         return [
             Action::make('updateRoles')
                 ->label('Editar Roles')
+                // Aspecto del botón
                 ->outlined()
                 ->color('gray')
                 ->icon('heroicon-o-pencil-square')
+                // Tipo de modal
+                ->slideOver()
+                // Información del modal
                 ->modalHeading('Editar Roles')
                 ->modalDescription('Seleccione los roles que deseee asignar a esta sucursal. Es posible que no pueda desasignar roles existentes.')
                 ->modalSubmitActionLabel('Guardar cambios')
+                // Lógica del formulario
                 ->fillForm(fn(Branch $record): array => [
                     'selected_roles' => $record->roles,
                 ])
@@ -38,13 +43,12 @@ class EditBranch extends EditRecord
                         ->options(BranchRoles::class)
                         ->columns(2),
                 ])
-                ->action(function (array $data, Branch $record): void {                
-                    $roles = $data['selected_roles'] ?? [];
-
+                ->action(function (array $data, Branch $record): void {
+                    $selectedRoles = $data['selected_roles'] ?? [];
                     $failedToDelete = [];
 
                     try {
-                        if (in_array(BranchRoles::Distributor, $roles)) {
+                        if (in_array(BranchRoles::Distributor, $selectedRoles)) {
                             $record->distributor()->firstOrCreate([]);
                         } else {
                             $record->distributor()->delete();
@@ -54,7 +58,7 @@ class EditBranch extends EditRecord
                     }
 
                     try {
-                        if (in_array(BranchRoles::ServiceCenter, $roles)) {
+                        if (in_array(BranchRoles::ServiceCenter, $selectedRoles)) {
                             $record->serviceCenter()->firstOrCreate([]);
                         } else {
                             $record->serviceCenter()->delete();
@@ -64,7 +68,7 @@ class EditBranch extends EditRecord
                     }
 
                     try {
-                        if (in_array(BranchRoles::SoftwareProvider, $roles)) {
+                        if (in_array(BranchRoles::SoftwareProvider, $selectedRoles)) {
                             $record->softwareProvider()->firstOrCreate([]);
                         } else {
                             $record->softwareProvider()->delete();
@@ -74,7 +78,7 @@ class EditBranch extends EditRecord
                     }
 
                     try {
-                        if (in_array(BranchRoles::Client, $roles)) {
+                        if (in_array(BranchRoles::Client, $selectedRoles)) {
                             $record->client()->firstOrCreate([]);
                         } else {
                             $record->client()->delete();
@@ -96,10 +100,25 @@ class EditBranch extends EditRecord
                             ->danger()
                             ->send();
                     }
-                })
-                ->slideOver(),
+                }),
             // ViewAction::make(),
-            DeleteAction::make(),
+            DeleteAction::make()
+                ->before(function (Branch $record): void {
+                    try {
+                        DB::beginTransaction();
+
+                        $record->distributor()->delete();
+                        $record->serviceCenter()->delete();
+                        $record->softwareProvider()->delete();
+                        $record->client()->delete();
+
+                        DB::commit();
+                    } catch (QueryException $e) {
+                        DB::rollBack();
+
+                        throw $e;
+                    }
+                }),
         ];
     }
 }

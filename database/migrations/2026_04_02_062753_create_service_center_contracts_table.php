@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('service_center_contracts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('service_center_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('service_center_id')->constrained()->restrictOnDelete();
             $table->date('start_date');
             $table->date('end_date');
             $table->text('photo_path');

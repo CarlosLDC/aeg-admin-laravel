@@ -25,7 +25,7 @@ class CreateCompany extends CreateRecord
                 ->modalHeading('Autollenar formulario de Empresa')
                 ->modalDescription(null)
                 ->modalSubmitActionLabel('Analizar documento')
-                ->form([
+                ->schema([
                     FileUpload::make('document')
                         ->label('Documento')
                         ->required()

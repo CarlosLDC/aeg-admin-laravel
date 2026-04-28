@@ -23,6 +23,7 @@ class CompanyForm
                                 TextInput::make('tax_id')
                                     ->label('RIF')
                                     ->required()
+                                    ->unique()
                                     ->regex('/^[VEJGCP][0-9]{1,9}$/i')
                                     ->stripCharacters('-')
                                     ->hintIcon('heroicon-m-question-mark-circle', tooltip: HintIconText::taxId())

@@ -55,11 +55,11 @@ class BranchForm
                                     ->label('Teléfono Principal')
                                     ->required()
                                     ->tel()
-                                    ->placeholder('0212-555-0000'),
+                                    ->placeholder('+5802125550000'),
                                 TextInput::make('phone_secondary')
                                     ->label('Teléfono Secundario')
                                     ->tel()
-                                    ->placeholder('0212-555-0001'),
+                                    ->placeholder('+5802125550001'),
                                 TextInput::make('email')
                                     ->label('Correo Electrónico')
                                     ->required()

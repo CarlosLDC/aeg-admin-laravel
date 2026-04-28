@@ -53,6 +53,8 @@ class RoleSeeder extends Seeder
             Permission::findOrCreate($permissionName, $guardName);
         }
 
+        app(PermissionRegistrar::class)->forgetCachedPermissions();
+
         $roles = [];
 
         foreach (UserRolesEnum::cases() as $userRole) {

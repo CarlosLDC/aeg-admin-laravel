@@ -25,7 +25,7 @@ class CreateBranch extends CreateRecord
                 ->modalHeading('Autollenar formulario de Sucursal')
                 ->modalDescription(null)
                 ->modalSubmitActionLabel('Analizar documento')
-                ->form([
+                ->schema([
                     FileUpload::make('document')
                         ->label('Documento')
                         ->required()
