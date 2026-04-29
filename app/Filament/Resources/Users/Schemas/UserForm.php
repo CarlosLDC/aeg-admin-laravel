@@ -24,6 +24,7 @@ class UserForm
                 TextInput::make('password')
                     ->label('Contraseña')
                     ->required()
+                    ->unique()
                     ->password(),
                 Select::make('roles')
                     ->label('Rol')
