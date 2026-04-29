@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('distributors', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('branch_id')->unique()->constrained()->restrictOnDelete();
+            $table->foreignId('branch_id')->unique()->constrained()->cascadeOnDelete(); // Es un rol de Branch
             $table->timestamps();
         });
     }

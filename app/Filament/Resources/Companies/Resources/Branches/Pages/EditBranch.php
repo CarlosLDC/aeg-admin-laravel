@@ -12,7 +12,6 @@ use Filament\Forms\Components\CheckboxList;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\DB;
 
 class EditBranch extends EditRecord
 {
@@ -34,7 +33,7 @@ class EditBranch extends EditRecord
                 ->modalDescription('Seleccione los roles que deseee asignar a esta sucursal. Es posible que no pueda desasignar roles existentes.')
                 ->modalSubmitActionLabel('Guardar cambios')
                 // Lógica del formulario
-                ->fillForm(fn(Branch $record): array => [
+                ->fillForm(fn (Branch $record): array => [
                     'selected_roles' => $record->roles,
                 ])
                 ->schema([
@@ -44,7 +43,7 @@ class EditBranch extends EditRecord
                         ->columns(2),
                 ])
                 ->action(function (array $data, Branch $record): void {
-                    $selectedRoles = $data['selected_roles'] ?? [];
+                    $selectedRoles = $data['selected_roles'];
                     $failedToDelete = [];
 
                     try {
@@ -96,29 +95,13 @@ class EditBranch extends EditRecord
                     } else {
                         Notification::make()
                             ->title('Error al actualizar roles')
-                            ->body('No se pudieron actualizar los siguientes roles: ' . implode(', ', $failedToDelete) . '.')
+                            ->body('No se pudieron actualizar los siguientes roles: '.implode(', ', $failedToDelete).'.')
                             ->danger()
                             ->send();
                     }
                 }),
             // ViewAction::make(),
-            DeleteAction::make()
-                ->before(function (Branch $record): void {
-                    try {
-                        DB::beginTransaction();
-
-                        $record->distributor()->delete();
-                        $record->serviceCenter()->delete();
-                        $record->softwareProvider()->delete();
-                        $record->client()->delete();
-
-                        DB::commit();
-                    } catch (QueryException $e) {
-                        DB::rollBack();
-
-                        throw $e;
-                    }
-                }),
+            DeleteAction::make(),
         ];
     }
 }

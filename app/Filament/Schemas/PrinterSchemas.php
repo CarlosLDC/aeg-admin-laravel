@@ -13,7 +13,6 @@ use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Builder;
 
 class PrinterSchemas
 {
@@ -59,12 +58,17 @@ class PrinterSchemas
                                                 ->default(PrinterStatus::Testing->value),
                                             Select::make('client_id')
                                                 ->label('Cliente')
-                                                ->relationship('client', 'id')
-                                                ->getOptionLabelFromRecordUsing(
-                                                    fn(Client $client) => $client->branch->trade_name
-                                                )
                                                 ->searchable()
-                                                ->preload(),
+                                                ->getSearchResultsUsing(fn (string $search): array => Client::query()
+                                                    ->join('branches', 'clients.branch_id', '=', 'branches.id')
+                                                    ->where('branches.trade_name', 'like', "%{$search}%")
+                                                    ->limit(50)
+                                                    ->pluck('branches.trade_name', 'clients.id')
+                                                    ->all())
+                                                ->getOptionLabelUsing(fn (string $value): ?string => Client::query()
+                                                    ->join('branches', 'clients.branch_id', '=', 'branches.id')
+                                                    ->where('clients.id', $value)
+                                                    ->value('branches.trade_name')),
                                             DatePicker::make('installation_date')
                                                 ->label('Fecha de Instalación'),
                                         ]),
@@ -88,13 +92,9 @@ class PrinterSchemas
                                                 ->placeholder('1000'),
                                             Select::make('tax_id')
                                                 ->label('Alícuota')
-                                                ->relationship(
-                                                    name: 'tax',
-                                                    titleAttribute: 'name',
-                                                    modifyQueryUsing: fn(Builder $query): Builder => $query,
-                                                )
+                                                ->relationship('tax', 'name')
                                                 ->getOptionLabelFromRecordUsing(
-                                                    fn(Tax $tax): string => $tax->name . (! $tax->is_active ? ' (Inactiva)' : '')
+                                                    fn (Tax $tax): string => $tax->name.(! $tax->is_active ? ' (Inactiva)' : '')
                                                 )
                                                 ->preload(),
                                         ]),
@@ -150,7 +150,7 @@ class PrinterSchemas
                 ->label('Estatus')
                 ->badge()
                 ->searchable(),
-            TextColumn::make('client.id')
+            TextColumn::make('client.branch.trade_name')
                 ->label('Cliente')
                 ->searchable(),
             TextColumn::make('installation_date')
@@ -159,18 +159,22 @@ class PrinterSchemas
                 ->sortable(),
             TextColumn::make('sale.invoice_number')
                 ->label('Número de Factura')
-                ->searchable(),
+                ->searchable()
+                ->toggleable(isToggledHiddenByDefault: true),
             TextColumn::make('final_sale_price')
                 ->label('Precio de Venta Final')
                 ->money()
-                ->sortable(),
+                ->sortable()
+                ->toggleable(isToggledHiddenByDefault: true),
             TextColumn::make('tax.name')
                 ->label('Alícuota')
-                ->searchable(),
+                ->searchable()
+                ->toggleable(isToggledHiddenByDefault: true),
             IconColumn::make('is_paid')
                 ->label('Pagada')
                 ->boolean()
-                ->sortable(),
+                ->sortable()
+                ->toggleable(isToggledHiddenByDefault: true),
         ];
     }
 }

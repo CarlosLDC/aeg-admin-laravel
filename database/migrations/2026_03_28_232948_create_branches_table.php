@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('branches', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->constrained()->restrictOnDelete();
-            $table->string('trade_name'); // Nombre comercial
+            $table->string('trade_name')->unique(); // Nombre comercial
             $table->string('state');
             $table->string('city');
             $table->text('address');

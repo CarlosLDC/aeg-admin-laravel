@@ -16,23 +16,20 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
-use UnitEnum;
 
 class CompanyResource extends Resource
 {
     protected static ?string $model = Company::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBuildingOffice2;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedIdentification;
 
     protected static ?string $recordTitleAttribute = 'legal_name';
 
-    protected static ?string $modelLabel = 'Empresa';
+    protected static ?string $modelLabel = 'Ficha Fiscal';
 
-    protected static ?string $pluralModelLabel = 'Empresas';
+    protected static ?string $pluralModelLabel = 'Fichas Fiscales';
 
-    protected static ?int $navigationSort = 1;
-
-    protected static string|UnitEnum|null $navigationGroup = 'Aliados y Clientes';
+    protected static ?int $navigationSort = 3;
 
     public static function form(Schema $schema): Schema
     {

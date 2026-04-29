@@ -22,7 +22,7 @@ class DocumentExtractionService
     }
 
     /**
-     * @return array{trade_name?: string, state?: string, city?: string, address?: string, phone_primary?: string, phone_secondary?: string, email?: string, contact_person?: string}
+     * @return array{tax_id?: string, trade_name?: string, state?: string, city?: string, address?: string, phone_primary?: string, phone_secondary?: string, email?: string, contact_person?: string}
      */
     public function extractBranchDataFromDocument(string $path, ?string $disk = null): array
     {
@@ -151,11 +151,12 @@ class DocumentExtractionService
 
     /**
      * @param  array<string, mixed>  $payload
-     * @return array{trade_name?: string, state?: string, city?: string, address?: string, phone_primary?: string, phone_secondary?: string, email?: string, contact_person?: string}
+     * @return array{tax_id?: string, trade_name?: string, state?: string, city?: string, address?: string, phone_primary?: string, phone_secondary?: string, email?: string, contact_person?: string}
      */
     private function normalizeBranchPayload(array $payload): array
     {
         $data = Arr::only($payload, [
+            'tax_id',
             'trade_name',
             'state',
             'city',
@@ -166,6 +167,7 @@ class DocumentExtractionService
             'contact_person',
         ]);
 
+        $taxId = $this->normalizeTaxId($data['tax_id'] ?? null);
         $tradeName = $this->normalizeText($data['trade_name'] ?? null);
         $state = $this->normalizeState($data['state'] ?? null);
         $city = $this->normalizeText($data['city'] ?? null);
@@ -176,6 +178,7 @@ class DocumentExtractionService
         $contactPerson = $this->normalizeText($data['contact_person'] ?? null);
 
         $normalized = array_filter([
+            'tax_id' => $taxId,
             'trade_name' => $tradeName,
             'state' => $state,
             'city' => $city,
@@ -396,7 +399,8 @@ Eres un motor de extracción de documentos para formularios de sucursales en Ven
 Lee el documento cargado y devuelve exclusivamente JSON válido, sin markdown, sin explicaciones y sin texto adicional.
 
 Debes extraer solo estos campos:
-- trade_name: nombre comercial de la sucursal.
+- tax_id: RIF de la empresa o sucursal, normalizado, con una letra inicial de V, E, J, G, C o P seguida de dígitos, sin guiones ni espacios.
+- trade_name: nombre comercial de la sucursal, sin prefijos o sufijos fiscales o societarios como C.A., S.R.L., S.A. u otros equivalentes.
 - state: estado venezolano normalizado en minúsculas y con guion bajo, por ejemplo distrito_capital o la_guaira.
 - city: ciudad.
 - address: dirección completa.
@@ -409,9 +413,12 @@ Reglas:
 - Si un campo no puede determinarse con confianza razonable, omítelo.
 - No inventes valores.
 - No incluyas claves adicionales.
+- Si el RIF aparece con separadores, elimínalos y devuelve el formato normalizado.
+- Si no hay nombre comercial visible, busca la razón social y mézclala con la ciudad para construir trade_name, pero sin incluir prefijos fiscales o societarios.
 
 Respuesta esperada:
 {
+    "tax_id": "J123456789",
   "trade_name": "Sucursal Caracas",
   "state": "distrito_capital",
   "city": "Caracas",
@@ -432,6 +439,12 @@ PROMPT;
         return [
             'type' => 'object',
             'properties' => [
+                'tax_id' => [
+                    'anyOf' => [
+                        ['type' => 'string'],
+                        ['type' => 'null'],
+                    ],
+                ],
                 'trade_name' => [
                     'anyOf' => [
                         ['type' => 'string'],
@@ -484,9 +497,9 @@ PROMPT;
                     ],
                 ],
             ],
-            'required' => ['trade_name', 'state', 'city', 'address', 'phone_primary', 'phone_secondary', 'email', 'contact_person'],
+            'required' => ['tax_id', 'trade_name', 'state', 'city', 'address', 'phone_primary', 'phone_secondary', 'email', 'contact_person'],
             'additionalProperties' => false,
-            'propertyOrdering' => ['trade_name', 'state', 'city', 'address', 'phone_primary', 'phone_secondary', 'email', 'contact_person'],
+            'propertyOrdering' => ['tax_id', 'trade_name', 'state', 'city', 'address', 'phone_primary', 'phone_secondary', 'email', 'contact_person'],
         ];
     }
 

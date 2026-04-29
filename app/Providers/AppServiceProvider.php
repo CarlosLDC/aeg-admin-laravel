@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Enums\UserRoles;
+use App\Models\User;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Forms\Components\Field;
@@ -9,6 +11,7 @@ use Filament\Infolists\Components\Entry;
 use Filament\Tables\Columns\Column;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,6 +29,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Gate::before(function (User $user, string $ability) {
+            if ($user->hasRole(UserRoles::Admin)) {
+                return true;
+            }
+        });
+
         DeleteAction::configureUsing(function (DeleteAction $action): void {
             $action->failureNotificationTitle('No se puede eliminar este registro porque tiene información relacionada.');
 

@@ -1,52 +1,11 @@
 <?php
 
-use App\Enums\TaxpayerType;
-use App\Filament\Resources\Companies\Pages\CreateCompany;
-use App\Models\User;
 use App\Services\AI\DocumentExtractionService;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
-use Livewire\Livewire;
-
-use function Pest\Laravel\actingAs;
-use function Pest\Laravel\mock;
 
 uses(LazilyRefreshDatabase::class);
-
-it('fills the company form from an extracted document', function () {
-    /** @var User $user */
-    $user = User::factory()->createOne();
-
-    actingAs($user);
-
-    $disk = (string) config('ai.disk', 'local');
-    Storage::fake($disk);
-
-    $documentPath = 'ai/company-documents/company.pdf';
-    Storage::disk($disk)->put($documentPath, '%PDF-1.4 fake company document');
-
-    mock(DocumentExtractionService::class, function ($mock) use ($documentPath, $disk): void {
-        $mock->shouldReceive('extractCompanyDataFromDocument')
-            ->once()
-            ->with($documentPath, $disk)
-            ->andReturn([
-                'tax_id' => 'J123456789',
-                'legal_name' => 'Alpha Engineer Group, C.A.',
-                'taxpayer_type' => 'ordinario',
-            ]);
-    });
-
-    Livewire::test(CreateCompany::class)
-        ->callAction('autofillFromDocument', data: [
-            'document' => [$documentPath],
-        ])
-        ->assertSchemaStateSet([
-            'tax_id' => 'J123456789',
-            'legal_name' => 'Alpha Engineer Group, C.A.',
-            'taxpayer_type' => TaxpayerType::Ordinary,
-        ]);
-});
 
 it('normalizes the payload returned by the ai endpoint', function () {
     Storage::fake('local');

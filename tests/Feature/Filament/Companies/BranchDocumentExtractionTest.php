@@ -106,4 +106,12 @@ it('normalizes branch phone fields to digits and plus signs only', function () {
         'email' => 'contacto@empresa.com',
         'contact_person' => 'Nombre y apellido',
     ]);
+
+    Http::assertSent(function ($request): bool {
+        $payload = $request->data();
+        $prompt = $payload['contents'][0]['parts'][0]['text'] ?? '';
+
+        return is_string($prompt)
+            && str_contains($prompt, 'sin prefijos o sufijos fiscales o societarios como C.A., S.R.L., S.A.');
+    });
 });
