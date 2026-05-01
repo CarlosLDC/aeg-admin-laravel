@@ -22,7 +22,7 @@ class BranchForm
         return $schema
             ->components([
                 Tabs::make('branch_form_tabs')
-                    ->schema([
+                    ->tabs([
                         Tab::make('Información Fiscal')
                             ->schema([
                                 Grid::make(2)
