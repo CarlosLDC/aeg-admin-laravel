@@ -21,14 +21,14 @@ class BranchFactory extends Factory
     {
         return [
             'company_id' => Company::factory(),
-            'trade_name' => fake()->company(),
+            'trade_name' => fake()->optional()->company(),
             'state' => fake()->randomElement(VenezuelaState::cases()),
             'city' => fake()->city(),
             'address' => fake()->address(),
-            'phone_primary' => fake()->e164PhoneNumber(),
+            'phone_primary' => fake()->optional()->e164PhoneNumber(),
             'phone_secondary' => fake()->optional()->e164PhoneNumber(),
-            'email' => fake()->freeEmail(),
-            'contact_person' => fake()->name(),
+            'email' => fake()->optional()->freeEmail(),
+            'contact_person' => fake()->optional()->name(),
         ];
     }
 }

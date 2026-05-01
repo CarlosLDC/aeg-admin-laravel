@@ -25,6 +25,7 @@ class BranchesTable
                     ->label('RIF')
                     ->searchable(),
                 IconColumn::make('roles')
+                    ->label('Roles')
                     ->icon(fn (string $state): Heroicon => match ($state) {
                         BranchRoles::Distributor->value => Heroicon::Truck,
                         BranchRoles::ServiceCenter->value => Heroicon::WrenchScrewdriver,

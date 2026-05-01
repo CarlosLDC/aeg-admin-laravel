@@ -20,8 +20,8 @@ class CompanyFactory extends Factory
     {
         return [
             'tax_id' => fake()->unique()->regexify('[VEJPG][0-9]{9}'),
-            'legal_name' => fake()->optional()->company(),
-            'taxpayer_type' => fake()->optional()->randomElement(TaxpayerType::cases()),
+            'legal_name' => fake()->unique()->company(),
+            'taxpayer_type' => fake()->randomElement(TaxpayerType::cases()),
         ];
     }
 }

@@ -196,13 +196,13 @@ class ListPrinters extends ListRecords
         return [
             'all' => Tab::make('Todas')
                 ->badge(Printer::count()),
-            'distributors' => Tab::make('En Laboratorio')
+            'distributors' => Tab::make('Laboratorio')
                 ->modifyQueryUsing(fn ($query) => $query->where('status', PrinterStatus::Testing->value))
                 ->badge(Printer::where('status', PrinterStatus::Testing->value)->count()),
             'serviceCenters' => Tab::make('Instaladas')
                 ->modifyQueryUsing(fn ($query) => $query->where('status', PrinterStatus::Installed->value))
                 ->badge(Printer::where('status', PrinterStatus::Installed->value)->count()),
-            'softwareProviders' => Tab::make('En Mantenimiento')
+            'softwareProviders' => Tab::make('Mantenimiento')
                 ->modifyQueryUsing(fn ($query) => $query->where('status', PrinterStatus::Maintenance->value))
                 ->badge(Printer::where('status', PrinterStatus::Maintenance->value)->count()),
             'clients' => Tab::make('Retiradas')

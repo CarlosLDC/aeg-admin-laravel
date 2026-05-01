@@ -43,8 +43,7 @@ class Company extends Model
             set: fn (string $value) => Str::of($value)
                 ->substr(1)
                 ->padLeft(9, '0')
-                ->prepend($value[0])
-                ->upper()
+                ->prepend(Str::upper($value[0]))
                 ->toString(),
         );
     }

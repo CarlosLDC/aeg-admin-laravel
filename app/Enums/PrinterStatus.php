@@ -3,9 +3,10 @@
 namespace App\Enums;
 
 use Filament\Support\Contracts\HasColor;
+use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasLabel;
 
-enum PrinterStatus: string implements HasColor, HasLabel
+enum PrinterStatus: string implements HasColor, HasIcon, HasLabel
 {
     case Testing = 'laboratorio';
     case Installed = 'instalada';
@@ -29,6 +30,16 @@ enum PrinterStatus: string implements HasColor, HasLabel
             self::Installed => 'success',
             self::Maintenance => 'warning',
             self::Retired => 'gray',
+        };
+    }
+
+    public function getIcon(): ?string
+    {
+        return match ($this) {
+            self::Testing => 'heroicon-m-beaker',
+            self::Installed => 'heroicon-m-check-circle',
+            self::Maintenance => 'heroicon-m-wrench',
+            self::Retired => 'heroicon-m-x-circle',
         };
     }
 }

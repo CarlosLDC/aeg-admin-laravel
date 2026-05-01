@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\TaxpayerType;
 use App\Enums\VenezuelaState;
 use App\Filament\Resources\Branches\Pages\CreateBranch;
 use App\Models\User;
@@ -31,6 +32,8 @@ it('fills the branch form from an extracted document', function () {
             ->with($documentPath, $disk)
             ->andReturn([
                 'tax_id' => 'J123456789',
+                'legal_name' => 'Alpha Engineer Group, C.A.',
+                'taxpayer_type' => 'ordinario',
                 'trade_name' => 'Sucursal Caracas',
                 'state' => 'distrito_capital',
                 'city' => 'Caracas',
@@ -48,6 +51,8 @@ it('fills the branch form from an extracted document', function () {
         ])
         ->assertSchemaStateSet([
             'tax_id' => 'J123456789',
+            'legal_name' => 'Alpha Engineer Group, C.A.',
+            'taxpayer_type' => TaxpayerType::Ordinary,
             'trade_name' => 'Sucursal Caracas',
             'state' => VenezuelaState::DistritoCapital,
             'city' => 'Caracas',

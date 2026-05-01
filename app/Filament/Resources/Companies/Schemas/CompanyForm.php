@@ -5,8 +5,8 @@ namespace App\Filament\Resources\Companies\Schemas;
 use App\Enums\TaxpayerType;
 use App\Filament\Support\HintIconText;
 use App\Models\Company;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -27,15 +27,23 @@ class CompanyForm
                                     ->unique()
                                     ->regex('/^[VEJGCP][0-9]{1,9}$/i')
                                     ->stripCharacters('-')
-                                    ->hintIcon('heroicon-m-question-mark-circle', tooltip: HintIconText::taxId())
+                                    ->hintIcon(
+                                        icon: 'heroicon-m-question-mark-circle',
+                                        tooltip: HintIconText::taxId()
+                                    )
                                     ->placeholder('J123456789')
-                                    ->disabled(fn(?Company $record) => $record?->branches()->exists())
-                                    ->live(),
+                                    ->disabled(
+                                        fn(?Company $record) => $record?->branches()->exists()
+                                    ),
                                 TextInput::make('legal_name')
                                     ->label('Razón Social')
-                                    ->placeholder('Alpha Engineer Group, C.A.'),
-                                Select::make('taxpayer_type')
+                                    ->required()
+                                    ->unique()
+                                    ->placeholder('Empresa S.A. de C.V.'),
+                                ToggleButtons::make('taxpayer_type')
                                     ->label('Tipo de Contribuyente')
+                                    ->required()
+                                    ->inline()
                                     ->options(TaxpayerType::class)
                                     ->default(TaxpayerType::Ordinary->value),
                             ]),

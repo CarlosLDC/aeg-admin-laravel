@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('branches', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->constrained()->restrictOnDelete();
-            $table->string('trade_name')->unique(); // Nombre comercial
+            $table->string('trade_name')->nullable(); // Nombre comercial
             $table->string('state');
             $table->string('city');
             $table->text('address');
-            $table->string('phone_primary');
+            $table->string('phone_primary')->nullable();
             $table->string('phone_secondary')->nullable();
-            $table->string('email');
-            $table->string('contact_person');
+            $table->string('email')->nullable();
+            $table->string('contact_person')->nullable();
             $table->timestamps();
         });
     }

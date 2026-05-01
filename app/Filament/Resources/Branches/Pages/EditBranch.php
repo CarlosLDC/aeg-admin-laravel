@@ -14,6 +14,7 @@ use Filament\Actions\ViewAction;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Database\QueryException;
 
 class EditBranch extends EditRecord
@@ -110,36 +111,52 @@ class EditBranch extends EditRecord
                 ->label('Más acciones')
                 ->outlined()
                 ->color('gray')
-                ->icon('heroicon-m-ellipsis-vertical')
-                // ->size(Size::Small)
+                ->icon(Heroicon::EllipsisVertical)
                 ->button(),
             // ViewAction::make(),
             DeleteAction::make(),
         ];
     }
 
-    protected function mutateFormDataBeforeSave(array $data): array
-    {
-        $tax_id = $data['tax_id'] ?? null;
-
-        unset($data['tax_id']);
-
-        if (is_null($tax_id)) {
-            return $data;
-        }
-
-        $company = Company::firstOrCreate([
-            'tax_id' => $tax_id,
-        ]);
-
-        $data['company_id'] = $company->id;
-
-        return $data;
-    }
+    // Hacer los roles de la maner sencilla
 
     protected function mutateFormDataBeforeFill(array $data): array
     {
-        $data['tax_id'] = Company::find($data['company_id'])?->tax_id;
+        $company = Company::find($data['company_id']);
+
+        if ($company === null) {
+            return $data;
+        }
+
+        return array_merge(
+            $data,
+            [
+                'tax_id' => $company->tax_id,
+                'legal_name' => $company->legal_name,
+                'taxpayer_type' => $company->taxpayer_type,
+            ]
+        );
+    }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $company = Company::updateOrCreate(
+            [
+                'tax_id' => $data['tax_id'],
+            ],
+            [
+                'legal_name' => $data['legal_name'],
+                'taxpayer_type' => $data['taxpayer_type'],
+            ]
+        );
+
+        unset(
+            $data['tax_id'],
+            $data['legal_name'],
+            $data['taxpayer_type'],
+        );
+
+        $data['company_id'] = $company->id;
 
         return $data;
     }
