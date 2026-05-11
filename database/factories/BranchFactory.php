@@ -20,11 +20,14 @@ class BranchFactory extends Factory
     public function definition(): array
     {
         return [
+            // Información fiscal
             'company_id' => Company::factory(),
-            'trade_name' => fake()->optional()->company(),
             'state' => fake()->randomElement(VenezuelaState::cases()),
             'city' => fake()->city(),
             'address' => fake()->address(),
+            // Información general
+            'trade_name' => fake()->company(),
+            // Contacto
             'phone_primary' => fake()->optional()->e164PhoneNumber(),
             'phone_secondary' => fake()->optional()->e164PhoneNumber(),
             'email' => fake()->optional()->freeEmail(),

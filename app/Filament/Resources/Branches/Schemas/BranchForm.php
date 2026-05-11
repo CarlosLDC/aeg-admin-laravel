@@ -36,19 +36,22 @@ class BranchForm
                                                 icon: 'heroicon-m-question-mark-circle',
                                                 tooltip: HintIconText::taxId()
                                             )
-                                            ->placeholder('J123456789'),
+                                            ->placeholder('J123456789')
+                                            ->dehydrated(false),
                                         TextInput::make('legal_name')
                                             ->label('Razón Social')
                                             ->required()
                                             ->unique()
-                                            ->placeholder('Alpha Engineer Group, C.A.'),
+                                            ->placeholder('Alpha Engineer Group, C.A.')
+                                            ->dehydrated(false),
                                         ToggleButtons::make('taxpayer_type')
                                             ->label('Tipo de Contribuyente')
                                             ->required()
                                             ->options(TaxpayerType::class)
                                             ->default(TaxpayerType::Ordinary->value)
                                             ->inline()
-                                            ->columnSpanFull(),
+                                            ->columnSpanFull()
+                                            ->dehydrated(false),
                                         Select::make('state')
                                             ->label('Estado')
                                             ->required()
@@ -71,13 +74,15 @@ class BranchForm
                                     ->schema([
                                         TextInput::make('trade_name')
                                             ->label('Nombre Comercial')
+                                            ->required()
                                             ->placeholder('AEG Caracas'),
                                         ToggleButtons::make('roles')
                                             ->label('Roles')
                                             ->multiple()
                                             ->options(BranchRoles::class)
                                             ->inline()
-                                            ->columnSpanFull(),
+                                            ->columnSpanFull()
+                                            ->dehydrated(false),
                                     ]),
                             ]),
                         Tab::make('Contacto')

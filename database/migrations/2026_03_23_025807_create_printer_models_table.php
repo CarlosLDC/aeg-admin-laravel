@@ -13,15 +13,24 @@ return new class extends Migration
     {
         Schema::create('printer_models', function (Blueprint $table) {
             $table->id();
+
+            // Marca y modelo
             $table->string('brand');
             $table->string('model');
-            $table->string('device_type');
-            $table->string('administrative_act');
-            $table->date('certification_date');
-            $table->decimal('price', total: 8, places: 2);
-            $table->string('full_name')->virtualAs("brand || '-' || model");
-            $table->timestamps();
+
+            // Restricciones de marca y modelo
             $table->unique(['brand', 'model']);
+            $table->string('full_name')->virtualAs("brand || '-' || model");
+
+            // Tipo de dispositivo y precio
+            $table->string('device_type');
+            $table->decimal('price', total: 8, places: 2);
+
+            // Información fiscal
+            $table->string('administrative_act')->nullable();
+            $table->date('certification_date')->nullable();
+
+            $table->timestamps();
         });
     }
 

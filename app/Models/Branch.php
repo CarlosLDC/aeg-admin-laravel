@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Enums\BranchRoles;
 use App\Enums\VenezuelaState;
+use App\Services\Branches\BranchRoleService;
 use Database\Factories\BranchFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,11 +17,14 @@ class Branch extends Model
     use HasFactory;
 
     protected $fillable = [
+        // Información fiscal
         'company_id',
-        'trade_name',
         'city',
         'state',
         'address',
+        // Información general
+        'trade_name',
+        // Contacto
         'phone_primary',
         'phone_secondary',
         'email',
@@ -33,33 +36,6 @@ class Branch extends Model
         return [
             'state' => VenezuelaState::class,
         ];
-    }
-
-    protected function roles(): Attribute
-    {
-        return Attribute::get(
-            function () {
-                $roles = [];
-
-                if ($this->distributor()->exists()) {
-                    $roles[] = BranchRoles::Distributor->value;
-                }
-
-                if ($this->serviceCenter()->exists()) {
-                    $roles[] = BranchRoles::ServiceCenter->value;
-                }
-
-                if ($this->softwareProvider()->exists()) {
-                    $roles[] = BranchRoles::SoftwareProvider->value;
-                }
-
-                if ($this->client()->exists()) {
-                    $roles[] = BranchRoles::Client->value;
-                }
-
-                return $roles;
-            },
-        );
     }
 
     public function company(): BelongsTo
@@ -85,5 +61,12 @@ class Branch extends Model
     public function client(): HasOne
     {
         return $this->hasOne(Client::class);
+    }
+
+    protected function roles(): Attribute
+    {
+        return Attribute::get(function (): array {
+            return app(BranchRoleService::class)->selectedRoleValues($this);
+        });
     }
 }

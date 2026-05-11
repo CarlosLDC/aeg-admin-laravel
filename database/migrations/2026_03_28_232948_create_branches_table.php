@@ -13,15 +13,22 @@ return new class extends Migration
     {
         Schema::create('branches', function (Blueprint $table) {
             $table->id();
+
+            // Información fiscal
             $table->foreignId('company_id')->constrained()->restrictOnDelete();
-            $table->string('trade_name')->nullable(); // Nombre comercial
             $table->string('state');
             $table->string('city');
             $table->text('address');
+
+            // Información general
+            $table->string('trade_name'); // Nombre comercial
+
+            // Contacto
             $table->string('phone_primary')->nullable();
             $table->string('phone_secondary')->nullable();
             $table->string('email')->nullable();
             $table->string('contact_person')->nullable();
+
             $table->timestamps();
         });
     }

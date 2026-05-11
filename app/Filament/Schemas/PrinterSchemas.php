@@ -48,7 +48,7 @@ class PrinterSchemas
                                         ->label('Cliente')
                                         ->searchable()
                                         ->getSearchResultsUsing(
-                                            fn(string $search): array => Client::query()
+                                            fn (string $search): array => Client::query()
                                                 ->join('branches', 'clients.branch_id', '=', 'branches.id')
                                                 ->where('branches.trade_name', 'like', "%{$search}%")
                                                 ->limit(50)
@@ -56,7 +56,7 @@ class PrinterSchemas
                                                 ->all()
                                         )
                                         ->getOptionLabelUsing(
-                                            fn(string $value): ?string => Client::query()
+                                            fn (string $value): ?string => Client::query()
                                                 ->join('branches', 'clients.branch_id', '=', 'branches.id')
                                                 ->where('clients.id', $value)
                                                 ->value('branches.trade_name')
@@ -105,7 +105,7 @@ class PrinterSchemas
                                         ->label('Alícuota')
                                         ->relationship('tax', 'name')
                                         ->getOptionLabelFromRecordUsing(
-                                            fn(Tax $tax): string => $tax->name . (! $tax->is_active ? ' (Inactiva)' : '')
+                                            fn (Tax $tax): string => $tax->name.(! $tax->is_active ? ' (Inactiva)' : '')
                                         )
                                         ->searchable()
                                         ->preload(),

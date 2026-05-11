@@ -1,8 +1,7 @@
 <?php
 
 use App\Enums\VenezuelaState;
-use App\Filament\Resources\Companies\Resources\Branches\Pages\CreateBranch;
-use App\Models\Company;
+use App\Filament\Resources\Branches\Pages\CreateBranch;
 use App\Models\User;
 use App\Services\AI\DocumentExtractionService;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
@@ -18,7 +17,6 @@ uses(LazilyRefreshDatabase::class);
 it('fills the branch form from an extracted document', function () {
     /** @var User $user */
     $user = User::factory()->createOne();
-    $company = Company::factory()->createOne();
 
     actingAs($user);
 
@@ -44,9 +42,7 @@ it('fills the branch form from an extracted document', function () {
             ]);
     });
 
-    Livewire::test(CreateBranch::class, [
-        'parentRecord' => $company,
-    ])
+    Livewire::test(CreateBranch::class)
         ->callAction('autofillFromDocument', data: [
             'document' => [$documentPath],
         ])

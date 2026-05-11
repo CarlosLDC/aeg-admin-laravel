@@ -61,9 +61,9 @@ class PrinterModelResource extends Resource
     {
         return [
             'index' => ListPrinterModels::route('/'),
-            // 'create' => CreatePrinterModel::route('/create'),
+            'create' => CreatePrinterModel::route('/create'),
             // 'view' => ViewPrinterModel::route('/{record}'),
-            // 'edit' => EditPrinterModel::route('/{record}/edit'),
+            'edit' => EditPrinterModel::route('/{record}/edit'),
         ];
     }
 }

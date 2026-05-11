@@ -7,7 +7,7 @@ use Database\Factories\PrinterModelFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class PrinterModel extends Model
@@ -16,12 +16,15 @@ class PrinterModel extends Model
     use HasFactory;
 
     protected $fillable = [
+        // Marca y modelo
         'brand',
         'model',
+        // Tipo de dispositivo y precio
         'device_type',
+        'price',
+        // Información fiscal
         'administrative_act',
         'certification_date',
-        'price',
     ];
 
     protected function casts(): array
@@ -33,18 +36,13 @@ class PrinterModel extends Model
 
     protected function administrative_act(): Attribute
     {
-        return Attribute::make(
-            set: fn (string $value) => Str::upper($value),
+        return Attribute::set(
+            fn (string $value) => Str::upper($value),
         );
     }
 
-    public function saleItems(): HasManyThrough
+    public function printers(): HasMany
     {
-        return $this->hasManyThrough(
-            SaleItem::class,
-            Printer::class,
-            'printer_model_id',
-            'printer_id',
-        );
+        return $this->hasMany(Printer::class);
     }
 }

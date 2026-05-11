@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\Users\Schemas;
 
 use App\Enums\UserRoles;
-use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
@@ -30,7 +29,8 @@ class UserForm
                     ->label('Rol')
                     ->required()
                     ->relationship('roles', 'name')
-                    ->preload(),
+                    ->preload()
+                    ->visible(fn (): bool => auth()->user()?->hasRole(UserRoles::Admin->value) ?? false),
             ]);
     }
 }

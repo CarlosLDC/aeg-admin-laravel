@@ -33,14 +33,14 @@ class Company extends Model
     protected function taxId(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => Str::of($value)
+            get: fn (string $value): string => Str::of($value)
                 ->substrReplace('-', offset: 1, length: 0)
                 ->when(
                     fn (Stringable $string) => $string->startsWith(['J', 'G', 'C', 'P']),
                     fn (Stringable $string) => $string->substrReplace('-', offset: -1, length: 0),
                 )
                 ->toString(),
-            set: fn (string $value) => Str::of($value)
+            set: fn (string $value): string => Str::of($value)
                 ->substr(1)
                 ->padLeft(9, '0')
                 ->prepend(Str::upper($value[0]))

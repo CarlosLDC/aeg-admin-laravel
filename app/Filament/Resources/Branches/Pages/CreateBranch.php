@@ -2,21 +2,22 @@
 
 namespace App\Filament\Resources\Branches\Pages;
 
-use App\Enums\BranchRoles;
 use App\Filament\Resources\Branches\BranchResource;
+use App\Filament\Resources\Branches\Pages\Concerns\HandlesBranchRoles;
 use App\Models\Company;
 use App\Services\AI\DocumentExtractionService;
 use Filament\Actions\Action;
 use Filament\Forms\Components\FileUpload;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use RuntimeException;
 
 class CreateBranch extends CreateRecord
 {
+    use HandlesBranchRoles;
+
     protected static string $resource = BranchResource::class;
 
     protected function getHeaderActions(): array
@@ -79,55 +80,42 @@ class CreateBranch extends CreateRecord
         return $documentPath;
     }
 
-    // protected function handleRecordCreation(array $data): Model
-    // {
-    //     $company = Company::updateOrCreate(
-    //         [
-    //             'tax_id' => $data['tax_id'],
-    //         ],
-    //         [
-    //             'legal_name' => $data['legal_name'],
-    //             'taxpayer_type' => $data['taxpayer_type'],
-    //         ]
-    //     );
-
-    //     unset(
-    //         $data['tax_id'],
-    //         $data['legal_name'],
-    //         $data['taxpayer_type'],
-    //     );
-
-    //     $data['company_id'] = $company->id;
-
-    //     $record = static::getModel()::create($data);
-
-    //     if (in_array(BranchRoles::Distributor->value, $data['roles'])) {
-    //         $record->distributor->create();
-    //     }
-
-    //     return $record;
-    // }
-
+    /**
+     * @param  array<string, mixed>  $data
+     * @return array<string, mixed>
+     */
     protected function mutateFormDataBeforeCreate(array $data): array
     {
+        /** @var array<string, mixed> $rawState */
+        $rawState = $this->form->getRawState();
+
         $company = Company::updateOrCreate(
             [
-                'tax_id' => $data['tax_id'],
+                'tax_id' => $rawState['tax_id'],
             ],
             [
-                'legal_name' => $data['legal_name'],
-                'taxpayer_type' => $data['taxpayer_type'],
+                'legal_name' => $rawState['legal_name'],
+                'taxpayer_type' => $rawState['taxpayer_type'],
             ]
-        );
-
-        unset(
-            $data['tax_id'],
-            $data['legal_name'],
-            $data['taxpayer_type'],
         );
 
         $data['company_id'] = $company->id;
 
         return $data;
+    }
+
+    protected function afterCreate(): void
+    {
+        $this->syncBranchRoles($this->record, $this->selectedBranchRoles());
+    }
+
+    /**
+     * @return array<int, mixed>
+     */
+    private function selectedBranchRoles(): array
+    {
+        $rawState = $this->form->getRawState();
+
+        return is_array($rawState['roles'] ?? null) ? $rawState['roles'] : [];
     }
 }

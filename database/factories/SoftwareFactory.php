@@ -20,16 +20,19 @@ class SoftwareFactory extends Factory
      */
     public function definition(): array
     {
-        $operatingSystems = OperatingSystem::cases();
-        $programmingLanguages = ProgrammingLanguage::cases();
-
         return [
             'software_provider_id' => SoftwareProvider::factory(),
             'name' => fake()->word(),
             'version' => fake()->semver(),
-            'integration_date' => fake()->dateTimeThisDecade()->format('Y-m-d'),
-            'operating_systems' => fake()->randomElements($operatingSystems, fake()->numberBetween(1, count($operatingSystems))),
-            'programming_languages' => fake()->randomElements($programmingLanguages, fake()->numberBetween(1, count($programmingLanguages))),
+            'integration_date' => fake()->optional()->dateTimeThisDecade()?->format('Y-m-d'),
+            'operating_systems' => fake()->optional()->randomElements(
+                OperatingSystem::cases(),
+                fake()->numberBetween(1, count(OperatingSystem::cases()))
+            ),
+            'programming_languages' => fake()->optional()->randomElements(
+                ProgrammingLanguage::cases(),
+                fake()->numberBetween(1, count(ProgrammingLanguage::cases()))
+            ),
         ];
     }
 }

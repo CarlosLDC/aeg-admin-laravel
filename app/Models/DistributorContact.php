@@ -25,8 +25,8 @@ class DistributorContact extends Model
     protected function nationalId(): Attribute
     {
         return Attribute::make(
-            get: fn(string $value) => Str::substrReplace($value, '-', 1, 0),
-            set: fn(string $value) => Str::upper($value),
+            get: fn (string $value) => Str::substrReplace($value, '-', 1, 0),
+            set: fn (string $value) => Str::upper($value),
         );
     }
 

@@ -44,7 +44,7 @@ class Distributor extends Model
     }
 
     public function printers(): HasManyThrough
-{
-    return $this->hasManyThrough(Printer::class, Sale::class);
-}
+    {
+        return $this->hasManyThrough(Printer::class, Sale::class);
+    }
 }

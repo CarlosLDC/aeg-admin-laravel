@@ -18,15 +18,13 @@ class PrinterModelFactory extends Factory
      */
     public function definition(): array
     {
-        $fakeDate = fake()->dateTimeThisDecade();
-
         return [
             'brand' => 'AEG',
             'model' => fake()->unique()->regexify('[A-Z][1-9]'),
             'device_type' => fake()->randomElement(DeviceType::cases()),
             'price' => fake()->randomFloat(2, min: 100, max: 1000),
-            'administrative_act' => 'snat/'.$fakeDate->format('Y').'/'.fake()->numerify('0###'),
-            'certification_date' => $fakeDate->format('Y-m-d'),
+            'administrative_act' => fake()->optional()->numerify('SNAT/####/####'),
+            'certification_date' => fake()->optional()->date('Y-m-d'),
         ];
     }
 }

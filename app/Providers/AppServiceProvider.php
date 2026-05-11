@@ -29,8 +29,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::before(function (User $user, string $ability) {
-            if ($user->hasRole(UserRoles::Admin)) {
+        Gate::before(function (User $user, string $ability, ...$arguments) {
+            // For destructive role actions, let the policy decide (so we can protect the Admin role)
+            $deleteAbilities = ['delete', 'forceDelete', 'deleteAny', 'forceDeleteAny'];
+            if (in_array($ability, $deleteAbilities, true)) {
+                return null; // fall through to policy
+            }
+
+            if ($user->hasRole(UserRoles::Admin->value)) {
                 return true;
             }
         });

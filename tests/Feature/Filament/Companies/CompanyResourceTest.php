@@ -8,10 +8,9 @@ it('adds lightweight visual guidance to the company form', function () {
     $contents = file_get_contents(base_path('app/Filament/Resources/Companies/Schemas/CompanyForm.php'));
 
     expect($contents)
-        ->toContain('Información General')
-        ->toContain('Datos básicos para identificar la empresa en el panel.')
+        ->toContain('Información Fiscal de las Empresas')
         ->toContain('Grid::make(2)')
-        ->toContain("->placeholder('J-12345678')")
-        ->toContain("->placeholder('AEG Admin C.A.')")
+        ->toContain("->placeholder('J123456789')")
+        ->toContain("->placeholder('Empresa S.A. de C.V.')")
         ->toContain('->columnSpanFull()');
 });

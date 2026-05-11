@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Software\Tables;
 
-use App\Filament\Schemas\SoftwareSchemas;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -19,7 +18,16 @@ class SoftwareTable
                 TextColumn::make('softwareProvider.branch.trade_name')
                     ->label('Casa de Software')
                     ->searchable(),
-                ...SoftwareSchemas::table(),
+                TextColumn::make('name')
+                    ->label('Nombre')
+                    ->searchable(),
+                TextColumn::make('version')
+                    ->label('Versión')
+                    ->searchable(),
+                TextColumn::make('integration_date')
+                    ->label('Fecha de Integración')
+                    ->date()
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

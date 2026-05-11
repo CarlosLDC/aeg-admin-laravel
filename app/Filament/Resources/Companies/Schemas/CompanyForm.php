@@ -33,7 +33,7 @@ class CompanyForm
                                     )
                                     ->placeholder('J123456789')
                                     ->disabled(
-                                        fn(?Company $record) => $record?->branches()->exists()
+                                        fn (?Company $record) => $record?->branches()->exists()
                                     ),
                                 TextInput::make('legal_name')
                                     ->label('Razón Social')

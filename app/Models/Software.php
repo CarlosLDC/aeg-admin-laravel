@@ -6,7 +6,6 @@ use App\Enums\OperatingSystem;
 use App\Enums\ProgrammingLanguage;
 use Database\Factories\SoftwareFactory;
 use Illuminate\Database\Eloquent\Casts\AsEnumCollection;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,9 +17,12 @@ class Software extends Model
 
     protected $fillable = [
         'software_provider_id',
+        // Nombre y versión
         'name',
         'version',
+        // Fecha de integración
         'integration_date',
+        // Información técnica
         'operating_systems',
         'programming_languages',
     ];
